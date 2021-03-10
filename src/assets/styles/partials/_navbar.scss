@@ -19,7 +19,8 @@
 
     .navbar-link-element {
         padding: 0 1.5rem;
-        &:first-child{
+
+        &:first-child {
             padding-left: 0;
         }
     }
@@ -28,6 +29,7 @@
         @include flex-row-center;
         list-style: none;
         padding-inline-start: 0;
+        height: 80%;
     }
 
     .navbar-link {
@@ -36,6 +38,15 @@
         color: $theme-color-white-low-transp;
         text-decoration: none;
         pointer-events: none;
+        height: 100%;
+
+        &.active {
+            color: $theme-color-white;
+            font-weight: 600;
+            border-bottom: 4px solid $theme-color-white;
+            padding: 8px;
+            border-radius: 3px;
+        }
     }
 
 }
