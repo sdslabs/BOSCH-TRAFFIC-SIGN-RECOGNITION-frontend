@@ -8,6 +8,7 @@
     "google",
     "plugin:prettier/recommended"
   ],
+  "parser": "babel-eslint",
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
@@ -19,7 +20,8 @@
   "rules": {
     "prettier/prettier": "error",
     "require-jsdoc": 0,
-    "react/react-in-jsx-scope": 0
+    "react/react-in-jsx-scope": 0,
+    "react/no-unescaped-entities": 0
   },
   "settings": {
     "react": {
