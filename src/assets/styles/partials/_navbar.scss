@@ -37,15 +37,14 @@
         @include font-size-2027;
         color: $theme-color-white-low-transp;
         text-decoration: none;
-        pointer-events: none;
+        // pointer-events: none;
         height: 100%;
 
-        &.active {
+        &.active , &:hover{
             color: $theme-color-white;
             font-weight: 600;
-            border-bottom: 4px solid $theme-color-white;
-            padding: 8px;
-            border-radius: 3px;
+            border-bottom: 3px solid $theme-color-white;
+            padding: 8px 0;
         }
     }
 

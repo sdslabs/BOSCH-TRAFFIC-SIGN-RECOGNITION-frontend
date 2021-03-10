@@ -5,7 +5,7 @@ export const MenuItems = [
   },
   {
     title: 'Trained Models',
-    url: '/trained',
+    url: '/trainedmodels',
   },
   {
     title: 'Analysis',

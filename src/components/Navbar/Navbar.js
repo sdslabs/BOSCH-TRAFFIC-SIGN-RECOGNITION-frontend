@@ -1,6 +1,6 @@
 import React from 'react'
 import { MenuItems } from '../../constants/NavbarItems'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 class Navbar extends React.Component {
   render() {
     return (
@@ -13,14 +13,13 @@ class Navbar extends React.Component {
             {MenuItems.map(item => {
               return (
                 <li key={item.title} className="navbar-link-element">
-                  <Link
-                    className={`navbar-link ${
-                      window.location.pathname === item.url ? 'active' : ''
-                    }`}
+                  <NavLink
+                    className="navbar-link"
+                    activeClassName="active"
                     to={item.url}
                   >
                     {item.title}
-                  </Link>
+                  </NavLink>
                 </li>
               )
             })}
