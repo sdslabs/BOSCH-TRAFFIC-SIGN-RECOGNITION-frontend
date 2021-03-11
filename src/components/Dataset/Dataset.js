@@ -1,8 +1,22 @@
 import React from 'react'
+import Sidebar from '../Common/Sidebar.js'
+import { Container, Row, Col } from 'react-bootstrap'
 
 class Dataset extends React.Component {
   render() {
-    return <h1>Hello this is the dataset Page</h1>
+    return (
+      <Container fluid>
+        <Row className="mx-auto">
+          <Col xs={2.4}>
+            {' '}
+            <Sidebar />{' '}
+          </Col>
+          <Col>
+            <div className="primary-cta">Data Selection</div>
+          </Col>
+        </Row>
+      </Container>
+    )
   }
 }
 

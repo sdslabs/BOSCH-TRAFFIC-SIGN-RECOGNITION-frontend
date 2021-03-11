@@ -1,11 +1,15 @@
-.primary-cta{
-    background-color: $theme-color-dark-blue;
-    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3);
-    border-radius: 3px;
-    @include font-size-1628;
-    @include primary-font-bold;
-    color: $theme-color-white;
-    padding: 0.5rem 1rem;
-    border: none;
-    outline: none;
+.primary-cta {
+  background-color: $theme-color-dark-blue;
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3);
+  border-radius: 3px;
+  @include font-size-1628;
+  @include primary-font-bold;
+  color: $theme-color-white;
+  padding: 0.5rem 1rem;
+  border: none;
+  outline: none;
+}
+
+.bw-10 {
+  width: 10rem;
 }

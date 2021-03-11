@@ -1,7 +1,8 @@
-@import "./partials/variables/colors";
-@import "./partials/variables/fonts";
-@import "./partials/variables/typography";
-@import "./partials/variables/layouts";
-@import "./partials/buttons";
-@import "./partials/navbar";
-@import "./partials/home";
+@import '~bootstrap/scss/bootstrap';
+@import './partials/variables/colors';
+@import './partials/variables/fonts';
+@import './partials/variables/typography';
+@import './partials/variables/layouts';
+@import './partials/buttons';
+@import './partials/navbar';
+@import './partials/home';
