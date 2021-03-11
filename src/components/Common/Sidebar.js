@@ -8,7 +8,7 @@ class Sidebar extends React.Component {
     return (
       <Container className="sidebar border-right border-dark p-0">
         <Col>
-          <Row className="border-bottom">Heading for model</Row>
+          <Row className="border-bottom heading">Heading for model</Row>
           <Step1 />
           <Step2 />
           <Step3 />
