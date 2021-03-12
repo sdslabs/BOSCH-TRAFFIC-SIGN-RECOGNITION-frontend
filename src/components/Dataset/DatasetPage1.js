@@ -240,15 +240,20 @@ const DatasetPage1 = () => {
             <Col className="mx-0 px-0">
               {structure.folders.map((folder, id) => (
                 <Row key={id} className="mx-0 px-0">
-                  <Form.Group controlId="formBasicCheckbox">
-                    <Form.Check type="checkbox" id={id} />
-                  </Form.Group>
-                  <Col className="ml-5">
+                  <Col
+                    xs={2}
+                    className="d-flex align-items-center justify-content-center"
+                  >
+                    <Form.Group controlId="formBasicCheckbox">
+                      <Form.Check type="checkbox" id={id} />
+                    </Form.Group>
+                  </Col>
+                  <Col className="">
                     {JSON.stringify(folder.name)
                       .replace('"', '')
                       .replace('"', '')}
                   </Col>
-                  <Col className="ml-5">{folder.images.length.toString(2)}</Col>
+                  <Col className="">{folder.images.length.toString(2)}</Col>
                   <Col>{getSelectedImagesCount(folder.images).toString(2)}</Col>
                 </Row>
               ))}
