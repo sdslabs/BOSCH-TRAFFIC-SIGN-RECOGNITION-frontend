@@ -1,8 +1,19 @@
 import React from 'react'
 
-import { Row, Col, Form, Button } from 'react-bootstrap'
+import { Row, Col, Form, Button, Container } from 'react-bootstrap'
 import { ReactComponent as UploadIcon } from '../../assets/images/upload.svg'
 import { ReactComponent as NewFolderIcon } from '../../assets/images/newfolder.svg'
+// import { ReactComponent as ArrowDownIcon } from '../../assets/images/arrowdown.svg'
+
+const getSelectedImagesCount = images => {
+  let count = 0
+  images.forEach(image => {
+    if (image.selected == 'true') {
+      count++
+    }
+  })
+  return count
+}
 
 const DatasetPage1 = () => {
   const structure = {
@@ -15,7 +26,7 @@ const DatasetPage1 = () => {
             name: '00001_00002.ppm',
             path: './GTSRB/trainingset/00014/00001_00002.ppm',
             can_be_modified: 'false',
-            selected: 'true',
+            selected: 'false',
           },
           {
             name: '00019_00018.ppm',
@@ -191,7 +202,7 @@ const DatasetPage1 = () => {
   }
 
   return (
-    <>
+    <Container fluid className="mx-0 px-0">
       <Row className="py-3 border-bottom mx-0 px-0">
         <Col xs={2}>
           <div className="primary-cta bw-8">
@@ -208,7 +219,10 @@ const DatasetPage1 = () => {
         <h1 className="ml-5">Select Dataset</h1>
       </Row>
       <Row className="ml-0">
-        <Col className="ml-4">
+        <Col
+          xs={2}
+          className="d-flex align-items-center justify-content-center"
+        >
           {' '}
           <Form>
             <Form.Group controlId="formBasicCheckbox">
@@ -220,24 +234,32 @@ const DatasetPage1 = () => {
         <Col> No of Images</Col>
         <Col>Images Selected</Col>
       </Row>
-      <Row>
-        <Form>
-          <Col className="ml-5">
-            {structure.folders.map((folder, id) => (
-              <Row key={id}>
-                <Form.Group controlId="formBasicCheckbox">
-                  <Form.Check type="checkbox" id={id} />
-                </Form.Group>
-                <div>{JSON.stringify(folder.name)}</div>
-              </Row>
-            ))}
-            <Button variant="primary" type="submit">
-              Submit
-            </Button>
-          </Col>
+      <Row className="ml-0">
+        <Form className="w-100">
+          <Container fluid className="mx-0 px-0">
+            <Col className="mx-0 px-0">
+              {structure.folders.map((folder, id) => (
+                <Row key={id} className="mx-0 px-0">
+                  <Form.Group controlId="formBasicCheckbox">
+                    <Form.Check type="checkbox" id={id} />
+                  </Form.Group>
+                  <Col className="ml-5">
+                    {JSON.stringify(folder.name)
+                      .replace('"', '')
+                      .replace('"', '')}
+                  </Col>
+                  <Col className="ml-5">{folder.images.length.toString(2)}</Col>
+                  <Col>{getSelectedImagesCount(folder.images).toString(2)}</Col>
+                </Row>
+              ))}
+              <Button variant="primary" type="submit">
+                Submit
+              </Button>
+            </Col>
+          </Container>
         </Form>
       </Row>
-    </>
+    </Container>
   )
 }
 
