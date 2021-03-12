@@ -1,9 +1,9 @@
-import React from 'react'
+import { React, useState } from 'react'
 
-import { Row, Col, Form, Button, Container } from 'react-bootstrap'
+import { Row, Col, Form, Container } from 'react-bootstrap'
 import { ReactComponent as UploadIcon } from '../../assets/images/upload.svg'
 import { ReactComponent as NewFolderIcon } from '../../assets/images/newfolder.svg'
-// import { ReactComponent as ArrowDownIcon } from '../../assets/images/arrowdown.svg'
+import { ReactComponent as ArrowDownIcon } from '../../assets/images/arrowdown.svg'
 
 const getSelectedImagesCount = images => {
   let count = 0
@@ -15,7 +15,44 @@ const getSelectedImagesCount = images => {
   return count
 }
 
+const generateImage = (imageName, folderName) => {
+  return {
+    element: (
+      <Row className="mx-0 px-0 border-bottom d-flex align-items-center">
+        <Col xs={1} className="d-flex justify-content-center">
+          <Form.Group controlId="formBasicCheckbox">
+            <Form.Check type="checkbox" id={imageName + folderName} />
+          </Form.Group>
+        </Col>
+        <Col
+          xs={1}
+          className="d-flex justify-content-start align-items-center"
+          onClick={() => {
+            console.log(image)
+          }}
+        >
+          <ArrowDownIcon />
+        </Col>
+        <Col className="">{imageName}</Col>
+      </Row>
+    ),
+    id: imageName + folderName,
+  }
+}
+
 const DatasetPage1 = () => {
+  const [images, setImages] = useState([])
+
+  const addImages = (folder, folderName) => {
+    folder.images.map(image => {
+      setImages(images => [...images, generateImage(image.name, folderName)])
+    })
+  }
+
+  // useEffect(() => {
+  //   console.log(images)
+  // }, [images])
+
   const structure = {
     folders: [
       {
@@ -220,7 +257,7 @@ const DatasetPage1 = () => {
       </Row>
       <Row className="ml-0">
         <Col
-          xs={2}
+          xs={1}
           className="d-flex align-items-center justify-content-center"
         >
           {' '}
@@ -239,14 +276,23 @@ const DatasetPage1 = () => {
           <Container fluid className="mx-0 px-0">
             <Col className="mx-0 px-0">
               {structure.folders.map((folder, id) => (
-                <Row key={id} className="mx-0 px-0">
-                  <Col
-                    xs={2}
-                    className="d-flex align-items-center justify-content-center"
-                  >
+                <Row
+                  key={id}
+                  className="mx-0 px-0 border-bottom d-flex align-items-center"
+                >
+                  <Col xs={1} className="d-flex justify-content-center">
                     <Form.Group controlId="formBasicCheckbox">
                       <Form.Check type="checkbox" id={id} />
                     </Form.Group>
+                  </Col>
+                  <Col
+                    xs={1}
+                    className="d-flex justify-content-start align-items-center"
+                    onClick={() => {
+                      addImages(folder, id)
+                    }}
+                  >
+                    <ArrowDownIcon />
                   </Col>
                   <Col className="">
                     {JSON.stringify(folder.name)
@@ -257,9 +303,9 @@ const DatasetPage1 = () => {
                   <Col>{getSelectedImagesCount(folder.images).toString(2)}</Col>
                 </Row>
               ))}
-              <Button variant="primary" type="submit">
-                Submit
-              </Button>
+              {images.map(image => (
+                <div key={image.id}>{image.element}</div>
+              ))}
             </Col>
           </Container>
         </Form>
