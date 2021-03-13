@@ -16,37 +16,67 @@ const getSelectedImagesCount = images => {
   return count
 }
 
-const generateImage = (imageName, folderName) => {
-  return {
-    element: (
-      <Row className="mx-0 px-0 border-bottom d-flex align-items-center">
-        <Col
-          xs={1}
-          className="d-flex justify-content-center align-items-center"
-        >
-          <Form.Group controlId="formBasicCheckbox d-flex justify-content-center align-items-center">
-            <Form.Check type="checkbox" id={imageName + folderName} />
-          </Form.Group>
-        </Col>
-        <Col xs={1}></Col>
-        <Col className="">{imageName}</Col>
-      </Row>
-    ),
-    id: imageName + folderName,
-    folderName: folderName,
-  }
-}
-
 const DatasetPage1 = () => {
   const [images, setImages] = useState([])
   const [selectedFolderName, setSelectedFolderName] = useState('')
   const [structure, setStructure] = useState({ empty: true })
-  console.log(selectedFolderName)
 
   const addImages = (folder, folderName) => {
     setImages([])
     folder.images.map(image => {
-      setImages(images => [...images, generateImage(image.name, folderName)])
+      setImages(images => [...images, generateImage(image, folderName)])
+    })
+  }
+
+  const generateImage = (image, folderName) => {
+    return {
+      element: (
+        <Row className="mx-0 px-0 border-bottom d-flex align-items-center">
+          <Col
+            xs={1}
+            className="d-flex justify-content-center align-items-center"
+          >
+            <Form.Group controlId="formBasicCheckbox d-flex justify-content-center align-items-center">
+              <Form.Check
+                type="checkbox"
+                id={image.name + folderName}
+                defaultChecked={image.selected === 'true'}
+                disabled={image.can_be_modified === 'false' && false}
+                onChange={e =>
+                  handleCheckbox(
+                    folderName,
+                    image.name,
+                    e.currentTarget.checked,
+                  )
+                }
+              />
+            </Form.Group>
+          </Col>
+          <Col xs={1}></Col>
+          <Col className="">{image.name}</Col>
+        </Row>
+      ),
+      id: image.name + folderName,
+      folderName: folderName,
+    }
+  }
+  const handleGetInitialData = async () => {
+    const structure = await getInitialData()
+    structure.empty = false
+    console.log('Got structure from backend: ', structure)
+    setStructure(structure)
+  }
+
+  const handleCheckbox = (folderName, imageName, selected) => {
+    structure.folders.forEach(folder => {
+      if (folder.name === folderName) {
+        folder.images.forEach(image => {
+          if (image.name == imageName) {
+            image.selected = selected
+            console.log(folderName, imageName, image.selected)
+          }
+        })
+      }
     })
   }
 
@@ -55,16 +85,8 @@ const DatasetPage1 = () => {
   }, [])
 
   useEffect(() => {
-    console.log('Structure updated: ', structure)
-    console.log(structure.empty)
+    console.log('Structure updated in state: ', structure)
   }, [structure])
-
-  const handleGetInitialData = async () => {
-    const structure = await getInitialData()
-    structure.empty = false
-    console.log('got structure: ', structure)
-    setStructure(structure)
-  }
 
   return (
     <>
@@ -97,6 +119,7 @@ const DatasetPage1 = () => {
                 </Form.Group>
               </Form>
             </Col>
+            <Col xs={1}></Col>
             <Col> Name</Col>
             <Col> No of Images</Col>
             <Col>Images Selected</Col>
