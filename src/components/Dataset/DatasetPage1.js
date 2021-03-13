@@ -6,15 +6,15 @@ import { ReactComponent as NewFolderIcon } from '../../assets/images/newfolder.s
 import { ReactComponent as ArrowDownIcon } from '../../assets/images/arrowdown.svg'
 import { ReactComponent as ArrowUpIcon } from '../../assets/images/arrowup.svg'
 
-const getSelectedImagesCount = images => {
-  let count = 0
-  images.forEach(image => {
-    if (image.selected == 'true') {
-      count++
-    }
-  })
-  return count
-}
+// const getSelectedImagesCount = images => {
+//   let count = 0
+//   images.forEach(image => {
+//     if (image.selected == 'true') {
+//       count++
+//     }
+//   })
+//   return count
+// }
 
 const DatasetPage1 = () => {
   const [images, setImages] = useState([])
@@ -63,21 +63,36 @@ const DatasetPage1 = () => {
   const handleGetInitialData = async () => {
     const structure = await getInitialData()
     structure.empty = false
+    structure.folders.forEach(folder => {
+      let count = 0
+      folder.images.forEach(image => {
+        if (image.selected === 'true') {
+          count++
+        }
+      })
+      folder.selectedCount = count
+    })
     console.log('Got structure from backend: ', structure)
     setStructure(structure)
   }
 
-  const handleCheckbox = (folderName, imageName, selected) => {
-    structure.folders.forEach(folder => {
+  const handleCheckbox = async (folderName, imageName, selected) => {
+    const newstructure = structure
+    newstructure.folders.forEach(folder => {
       if (folder.name === folderName) {
+        folder.selectedCount = selected
+          ? folder.selectedCount + 1
+          : folder.selectedCount - 1
         folder.images.forEach(image => {
           if (image.name == imageName) {
-            image.selected = selected
+            image.selected = selected.toString()
             console.log(folderName, imageName, image.selected)
           }
         })
       }
     })
+    setStructure(newstructure)
+    console.log(structure)
   }
 
   useEffect(() => {
@@ -166,9 +181,7 @@ const DatasetPage1 = () => {
                         <Col className="">
                           {folder.images.length.toString(2)}
                         </Col>
-                        <Col>
-                          {getSelectedImagesCount(folder.images).toString(2)}
-                        </Col>
+                        <Col>{folder.selectedCount.toString(2)}</Col>
                       </Row>
 
                       {selectedFolderName === folder.name ? (
