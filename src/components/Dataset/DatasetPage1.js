@@ -37,13 +37,17 @@ const generateImage = (imageName, folderName) => {
       </Row>
     ),
     id: imageName + folderName,
+    folderName: folderName,
   }
 }
 
 const DatasetPage1 = () => {
   const [images, setImages] = useState([])
+  const [selectedFolderName, setSelectedFolderName] = useState('')
+  console.log(selectedFolderName)
 
   const addImages = (folder, folderName) => {
+    setImages([])
     folder.images.map(image => {
       setImages(images => [...images, generateImage(image.name, folderName)])
     })
@@ -276,35 +280,45 @@ const DatasetPage1 = () => {
           <Container fluid className="mx-0 px-0">
             <Col className="mx-0 px-0">
               {structure.folders.map((folder, id) => (
-                <Row
-                  key={id}
-                  className="mx-0 px-0 border-bottom d-flex align-items-center"
-                >
-                  <Col xs={1} className="d-flex justify-content-center">
-                    <Form.Group controlId="formBasicCheckbox">
-                      <Form.Check type="checkbox" id={id} />
-                    </Form.Group>
-                  </Col>
-                  <Col
-                    xs={1}
-                    className="d-flex justify-content-start align-items-center"
-                    onClick={() => {
-                      addImages(folder, id)
-                    }}
+                <div key={'parent' + id.toString(2)}>
+                  <Row
+                    key={id}
+                    className="mx-0 px-0 border-bottom d-flex align-items-center"
                   >
-                    <ArrowDownIcon />
-                  </Col>
-                  <Col className="">
-                    {JSON.stringify(folder.name)
-                      .replace('"', '')
-                      .replace('"', '')}
-                  </Col>
-                  <Col className="">{folder.images.length.toString(2)}</Col>
-                  <Col>{getSelectedImagesCount(folder.images).toString(2)}</Col>
-                </Row>
-              ))}
-              {images.map(image => (
-                <div key={image.id}>{image.element}</div>
+                    <Col xs={1} className="d-flex justify-content-center">
+                      <Form.Group controlId="formBasicCheckbox">
+                        <Form.Check type="checkbox" id={id} />
+                      </Form.Group>
+                    </Col>
+                    <Col
+                      xs={1}
+                      className="d-flex justify-content-start align-items-center"
+                      onClick={() => {
+                        setSelectedFolderName(folder.name)
+                        addImages(folder, folder.name)
+                      }}
+                    >
+                      <ArrowDownIcon />
+                    </Col>
+                    <Col className="">
+                      {JSON.stringify(folder.name)
+                        .replace('"', '')
+                        .replace('"', '')}
+                    </Col>
+                    <Col className="">{folder.images.length.toString(2)}</Col>
+                    <Col>
+                      {getSelectedImagesCount(folder.images).toString(2)}
+                    </Col>
+                  </Row>
+
+                  {selectedFolderName === folder.name ? (
+                    images.map(image => (
+                      <div key={image.id}>{image.element}</div>
+                    ))
+                  ) : (
+                    <div key={'none' + id.toString(2)}></div>
+                  )}
+                </div>
               ))}
             </Col>
           </Container>
