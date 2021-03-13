@@ -37,10 +37,9 @@ const generateImage = (imageName, folderName) => {
 }
 
 const DatasetPage1 = () => {
-  const [pending, setPending] = useState(false)
   const [images, setImages] = useState([])
   const [selectedFolderName, setSelectedFolderName] = useState('')
-  const [structure, setStructure] = useState({})
+  const [structure, setStructure] = useState({ empty: true })
   console.log(selectedFolderName)
 
   const addImages = (folder, folderName) => {
@@ -56,19 +55,19 @@ const DatasetPage1 = () => {
 
   useEffect(() => {
     console.log('Structure updated: ', structure)
+    console.log(structure.empty)
   }, [structure])
 
   const handleGetInitialData = async () => {
-    setPending(true)
     const structure = await getInitialData()
+    structure.empty = false
     console.log('got structure: ', structure)
     setStructure(structure)
-    setPending(false)
   }
 
   return (
     <>
-      {!pending ? (
+      {!structure.empty ? (
         <Container fluid className="mx-0 px-0">
           <Row className="py-3 border-bottom mx-0 px-0">
             <Col xs={2}>
@@ -105,50 +104,49 @@ const DatasetPage1 = () => {
             <Form className="w-100">
               <Container fluid className="mx-0 px-0">
                 <Col className="mx-0 px-0">
-                  {false &&
-                    structure.folders.map((folder, id) => (
-                      <div key={'parent' + id.toString(2)}>
-                        <Row
-                          key={id}
-                          className="mx-0 px-0 border-bottom d-flex align-items-center"
+                  {structure.folders.map((folder, id) => (
+                    <div key={'parent' + id.toString(2)}>
+                      <Row
+                        key={id}
+                        className="mx-0 px-0 border-bottom d-flex align-items-center"
+                      >
+                        <Col xs={1} className="d-flex justify-content-center">
+                          <Form.Group controlId="formBasicCheckbox">
+                            <Form.Check type="checkbox" id={id} />
+                          </Form.Group>
+                        </Col>
+                        <Col
+                          xs={1}
+                          className="d-flex justify-content-start align-items-center"
+                          onClick={() => {
+                            setSelectedFolderName(folder.name)
+                            addImages(folder, folder.name)
+                          }}
                         >
-                          <Col xs={1} className="d-flex justify-content-center">
-                            <Form.Group controlId="formBasicCheckbox">
-                              <Form.Check type="checkbox" id={id} />
-                            </Form.Group>
-                          </Col>
-                          <Col
-                            xs={1}
-                            className="d-flex justify-content-start align-items-center"
-                            onClick={() => {
-                              setSelectedFolderName(folder.name)
-                              addImages(folder, folder.name)
-                            }}
-                          >
-                            <ArrowDownIcon />
-                          </Col>
-                          <Col className="">
-                            {JSON.stringify(folder.name)
-                              .replace('"', '')
-                              .replace('"', '')}
-                          </Col>
-                          <Col className="">
-                            {folder.images.length.toString(2)}
-                          </Col>
-                          <Col>
-                            {getSelectedImagesCount(folder.images).toString(2)}
-                          </Col>
-                        </Row>
+                          <ArrowDownIcon />
+                        </Col>
+                        <Col className="">
+                          {JSON.stringify(folder.name)
+                            .replace('"', '')
+                            .replace('"', '')}
+                        </Col>
+                        <Col className="">
+                          {folder.images.length.toString(2)}
+                        </Col>
+                        <Col>
+                          {getSelectedImagesCount(folder.images).toString(2)}
+                        </Col>
+                      </Row>
 
-                        {selectedFolderName === folder.name ? (
-                          images.map(image => (
-                            <div key={image.id}>{image.element}</div>
-                          ))
-                        ) : (
-                          <div key={'none' + id.toString(2)}></div>
-                        )}
-                      </div>
-                    ))}
+                      {selectedFolderName === folder.name ? (
+                        images.map(image => (
+                          <div key={image.id}>{image.element}</div>
+                        ))
+                      ) : (
+                        <div key={'none' + id.toString(2)}></div>
+                      )}
+                    </div>
+                  ))}
                 </Col>
               </Container>
             </Form>
