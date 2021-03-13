@@ -4,6 +4,7 @@ import getInitialData from '../../api/datasetAPI'
 import { ReactComponent as UploadIcon } from '../../assets/images/upload.svg'
 import { ReactComponent as NewFolderIcon } from '../../assets/images/newfolder.svg'
 import { ReactComponent as ArrowDownIcon } from '../../assets/images/arrowdown.svg'
+import { ReactComponent as ArrowUpIcon } from '../../assets/images/arrowup.svg'
 
 const getSelectedImagesCount = images => {
   let count = 0
@@ -119,11 +120,20 @@ const DatasetPage1 = () => {
                           xs={1}
                           className="d-flex justify-content-start align-items-center"
                           onClick={() => {
-                            setSelectedFolderName(folder.name)
-                            addImages(folder, folder.name)
+                            if (selectedFolderName === folder.name) {
+                              setSelectedFolderName('')
+                              setImages([])
+                            } else {
+                              setSelectedFolderName(folder.name)
+                              addImages(folder, folder.name)
+                            }
                           }}
                         >
-                          <ArrowDownIcon />
+                          {selectedFolderName === folder.name ? (
+                            <ArrowUpIcon />
+                          ) : (
+                            <ArrowDownIcon />
+                          )}
                         </Col>
                         <Col className="">
                           {JSON.stringify(folder.name)
