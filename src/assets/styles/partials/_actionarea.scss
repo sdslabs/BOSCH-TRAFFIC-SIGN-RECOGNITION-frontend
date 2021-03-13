@@ -1,0 +1,10 @@
+.action-area {
+  position: absolute;
+  background-color: $theme-color-white;
+  width: 20%;
+  height: 100%;
+  right: 0;
+  top: 0;
+  filter: drop-shadow(-3px 0px 8px rgba(25, 25, 25, 0.25));
+  z-index: 1;
+}
