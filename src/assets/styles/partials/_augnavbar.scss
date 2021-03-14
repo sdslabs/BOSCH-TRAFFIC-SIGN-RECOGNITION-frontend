@@ -1,0 +1,10 @@
+.augmentation-navbar {
+  padding: 1rem;
+  @include flex-row-center;
+  background-color: $theme-color-greyEB;
+  height:5rem;
+}
+
+.augmentation-navbar-element {
+  margin: 0 1rem;
+}

@@ -7,11 +7,17 @@ class Sidebar extends React.Component {
   render() {
     return (
       <Container className="sidebar border-right border-dark p-0">
-        <Col>
+        <Col className="p-0">
           <Row className="border-bottom heading">Heading for model</Row>
-          <Step1 />
-          <Step2 />
-          <Step3 />
+          {this.props.datasetStep >= 1 && (
+            <Step1 done={this.props.datasetStep > 1} />
+          )}
+          {this.props.datasetStep >= 2 && (
+            <Step2 done={this.props.datasetStep > 2} />
+          )}
+          {this.props.datasetStep >= 3 && (
+            <Step3 done={this.props.datasetStep > 3} />
+          )}
         </Col>
       </Container>
     )

@@ -1,18 +1,25 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
+import Tick from '../../assets/images/tick.svg'
 class Step2 extends React.Component {
   render() {
     return (
-      <Container fluid className="m-0 p-0">
+      <Container
+        fluid
+        className={'stepContainer ' + (this.props.done ? 'grey-bg' : '')}
+      >
         <Col>
-          <Row>
-            <h3>Step 2</h3>
+          <Row className="d-flex mb-2">
+            <div className="stepHeading">Step 2</div>
+            {this.props.done && <img src={Tick} className="mr-2" />}
           </Row>
           <Row>
-            <div>Split Selected Data into Training and Test Data </div>
+            <div className="stepInfo">
+              Split Selected Data into Training and Test Data{' '}
+            </div>
           </Row>
-          <Row className="d-flex justify-content-center mt-3">
-            <div className="primary-cta bw-10">Split Data</div>
+          <Row className="d-flex justify-content-flex-start mt-3">
+            <button className="primary-cta primary-shadow">Split Data</button>
           </Row>
         </Col>
       </Container>

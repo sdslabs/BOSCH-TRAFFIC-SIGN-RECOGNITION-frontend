@@ -7,3 +7,28 @@
   font-size: 1rem;
   line-height: 1.75rem;
 }
+
+@mixin font-size-1622 {
+  font-size: 1rem;
+  line-height: 1.45rem;
+}
+
+@mixin font-size-912 {
+  font-size: 0.5625rem;
+  line-height: 0.75rem;
+}
+
+@mixin font-size-1216 {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+@mixin font-size-2433 {
+  font-size: 1.5rem;
+  line-height: 2.0625rem;
+}
+
+@mixin font-size-3244 {
+  font-size: 2rem;
+  line-height: 2.75rem;
+}

@@ -1,0 +1,42 @@
+.dataset-page-1 {
+  .heading {
+    @include primary-font-normal;
+    @include font-size-3244;
+    font-weight: 600;
+    color: $theme-color-black;
+    @include flex-row-center;
+    margin: 1.5rem 0;
+  }
+}
+
+.select-dataset-header {
+  @include primary-font-normal;
+  font-weight: 600;
+  color: $theme-color-black;
+  @include flex-row-center;
+  align-items: flex-start;
+}
+
+.select-dataset-folder {
+  @include primary-font-normal;
+  @include font-size-1216;
+  color: $theme-color-black39;
+  @include flex-row-center;
+  justify-content: flex-start;
+}
+
+.select-dataset-image {
+  @include primary-font-normal;
+  @include font-size-912;
+  color: $theme-color-black39;
+  @include flex-row-center;
+  justify-content: flex-start;
+}
+
+.open-close-folder {
+  padding: 1rem 2rem;
+}
+
+.pointer {
+  cursor: pointer;
+}
