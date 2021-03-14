@@ -1,7 +1,8 @@
 .augmentation-navbar {
   padding: 1rem;
   @include flex-row-center;
-  background-color: $theme-color-greyEB;    
+  background-color: $theme-color-greyEB;
+  height:5rem;
 }
 
 .augmentation-navbar-element {
