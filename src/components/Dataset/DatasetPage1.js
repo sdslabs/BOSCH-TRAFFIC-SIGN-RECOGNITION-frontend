@@ -12,7 +12,6 @@ const DatasetPage1 = props => {
   const [structure, setStructure] = useState({ empty: true }) // main structure
   const [checkedFolders, setCheckedFolders] = useState([]) // list of folders status on checked
   const [checkedAll, setCheckedAll] = useState(false) // are all folders checked?
-
   const addImages = (folder, folderName) => {
     setImages([])
     folder.images.map(image => {
@@ -21,17 +20,15 @@ const DatasetPage1 = props => {
   }
 
   // const getImageCheckedStatus = (folderName, imageName) => {
-  //   structure.folders.forEach(folder => {
-  //     if (folder.name === folderName) {
-  //       folder.images.forEach(image => {
-  //         if (image.name == imageName) {
-  //           const answer = image.selected === 'true'
-  //           console.log("I'm returning this: ", answer)
-  //           return answer
-  //         }
+  //   return (
+  //     structure.folders
+  //       .find(a => {
+  //         return a.name === folderName
   //       })
-  //     }
-  //   })
+  //       .images.find(a => {
+  //         return a.name === imageName
+  //       }).selected === 'true'
+  //   )
   // }
 
   const generateImage = (image, folderName) => {
@@ -54,24 +51,9 @@ const DatasetPage1 = props => {
               <input
                 type="checkbox"
                 id={image.name + folderName}
-                checked={(async (folderName, imageName) => {
-                  structure.folders.forEach(folder => {
-                    if (folder.name === folderName) {
-                      folder.images.forEach(image => {
-                        if (image.name == imageName) {
-                          const answer = image.selected === 'true'
-                          console.log("I'm returning this: ", answer)
-                          return answer
-                        }
-                      })
-                    }
-                  })
-                  // const something = getImageCheckedStatus(
-                  //   folderName,
-                  //   image.name,
-                  // )
-                  // console.log('this is what I get: ', something)
-                  // return something
+                checked={(() => {
+                  console.log('this is called')
+                  return false
                 })()}
                 disabled={image.can_be_modified === 'false' && false}
                 onChange={e =>
