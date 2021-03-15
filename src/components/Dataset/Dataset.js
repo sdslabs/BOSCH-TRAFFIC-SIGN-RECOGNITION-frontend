@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import DatasetPage1 from './DatasetPage1.js'
 import DatasetPage2 from './DatasetPage2.js'
-import DatasetPage3 from './DatasetPage3/DatasetPage3'
+import DatasetPage3Data from './DatasetPage3/DatasetPage3Data'
 // import structure from './structure.json'
 import { Container, Row, Col } from 'react-bootstrap'
 import Step1 from '../Common/SidebarStep1.js'
@@ -11,7 +11,7 @@ const Dataset = () => {
   // [TODO] Fetch structure here with an API call
   const [datasetStep, setDatasetStep] = useState(1)
   const [initialData, setInitialData] = useState({ empty: true })
-  const [splitDataTraining, setSplitDataTraining] = useState(0)
+  const [splitDataTraining, setSplitDataTraining] = useState(70)
   return (
     <Container fluid className="h-100 mx-0 px-0">
       <Row className="mx-auto h-100">
@@ -47,7 +47,7 @@ const Dataset = () => {
           {datasetStep === 2 && (
             <DatasetPage2 setSplitDataTraining={setSplitDataTraining} />
           )}
-          {datasetStep === 3 && <DatasetPage3 />}
+          {datasetStep === 3 && <DatasetPage3Data />}
         </Col>
       </Row>
     </Container>

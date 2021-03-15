@@ -34,7 +34,7 @@ const PrettoSlider = withStyles({
 })(Slider)
 
 const DatasetPage2 = props => {
-  const [training, setTraining] = useState(0)
+  const [training, setTraining] = useState(70)
   return (
     <div className="dataset-page2 h-100">
       <div className="data h-100">
