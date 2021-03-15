@@ -18,7 +18,8 @@ import ArrowUpIcon from '../../assets/images/arrowup.svg'
 const DatasetPage1 = props => {
   const [images, setImages] = useState([])
   const [selectedFolderName, setSelectedFolderName] = useState('')
-  const [checkedFolderName, setCheckedFolderName] = useState('')
+  const [checkedFolders, setCheckedFolders] = useState([])
+  const [checkedAll, setCheckedAll] = useState(false)
   const [structure, setStructure] = useState({ empty: true })
   // const [trainstructure, setStructure] = useState({ empty: true })
 
@@ -49,9 +50,7 @@ const DatasetPage1 = props => {
               <input
                 type="checkbox"
                 id={image.name + folderName}
-                defaultChecked={
-                  image.selected === 'true' || checkedFolderName === folderName
-                }
+                defaultChecked={image.selected === 'true'}
                 disabled={image.can_be_modified === 'false' && false}
                 onChange={e =>
                   handleCheckbox(
@@ -71,7 +70,26 @@ const DatasetPage1 = props => {
       folderName: folderName,
     }
   }
+
+  // const handleCheckAll = async checked => {
+  //   checkedFolders
+  //   newstructure.folders.forEach((folder, index) => {
+  //     folder.checked = true
+  //     if (index === newstructure.folders.length - 1) {
+  //       console.log('calling setStructure now, index is:', index)
+  //       setStructure(newstructure)
+  //     }
+  //   })
+  //   setCheckAll(checked)
+  // }
+
+  const getCheckedStatus = folderName => {
+    return checkedFolders.find(element => element.folderName === folderName)
+      .checked
+  }
+
   const handleGetInitialData = async () => {
+    const checkedFolders = []
     const structure = await getInitialData()
     structure.empty = false
     structure.folders.forEach(folder => {
@@ -82,13 +100,30 @@ const DatasetPage1 = props => {
         }
       })
       folder.selectedCount = count
+      checkedFolders.push({
+        folderName: folder.name,
+        checked: false,
+      })
     })
     console.log('Got structure from backend: ', structure)
+    setCheckedFolders(checkedFolders)
     setStructure(structure)
 
     // isko mat hataana setstructure jaise hi hai ye
     if (props.initialDataHandler) {
       props.initialDataHandler(structure)
+    }
+  }
+  const handleCheckMultiple = e => {
+    const itemName = e.target.name
+    const checked = e.target.checked
+    setCheckedAll(checked)
+    if (itemName === 'checkAll') {
+      const newCheckedFolders = checkedFolders
+      newCheckedFolders.forEach(folder => {
+        folder.checked = checked
+      })
+      setCheckedFolders(newCheckedFolders)
     }
   }
 
@@ -128,6 +163,10 @@ const DatasetPage1 = props => {
     console.log('Structure updated in state: ', structure)
   }, [structure])
 
+  useEffect(() => {
+    console.log('CheckedFolder updated in state: ', checkedFolders)
+  }, [checkedFolders])
+
   return (
     <>
       {!structure.empty ? (
@@ -163,7 +202,9 @@ const DatasetPage1 = props => {
               >
                 <input
                   type="checkbox"
-                  id="select-all"
+                  name="checkAll"
+                  checked={checkedAll}
+                  onChange={handleCheckMultiple}
                   className="d-flex align-items-center"
                 ></input>
               </Col>
@@ -191,8 +232,9 @@ const DatasetPage1 = props => {
                             <input
                               type="checkbox"
                               id={id}
+                              checked={getCheckedStatus(folder.name)}
                               className="d-flex align-items-center"
-                              onChange={() => setCheckedFolderName(folder.name)}
+                              onChange={handleCheckMultiple}
                             />
                           </Col>
                         )}
