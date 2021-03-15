@@ -31,6 +31,7 @@
   color: $theme-color-black39;
   @include flex-row-center;
   justify-content: flex-start;
+  min-height: 2rem;
 }
 
 .open-close-folder {
@@ -39,4 +40,9 @@
 
 .pointer {
   cursor: pointer;
+}
+
+.empty-header {
+  background-color: $theme-color-grey;
+  height: 5rem;
 }

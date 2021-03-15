@@ -1,7 +1,16 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import Tick from '../../assets/images/tick.svg'
+import { splitDataset } from '../../api/datasetAPI'
 class Step2 extends React.Component {
+  splitData = async () => {
+    const res = await splitDataset({
+      training_data: this.props.splitDataTraining,
+    })
+    if (res.status === 200) {
+      this.props.setDatasetStep(3)
+    }
+  }
   render() {
     return (
       <Container
@@ -19,7 +28,12 @@ class Step2 extends React.Component {
             </div>
           </Row>
           <Row className="d-flex justify-content-flex-start mt-3">
-            <button className="primary-cta primary-shadow">Split Data</button>
+            <button
+              className="primary-cta primary-shadow"
+              onClick={this.splitData}
+            >
+              Split Data
+            </button>
           </Row>
         </Col>
       </Container>

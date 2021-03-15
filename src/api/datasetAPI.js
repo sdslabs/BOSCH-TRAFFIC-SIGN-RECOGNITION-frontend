@@ -12,4 +12,20 @@ function getInitialData() {
     })
 }
 
+export const generateDataset = async dataset => {
+  return await axiosInstance({
+    method: 'post',
+    url: `/GenerateDataset`,
+    data: dataset,
+  })
+}
+
+export const splitDataset = async trainPercentageData => {
+  return await axiosInstance({
+    method: 'post',
+    url: `/SplitData`,
+    data: trainPercentageData,
+  })
+}
+
 export default getInitialData
