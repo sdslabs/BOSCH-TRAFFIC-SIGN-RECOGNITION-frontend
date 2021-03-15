@@ -1,7 +1,15 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import Tick from '../../assets/images/tick.svg'
+import { generateDataset } from '../../api/datasetAPI'
 class Step1 extends React.Component {
+  submitInitialDataset = async () => {
+    const res = await generateDataset(JSON.stringify(this.props.initialData))
+    console.log(res)
+    if (res.status === 200) {
+      this.props.setDatasetStep(2)
+    }
+  }
   render() {
     return (
       <Container
@@ -19,7 +27,11 @@ class Step1 extends React.Component {
             </div>
           </Row>
           <Row className="d-flex justify-content-flex-start mt-3">
-            <button className="primary-cta primary-shadow">
+            <button
+              className="primary-cta primary-shadow"
+              onClick={this.submitInitialDataset}
+              disabled={this.props.done}
+            >
               Generate Dataset
             </button>
           </Row>

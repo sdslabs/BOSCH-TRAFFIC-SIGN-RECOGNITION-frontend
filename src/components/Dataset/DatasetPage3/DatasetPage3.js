@@ -22,7 +22,7 @@ class DatasetPage2 extends React.Component {
 
   render() {
     return (
-      <div className="dataset-page2">
+      <div>
         <AugmentationNavbar
           showActionAreaHandler={this.showActionAreaHandler}
           augActionHandler={this.augActionHandler}
