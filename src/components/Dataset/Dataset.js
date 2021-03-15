@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Sidebar from '../Common/Sidebar.js'
 import RightSidebar from '../Common/RightSidebar'
 import DatasetPage1 from './DatasetPage1.js'
 import DatasetPage2 from './DatasetPage2.js'

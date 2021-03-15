@@ -30,6 +30,7 @@ class NewFolder extends React.Component {
                   borderStyle: 'solid',
                   padding: '3px',
                   borderRadius: '0.25rem',
+                  cursor: 'pointer',
                 }}
               >
                 <input
