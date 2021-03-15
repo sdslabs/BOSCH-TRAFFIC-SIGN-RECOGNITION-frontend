@@ -5,6 +5,20 @@ import { ReactComponent as UploadIcon } from '../../assets/images/upload.svg'
 import { ReactComponent as NewFolderIcon } from '../../assets/images/newfolder.svg'
 import ArrowDownIcon from '../../assets/images/arrowdown.svg'
 import ArrowUpIcon from '../../assets/images/arrowup.svg'
+// const getSelectedImagesCount = images => {
+//   let count = 0
+//   images.forEach(image => {
+//     if (image.selected == 'true') {
+//       count++
+//     }
+//   })
+//   return count
+// }
+
+const DatasetPage1 = props => {
+  const [images, setImages] = useState([])
+  const [selectedFolderName, setSelectedFolderName] = useState('')
+  const [structure, setStructure] = useState({ empty: true })
 
 const DatasetPage1 = props => {
   const [images, setImages] = useState([]) // the currently loaded images in frontend
@@ -177,12 +191,19 @@ const DatasetPage1 = props => {
           {!props.preview ? (
             <Row className="py-3 border-bottom mx-0 px-0">
               <Col xs={2}>
-                <button className="primary-cta bw-8">
+                <button
+                  className="primary-cta bw-8"
+                  onClick={() => props.toggleUpload()}
+                >
                   <UploadIcon className="mr-3" />
                   Upload
                 </button>
               </Col>
-              <Col className="p-auto my-auto">
+              <Col
+                className="p-auto my-auto"
+                onClick={() => props.toggleNewFolder()}
+                style={{ cursor: 'pointer' }}
+              >
                 <NewFolderIcon className="mr-3" />
                 New Folder
               </Col>
@@ -297,6 +318,7 @@ const DatasetPage1 = props => {
       )}
     </>
   )
+}
 }
 
 export default DatasetPage1

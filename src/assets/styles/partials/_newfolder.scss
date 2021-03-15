@@ -1,0 +1,69 @@
+.newfolder {
+  background-color: #ffffff;
+  min-height: 100%;
+  height: 100%;
+  margin-top: 1%;
+  margin-right: 0%;
+  font-family: Nunito Sans;
+  font-style: normal;
+  .heading {
+    font-size: x-large;
+    margin-left: 0%;
+    margin-top: 7%;
+    font-weight: 600;
+  }
+  .exit {
+    margin-top: 3%;
+    margin-left: 65%;
+    cursor: pointer;
+  }
+  .button {
+    background-color: $theme-color-dark-blue;
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+    @include font-size-1628;
+    @include primary-font-bold;
+    color: $theme-color-white;
+    padding: 0.25rem;
+    border: none;
+    outline: none;
+    // width: fit-content;
+    margin-left: 0%;
+    margin-top: 2%;
+  }
+  .disabled-button {
+    background-color: #D7D7D7;
+    border-radius: 3px;
+    @include font-size-1628;
+    @include primary-font-bold;
+    color: black;
+    padding: 0.25rem;
+    border: none;
+    outline: none;
+    // width: fit-content;
+    margin-left: 0%;
+    margin-top: 2%;
+  }
+  .head {
+    display: flex;
+    flex-direction: row;
+  }
+  .heading-2 {
+    font-size: large;
+    margin-left: 0%;
+    margin-top: 7%;
+  }
+  .delete-images {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    .inside {
+      display: flex;
+      flex-direction: row;
+      .text {
+        margin-top: 10%;
+        margin-left: 5%;
+      }
+    }
+  }
+}
