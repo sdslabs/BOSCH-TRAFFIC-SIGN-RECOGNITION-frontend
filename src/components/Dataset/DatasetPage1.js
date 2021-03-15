@@ -3,8 +3,8 @@ import { Row, Col, Form, Container } from 'react-bootstrap'
 import getInitialData from '../../api/datasetAPI'
 import { ReactComponent as UploadIcon } from '../../assets/images/upload.svg'
 import { ReactComponent as NewFolderIcon } from '../../assets/images/newfolder.svg'
-import { ReactComponent as ArrowDownIcon } from '../../assets/images/arrowdown.svg'
-import { ReactComponent as ArrowUpIcon } from '../../assets/images/arrowup.svg'
+import ArrowDownIcon from '../../assets/images/arrowdown.svg'
+import ArrowUpIcon from '../../assets/images/arrowup.svg'
 
 // const getSelectedImagesCount = images => {
 //   let count = 0
@@ -31,7 +31,7 @@ const DatasetPage1 = () => {
   const generateImage = (image, folderName) => {
     return {
       element: (
-        <Row className="mx-0 px-0 border-bottom d-flex align-items-center">
+        <Row className="mx-0 px-0 border-bottom d-flex align-items-center select-dataset-image">
           <Col
             xs={1}
             className="d-flex justify-content-center align-items-center"
@@ -106,7 +106,7 @@ const DatasetPage1 = () => {
   return (
     <>
       {!structure.empty ? (
-        <Container fluid className="mx-0 px-0">
+        <Container fluid className="mx-0 px-0 dataset-page-1">
           <Row className="py-3 border-bottom mx-0 px-0">
             <Col xs={2}>
               <div className="primary-cta bw-8">
@@ -120,17 +120,20 @@ const DatasetPage1 = () => {
             </Col>
           </Row>
           <Row>
-            <h1 className="ml-5">Select Dataset</h1>
+            <div className="ml-5 heading">Select Dataset</div>
           </Row>
-          <Row className="ml-0">
+          <Row className="ml-0 select-dataset-header">
             <Col
               xs={1}
               className="d-flex align-items-center justify-content-center"
             >
-              {' '}
               <Form>
                 <Form.Group controlId="formBasicCheckbox">
-                  <Form.Check type="checkbox" id="select-all" />
+                  <Form.Check
+                    type="checkbox"
+                    id="select-all"
+                    className="d-flex align-items-center"
+                  />
                 </Form.Group>
               </Form>
             </Col>
@@ -147,16 +150,26 @@ const DatasetPage1 = () => {
                     <div key={'parent' + id.toString(2)}>
                       <Row
                         key={id}
-                        className="mx-0 px-0 border-bottom d-flex align-items-center"
+                        className="mx-0 px-0 border-bottom d-flex align-items-center select-dataset-folder"
                       >
-                        <Col xs={1} className="d-flex justify-content-center">
-                          <Form.Group controlId="formBasicCheckbox">
-                            <Form.Check type="checkbox" id={id} />
+                        <Col
+                          xs={1}
+                          className="d-flex justify-content-center align-items-center"
+                        >
+                          <Form.Group
+                            controlId="formBasicCheckbox"
+                            className="d-flex align-items-center"
+                          >
+                            <Form.Check
+                              type="checkbox"
+                              id={id}
+                              className="d-flex align-items-center"
+                            />
                           </Form.Group>
                         </Col>
                         <Col
                           xs={1}
-                          className="d-flex justify-content-start align-items-center"
+                          className="d-flex justify-content-center align-items-center pointer"
                           onClick={() => {
                             if (selectedFolderName === folder.name) {
                               setSelectedFolderName('')
@@ -168,9 +181,15 @@ const DatasetPage1 = () => {
                           }}
                         >
                           {selectedFolderName === folder.name ? (
-                            <ArrowUpIcon />
+                            <img
+                              src={ArrowUpIcon}
+                              className="open-close-folder d-flex justify-content-center"
+                            />
                           ) : (
-                            <ArrowDownIcon />
+                            <img
+                              src={ArrowDownIcon}
+                              className="open-close-folder d-flex justify-content-center"
+                            />
                           )}
                         </Col>
                         <Col className="">
