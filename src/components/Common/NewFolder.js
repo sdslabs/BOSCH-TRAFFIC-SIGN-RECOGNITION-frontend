@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Button, Col, Row, Form } from 'react-bootstrap'
+import { Container, Col, Row, Form } from 'react-bootstrap'
 import cross from '../../assets/images/cross.svg'
 
 class NewFolder extends React.Component {
@@ -20,16 +20,28 @@ class NewFolder extends React.Component {
         <Row className="heading-2"> Choose Images to Upload </Row>
         <Row>
           <Col>
-            <Button
-              style={{
-                color: '#335BC0',
-                borderColor: '#335BC0',
-                backgroundColor: 'white',
-                marginTop: '10%',
-              }}
-            >
-              Browse
-            </Button>
+            <form>
+              <label
+                style={{
+                  color: '#335BC0',
+                  borderColor: '#335BC0',
+                  backgroundColor: 'white',
+                  marginTop: '10%',
+                  borderStyle: 'solid',
+                  padding: '3px',
+                  borderRadius: '0.25rem',
+                }}
+              >
+                <input
+                  type="file"
+                  accept="image/*"
+                  multiple={true}
+                  capture={true}
+                  style={{ display: 'none' }}
+                />
+                Browse
+              </label>
+            </form>
           </Col>
           <Col className="delete-images">
             <Row className="inside">
