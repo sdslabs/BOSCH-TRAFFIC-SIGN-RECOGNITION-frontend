@@ -1,35 +1,24 @@
 import { React, useState, useEffect } from 'react'
 import { Row, Col, Form, Container } from 'react-bootstrap'
-import { getInitialData } from '../../api/datasetAPI'
+import { getSplitData } from '../../api/datasetAPI'
 import { ReactComponent as UploadIcon } from '../../assets/images/upload.svg'
 import { ReactComponent as NewFolderIcon } from '../../assets/images/newfolder.svg'
 import ArrowDownIcon from '../../assets/images/arrowdown.svg'
 import ArrowUpIcon from '../../assets/images/arrowup.svg'
 
 const DatasetPage1 = props => {
-  const [images, setImages] = useState([]) // the currently loaded images in frontend
-  const [selectedFolderName, setSelectedFolderName] = useState('') // the folder currentl selected for dropdown
-  const [structure, setStructure] = useState({ empty: true }) // main structure
-  const [checkedFolders, setCheckedFolders] = useState([]) // list of folders status on checked
-  const [checkedAll, setCheckedAll] = useState(false) // are all folders checked?
+  const [images, setImages] = useState([])
+  const [selectedFolderName, setSelectedFolderName] = useState('')
+  const [checkedFolders, setCheckedFolders] = useState([])
+  const [checkedAll, setCheckedAll] = useState(false)
+  const [structure, setStructure] = useState({ empty: true })
+  // const [trainStructure, setTrainStructure] = useState({ empty: true })
+  // const [testStructure, setTestStructure] = useState({ empty: true })
 
   const addImages = (folder, folderName) => {
     setImages([])
     folder.images.map(image => {
       setImages(images => [...images, generateImage(image, folderName)])
-    })
-  }
-
-  const getImageCheckedStatus = (folderName, imageName) => {
-    structure.folders.forEach(folder => {
-      if (folder.name === folderName) {
-        folder.images.forEach(image => {
-          if (image.name == imageName) {
-            console.log(image.selected === 'true')
-            return image.selected === 'true'
-          }
-        })
-      }
     })
   }
 
@@ -53,10 +42,10 @@ const DatasetPage1 = props => {
               <input
                 type="checkbox"
                 id={image.name + folderName}
-                checked={getImageCheckedStatus(folderName, image.name)}
+                defaultChecked={image.selected === 'true'}
                 disabled={image.can_be_modified === 'false' && false}
                 onChange={e =>
-                  handleImageCheckbox(
+                  handleCheckbox(
                     folderName,
                     image.name,
                     e.currentTarget.checked,
@@ -74,9 +63,26 @@ const DatasetPage1 = props => {
     }
   }
 
+  // const handleCheckAll = async checked => {
+  //   checkedFolders
+  //   newstructure.folders.forEach((folder, index) => {
+  //     folder.checked = true
+  //     if (index === newstructure.folders.length - 1) {
+  //       console.log('calling setStructure now, index is:', index)
+  //       setStructure(newstructure)
+  //     }
+  //   })
+  //   setCheckAll(checked)
+  // }
+
+  const getCheckedStatus = folderName => {
+    return checkedFolders.find(element => element.folderName === folderName)
+      .checked
+  }
+
   const handleGetInitialData = async () => {
     const checkedFolders = []
-    const structure = await getInitialData()
+    const structure = await getSplitData()
     structure.empty = false
     structure.folders.forEach(folder => {
       let count = 0
@@ -100,40 +106,23 @@ const DatasetPage1 = props => {
       props.initialDataHandler(structure)
     }
   }
-
-  const getFolderCheckedStatus = folderName => {
-    return checkedFolders.find(element => element.folderName === folderName)
-      .checked
-  }
-
   const handleCheckMultiple = e => {
     const itemName = e.target.name
     const checked = e.target.checked
+    setCheckedAll(checked)
     if (itemName === 'checkAll') {
-      setCheckedAll(checked)
-
       const newCheckedFolders = checkedFolders
-
       newCheckedFolders.forEach(folder => {
         folder.checked = checked
       })
       setCheckedFolders(newCheckedFolders)
-    } else {
-      const newCheckedFolders = checkedFolders.slice()
-      for (let i = 0; i < newCheckedFolders.length; i++) {
-        if (newCheckedFolders[i].folderName === e.target.name) {
-          newCheckedFolders[i].checked = e.target.checked
-          if (e.target.checked === false) {
-            setCheckedAll(false)
-          }
-        }
-      }
-      setCheckedFolders(newCheckedFolders)
     }
   }
 
-  const handleImageCheckbox = (folderName, imageName, selected) => {
-    const newstructure = { ...structure }
+  const handleCheckbox = (folderName, imageName, selected) => {
+    const newstructure = structure
+    console.log('newstructure before set:', newstructure)
+    console.log('structure before set:', structure)
     newstructure.folders.forEach(folder => {
       if (folder.name === folderName) {
         folder.selectedCount = selected
@@ -142,7 +131,7 @@ const DatasetPage1 = props => {
         folder.images.forEach(image => {
           if (image.name == imageName) {
             image.selected = selected.toString()
-            console.log(folderName, imageName, selected)
+            console.log(folderName, imageName, image.selected)
           }
         })
       }
@@ -154,6 +143,7 @@ const DatasetPage1 = props => {
     if (props.initialDataHandler) {
       props.initialDataHandler(structure)
     }
+    console.log("structure from aviral's code:", structure)
   }
 
   useEffect(() => {
@@ -234,8 +224,7 @@ const DatasetPage1 = props => {
                             <input
                               type="checkbox"
                               id={id}
-                              name={folder.name}
-                              checked={getFolderCheckedStatus(folder.name)}
+                              checked={getCheckedStatus(folder.name)}
                               className="d-flex align-items-center"
                               onChange={handleCheckMultiple}
                             />
