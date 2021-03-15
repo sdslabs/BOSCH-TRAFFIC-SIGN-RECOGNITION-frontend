@@ -17,6 +17,7 @@ export const getSplitData = () => {
     .get(`/SendSplit`)
     .then(response => {
       const res = JSON.parse(response.request.response)
+      console.log('sendsplit: ', res)
       return res
     })
     .catch(error => {

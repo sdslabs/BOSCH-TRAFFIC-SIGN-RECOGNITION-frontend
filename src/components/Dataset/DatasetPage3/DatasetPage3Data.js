@@ -1,5 +1,5 @@
 import React from 'react'
-import DatasetPage3 from '../DatasetPage1'
+import DatasetPage3 from '../DatasetPage3'
 
 const DatasetPage3Data = () => {
   return (

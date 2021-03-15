@@ -6,7 +6,7 @@ import { ReactComponent as NewFolderIcon } from '../../assets/images/newfolder.s
 import ArrowDownIcon from '../../assets/images/arrowdown.svg'
 import ArrowUpIcon from '../../assets/images/arrowup.svg'
 
-const DatasetPage1 = props => {
+const DatasetPage3 = props => {
   const [images, setImages] = useState([])
   const [selectedFolderName, setSelectedFolderName] = useState('')
   const [checkedFolders, setCheckedFolders] = useState([])
@@ -63,42 +63,15 @@ const DatasetPage1 = props => {
     }
   }
 
-  // const handleCheckAll = async checked => {
-  //   checkedFolders
-  //   newstructure.folders.forEach((folder, index) => {
-  //     folder.checked = true
-  //     if (index === newstructure.folders.length - 1) {
-  //       console.log('calling setStructure now, index is:', index)
-  //       setStructure(newstructure)
-  //     }
-  //   })
-  //   setCheckAll(checked)
-  // }
-
   const getCheckedStatus = folderName => {
     return checkedFolders.find(element => element.folderName === folderName)
       .checked
   }
 
   const handleGetInitialData = async () => {
-    const checkedFolders = []
     const structure = await getSplitData()
     structure.empty = false
-    structure.folders.forEach(folder => {
-      let count = 0
-      folder.images.forEach(image => {
-        if (image.selected === 'true') {
-          count++
-        }
-      })
-      folder.selectedCount = count
-      checkedFolders.push({
-        folderName: folder.name,
-        checked: false,
-      })
-    })
-    console.log('Got structure from backend: ', structure)
-    setCheckedFolders(checkedFolders)
+
     setStructure(structure)
 
     // isko mat hataana setstructure jaise hi hai ye
@@ -287,4 +260,4 @@ const DatasetPage1 = props => {
   )
 }
 
-export default DatasetPage1
+export default DatasetPage3

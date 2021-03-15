@@ -20,18 +20,19 @@ const DatasetPage1 = props => {
     })
   }
 
-  const getImageCheckedStatus = (folderName, imageName) => {
-    structure.folders.forEach(folder => {
-      if (folder.name === folderName) {
-        folder.images.forEach(image => {
-          if (image.name == imageName) {
-            console.log(image.selected === 'true')
-            return image.selected === 'true'
-          }
-        })
-      }
-    })
-  }
+  // const getImageCheckedStatus = (folderName, imageName) => {
+  //   structure.folders.forEach(folder => {
+  //     if (folder.name === folderName) {
+  //       folder.images.forEach(image => {
+  //         if (image.name == imageName) {
+  //           const answer = image.selected === 'true'
+  //           console.log("I'm returning this: ", answer)
+  //           return answer
+  //         }
+  //       })
+  //     }
+  //   })
+  // }
 
   const generateImage = (image, folderName) => {
     console.log(
@@ -53,7 +54,25 @@ const DatasetPage1 = props => {
               <input
                 type="checkbox"
                 id={image.name + folderName}
-                checked={getImageCheckedStatus(folderName, image.name)}
+                checked={(async (folderName, imageName) => {
+                  structure.folders.forEach(folder => {
+                    if (folder.name === folderName) {
+                      folder.images.forEach(image => {
+                        if (image.name == imageName) {
+                          const answer = image.selected === 'true'
+                          console.log("I'm returning this: ", answer)
+                          return answer
+                        }
+                      })
+                    }
+                  })
+                  // const something = getImageCheckedStatus(
+                  //   folderName,
+                  //   image.name,
+                  // )
+                  // console.log('this is what I get: ', something)
+                  // return something
+                })()}
                 disabled={image.can_be_modified === 'false' && false}
                 onChange={e =>
                   handleImageCheckbox(
