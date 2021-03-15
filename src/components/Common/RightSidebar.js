@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container, Col } from 'react-bootstrap'
-// import NewFolder from './NewFolder'
+import NewFolder from './NewFolder'
 import Upload from './Upload'
 
 class RightSidebar extends React.Component {
@@ -8,7 +8,17 @@ class RightSidebar extends React.Component {
     return (
       <Container>
         <Col>
-          <Upload />
+          {this.props.isUpload ? (
+            <Upload
+              isUpload={this.props.isUpload}
+              toggleUpload={this.props.toggleUpload}
+            />
+          ) : (
+            <NewFolder
+              isNewFolder={this.props.isNewFolder}
+              toggleNewFolder={this.props.toggleNewFolder}
+            />
+          )}
         </Col>
       </Container>
     )

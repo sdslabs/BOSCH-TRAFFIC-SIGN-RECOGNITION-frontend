@@ -121,12 +121,19 @@ const DatasetPage1 = props => {
           {!props.preview ? (
             <Row className="py-3 border-bottom mx-0 px-0">
               <Col xs={2}>
-                <button className="primary-cta bw-8">
+                <button
+                  className="primary-cta bw-8"
+                  onClick={() => props.toggleUpload()}
+                >
                   <UploadIcon className="mr-3" />
                   Upload
                 </button>
               </Col>
-              <Col className="p-auto my-auto">
+              <Col
+                className="p-auto my-auto"
+                onClick={() => props.toggleNewFolder()}
+                style={{ cursor: 'pointer' }}
+              >
                 <NewFolderIcon className="mr-3" />
                 New Folder
               </Col>

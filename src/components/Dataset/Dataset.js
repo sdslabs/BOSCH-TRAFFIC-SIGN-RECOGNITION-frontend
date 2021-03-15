@@ -13,6 +13,17 @@ const Dataset = () => {
   const [datasetStep, setDatasetStep] = useState(1)
   const [initialData, setInitialData] = useState({ empty: true })
   const [splitDataTraining, setSplitDataTraining] = useState(70)
+  const [isUpload, setUpload] = useState(false)
+  const [isNewFolder, setNewFolder] = useState(false)
+
+  const toggleUpload = () => {
+    console.log('toggle upload')
+    setUpload(!isUpload)
+  }
+
+  const toggleNewFolder = () => {
+    setNewFolder(!isNewFolder)
+  }
   return (
     <Container fluid className="h-100 mx-0 px-0">
       <Row className="mx-auto h-100">
@@ -43,17 +54,28 @@ const Dataset = () => {
         </Col>
         <Col className="mx-0 px-0">
           {datasetStep === 1 && (
-            <DatasetPage1 initialDataHandler={setInitialData} />
+            <DatasetPage1
+              initialDataHandler={setInitialData}
+              toggleUpload={toggleUpload}
+              toggleNewFolder={toggleNewFolder}
+            />
           )}
           {datasetStep === 2 && (
             <DatasetPage2 setSplitDataTraining={setSplitDataTraining} />
           )}
           {datasetStep === 3 && <DatasetPage3Data />}
         </Col>
-        <Col xs={2.4}>
-          {' '}
-          <RightSidebar />{' '}
-        </Col>
+        {isUpload || isNewFolder ? (
+          <Col xs={2.4}>
+            {' '}
+            <RightSidebar
+              isUpload={isUpload}
+              toggleUpload={toggleUpload}
+              isNewFolder={isNewFolder}
+              toggleNewFolder={toggleNewFolder}
+            />{' '}
+          </Col>
+        ) : null}
       </Row>
     </Container>
   )

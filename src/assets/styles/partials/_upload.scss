@@ -15,6 +15,7 @@
   .exit {
     margin-top: 3%;
     margin-left: 70%;
+    cursor: pointer;
   }
   .button {
     background-color: $theme-color-dark-blue;
@@ -29,6 +30,7 @@
     width: fit-content;
     margin-left: 0%;
     margin-top: 2%;
+    cursor: pointer;
   }
   .head {
     display: flex;
@@ -42,6 +44,7 @@
   .delete-images {
     display: flex;
     flex-direction: column;
+    cursor: pointer;
     .inside {
       display: flex;
       flex-direction: row;
