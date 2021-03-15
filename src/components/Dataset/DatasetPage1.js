@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from 'react'
 import { Row, Col, Form, Container } from 'react-bootstrap'
-import getInitialData from '../../api/datasetAPI'
+import { getInitialData } from '../../api/datasetAPI'
 import { ReactComponent as UploadIcon } from '../../assets/images/upload.svg'
 import { ReactComponent as NewFolderIcon } from '../../assets/images/newfolder.svg'
 import ArrowDownIcon from '../../assets/images/arrowdown.svg'
@@ -18,7 +18,9 @@ import ArrowUpIcon from '../../assets/images/arrowup.svg'
 const DatasetPage1 = props => {
   const [images, setImages] = useState([])
   const [selectedFolderName, setSelectedFolderName] = useState('')
+  const [checkedFolderName, setCheckedFolderName] = useState('')
   const [structure, setStructure] = useState({ empty: true })
+  // const [trainstructure, setStructure] = useState({ empty: true })
 
   const addImages = (folder, folderName) => {
     setImages([])
@@ -28,6 +30,14 @@ const DatasetPage1 = props => {
   }
 
   const generateImage = (image, folderName) => {
+    console.log(
+      'Image:',
+      image.name,
+      'selected',
+      image.selected,
+      'modified',
+      image.can_be_modified,
+    )
     return {
       element: (
         <Row className="mx-0 px-0 border-bottom d-flex align-items-center select-dataset-image">
@@ -36,21 +46,21 @@ const DatasetPage1 = props => {
               xs={1}
               className="d-flex justify-content-center align-items-center"
             >
-              <Form.Group controlId="formBasicCheckbox d-flex justify-content-center align-items-center">
-                <Form.Check
-                  type="checkbox"
-                  id={image.name + folderName}
-                  defaultChecked={image.selected === 'true'}
-                  disabled={image.can_be_modified === 'false' && false}
-                  onChange={e =>
-                    handleCheckbox(
-                      folderName,
-                      image.name,
-                      e.currentTarget.checked,
-                    )
-                  }
-                />
-              </Form.Group>
+              <input
+                type="checkbox"
+                id={image.name + folderName}
+                defaultChecked={
+                  image.selected === 'true' || checkedFolderName === folderName
+                }
+                disabled={image.can_be_modified === 'false' && false}
+                onChange={e =>
+                  handleCheckbox(
+                    folderName,
+                    image.name,
+                    e.currentTarget.checked,
+                  )
+                }
+              />
             </Col>
           )}
           <Col xs={1}></Col>
@@ -82,8 +92,10 @@ const DatasetPage1 = props => {
     }
   }
 
-  const handleCheckbox = async (folderName, imageName, selected) => {
+  const handleCheckbox = (folderName, imageName, selected) => {
     const newstructure = structure
+    console.log('newstructure before set:', newstructure)
+    console.log('structure before set:', structure)
     newstructure.folders.forEach(folder => {
       if (folder.name === folderName) {
         folder.selectedCount = selected
@@ -97,16 +109,18 @@ const DatasetPage1 = props => {
         })
       }
     })
+
     setStructure(newstructure)
 
     // isko mat hataana setstructure jaise hi hai ye
     if (props.initialDataHandler) {
       props.initialDataHandler(structure)
     }
-    console.log(structure)
+    console.log("structure from aviral's code:", structure)
   }
 
   useEffect(() => {
+    console.log('useEffect called!')
     handleGetInitialData()
   }, [])
 
@@ -147,15 +161,11 @@ const DatasetPage1 = props => {
                 xs={1}
                 className="d-flex align-items-center justify-content-center"
               >
-                <Form>
-                  <Form.Group controlId="formBasicCheckbox">
-                    <Form.Check
-                      type="checkbox"
-                      id="select-all"
-                      className="d-flex align-items-center"
-                    />
-                  </Form.Group>
-                </Form>
+                <input
+                  type="checkbox"
+                  id="select-all"
+                  className="d-flex align-items-center"
+                ></input>
               </Col>
             )}
             <Col xs={1}></Col>
@@ -178,16 +188,12 @@ const DatasetPage1 = props => {
                             xs={1}
                             className="d-flex justify-content-center align-items-center"
                           >
-                            <Form.Group
-                              controlId="formBasicCheckbox"
+                            <input
+                              type="checkbox"
+                              id={id}
                               className="d-flex align-items-center"
-                            >
-                              <Form.Check
-                                type="checkbox"
-                                id={id}
-                                className="d-flex align-items-center"
-                              />
-                            </Form.Group>
+                              onChange={() => setCheckedFolderName(folder.name)}
+                            />
                           </Col>
                         )}
                         <Col
