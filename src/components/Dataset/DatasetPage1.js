@@ -58,29 +58,32 @@ const DatasetPage1 = props => {
           if (e.target.checked) {
             // load all image and set them to true
             newFolders[i].currentlySelected = true
-            newFolders[i].selectedCount = newFolders[i].imageCount
             const newStructure = { ...props.structure }
             newStructure.folders.forEach(sFolder => {
               if (i === sFolder.id) {
                 const newImages = sFolder.images.slice()
 
-                newImages.forEach(
-                  image =>
-                    (image.selected =
-                      image.can_be_modified === 'true'
-                        ? 'true'
-                        : image.selected),
-                )
-                // update structure
-                sFolder.images.forEach(
-                  image =>
-                    (image.selected =
-                      image.can_be_modified === 'true'
-                        ? 'true'
-                        : image.selected),
-                )
-                props.setStructure(newStructure)
+                newImages.forEach(image => {
+                  if (image.can_be_modified === 'true') {
+                    newFolders[i].selectedCount =
+                      image.selected === 'true'
+                        ? newFolders[i].selectedCount
+                        : newFolders[i].selectedCount + 1
+                    image.selected = 'true'
+                  }
+                })
                 setImages(newImages)
+                // update structure
+                sFolder.images.forEach(image => {
+                  if (image.can_be_modified === 'true') {
+                    sFolder.selectedCount =
+                      image.selected === 'true'
+                        ? sFolder.selectedCount
+                        : sFolder.selectedCount + 1
+                    image.selected = 'true'
+                  }
+                })
+                props.setStructure(newStructure)
               }
             })
             // to make all images false
@@ -89,27 +92,30 @@ const DatasetPage1 = props => {
             setCheckAllFolders(false)
             // update images state
             newFolders[i].currentlySelected = true
-            newFolders[i].selectedCount = 0
             const newStructure = { ...props.structure }
             newStructure.folders.forEach(sFolder => {
               if (i === sFolder.id) {
                 const newImages = sFolder.images.slice()
-                newImages.forEach(
-                  image =>
-                    (image.selected =
-                      image.can_be_modified === 'true'
-                        ? 'false'
-                        : image.selected),
-                )
+                newImages.forEach(image => {
+                  if (image.can_be_modified === 'true') {
+                    newFolders[i].selectedCount =
+                      image.selected === 'false'
+                        ? newFolders[i].selectedCount
+                        : newFolders[i].selectedCount - 1
+                    image.selected = 'false'
+                  }
+                })
                 setImages(newImages)
                 // update structure
-                sFolder.images.forEach(
-                  image =>
-                    (image.selected =
-                      image.can_be_modified === 'true'
-                        ? 'false'
-                        : image.selected),
-                )
+                sFolder.images.forEach(image => {
+                  if (image.can_be_modified === 'true') {
+                    sFolder.selectedCount =
+                      image.selected === 'false'
+                        ? sFolder.selectedCount
+                        : sFolder.selectedCount - 1
+                    image.selected = 'false'
+                  }
+                })
                 props.setStructure(newStructure)
               }
             })
@@ -260,8 +266,8 @@ const DatasetPage1 = props => {
                             .replace('"', '')
                             .replace('"', '')}
                         </Col>
-                        <Col className="">{folder.imageCount.toString(2)}</Col>
-                        <Col>{folder.selectedCount.toString(2)}</Col>
+                        <Col className="">{folder.imageCount.toString()}</Col>
+                        <Col>{folder.selectedCount.toString()}</Col>
                       </Row>
 
                       {folder.currentlySelected ? (
@@ -280,7 +286,7 @@ const DatasetPage1 = props => {
                           />
                         ))
                       ) : (
-                        <div key={'none' + folder.id.toString(2)}></div>
+                        <div key={'none' + folder.id.toString()}></div>
                       )}
                     </div>
                   ))}
