@@ -15,6 +15,21 @@ const DatasetImageDiv = props => {
     }
     props.setStructure(newStructure)
     // update UI
+    const newFolders = props.folders.slice()
+    for (let i = 0; i < newFolders.length; i++) {
+      if (newFolders[i] === props.folder) {
+        newFolders[i].selectedCount = checked
+          ? newFolders[i].selectedCount + 1
+          : newFolders[i].selectedCount - 1
+        console.log('selected count: ', newFolders[i].selectedCount)
+        newFolders[i].checked =
+          checked && newFolders[i].selectedCount === props.folder.imageCount
+            ? true
+            : false
+      }
+    }
+    props.setFolders(newFolders)
+
     const newImages = props.images.slice()
     for (let i = 0; i < newImages.length; i++) {
       if (newImages[i].name === props.image.name) {

@@ -58,6 +58,7 @@ const DatasetPage1 = props => {
           if (e.target.checked) {
             // load all image and set them to true
             newFolders[i].currentlySelected = true
+            newFolders[i].selectedCount = newFolders[i].imageCount
             const newStructure = { ...props.structure }
             newStructure.folders.forEach(sFolder => {
               if (i === sFolder.id) {
@@ -88,6 +89,7 @@ const DatasetPage1 = props => {
             setCheckAllFolders(false)
             // update images state
             newFolders[i].currentlySelected = true
+            newFolders[i].selectedCount = 0
             const newStructure = { ...props.structure }
             newStructure.folders.forEach(sFolder => {
               if (i === sFolder.id) {
@@ -267,6 +269,9 @@ const DatasetPage1 = props => {
                           <DatasetImageDiv
                             key={image.name}
                             image={image}
+                            folders={props.folders}
+                            setFolders={props.setFolders}
+                            folder={folder}
                             images={images}
                             setImages={setImages}
                             structure={props.structure}
