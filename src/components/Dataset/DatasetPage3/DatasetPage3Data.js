@@ -4,7 +4,7 @@ import { getSplitData, selectAugmentationManual } from '../../../api/datasetAPI'
 import { Row } from 'react-bootstrap'
 import Select from 'react-select'
 import ActionArea from './ActionArea'
-
+import DatasetPage3 from './DatasetPage3'
 const DatasetPage3Data = () => {
   const [trainStructure, setTrainStructure] = useState({ empty: true })
   const [testStructure, setTestStructure] = useState({ empty: true })
@@ -13,6 +13,9 @@ const DatasetPage3Data = () => {
   const [imageSelectable, setImageSelectable] = useState(false)
   const [selectedOption, setSelectedOption] = useState(null)
   const [showActionArea, setShowActionArea] = useState(false)
+  const [augmentationDataSelected, setAugmentationDataSelected] = useState(
+    false,
+  )
   useEffect(() => {
     handleGetAugmentationData()
   }, [])
@@ -69,6 +72,7 @@ const DatasetPage3Data = () => {
     setTestFolders(testFolders)
     setTestStructure(structure.test)
     setTrainStructure(structure.train)
+    console.log(structure)
   }
 
   const handleSelectedChange = selectedOption => {
@@ -91,6 +95,7 @@ const DatasetPage3Data = () => {
     const res = await selectAugmentationManual(structure)
     if (res.status === 200) {
       console.log('Manual data sent respectfully')
+      setAugmentationDataSelected(true)
     }
   }
 
@@ -98,6 +103,9 @@ const DatasetPage3Data = () => {
     { value: 'random', label: 'Random Selection' },
     { value: 'manual', label: 'Manual Selection' },
   ]
+  if (augmentationDataSelected) {
+    return <DatasetPage3 />
+  }
   return (
     <div className="dataset-page2 h-100">
       <div className="data h-100">
@@ -161,6 +169,7 @@ const DatasetPage3Data = () => {
         <ActionArea
           showActionAreaHandler={removeActionArea}
           action={'Random'}
+          editingHandler={setAugmentationDataSelected}
         />
       )}
     </div>

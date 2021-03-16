@@ -63,6 +63,7 @@ class RandomPreview extends React.Component {
     })
     if (res.status === 200) {
       console.log('send respectfully')
+      this.props.editingHandler(true)
     }
   }
 

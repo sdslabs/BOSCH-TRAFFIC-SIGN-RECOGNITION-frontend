@@ -38,6 +38,7 @@ class ActionArea extends React.Component {
           {this.props.action === 'Random' && (
             <RandomPreview
               showActionAreaHandler={this.props.showActionAreaHandler}
+              editingHandler={this.props.editingHandler}
             />
           )}
         </div>

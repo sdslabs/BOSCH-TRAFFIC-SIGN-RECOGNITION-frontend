@@ -13,8 +13,9 @@ export const getInitialData = () => {
 }
 
 export const getSplitData = () => {
+  const timeString = Date.now().toString()
   return axiosInstance
-    .get(`/SendSplit`)
+    .get(`/SendSplit/${timeString}`)
     .then(response => {
       const res = JSON.parse(response.request.response)
       return res
