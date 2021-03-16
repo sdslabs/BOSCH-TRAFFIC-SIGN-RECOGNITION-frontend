@@ -12,6 +12,7 @@ import DatasetImageDiv from './DataSetImageDiv'
 const DatasetPage1 = props => {
   const [checkAllFolders, setCheckAllFolders] = useState(false) // are all folders checked?
   const [images, setImages] = useState([]) // the currently loaded images in frontend
+  const [imageRandom, setImageRandom] = useState(100) // random
 
   useEffect(() => {
     console.log('images updated in state: ', images)
@@ -23,6 +24,7 @@ const DatasetPage1 = props => {
 
   const handleCheckMultiple = e => {
     const itemName = e.target.name
+    // handle check All folders
     if (itemName === 'checkAll') {
       setCheckAllFolders(e.target.checked)
       const newFolders = props.folders.slice()
@@ -30,14 +32,52 @@ const DatasetPage1 = props => {
         folder.checked = e.target.checked
       })
       props.setFolders(newFolders)
-    } else {
+    }
+    // handle checkAll Images
+    else {
       const newFolders = props.folders.slice()
       for (let i = 0; i < newFolders.length; i++) {
         if (newFolders[i].id.toString() === e.target.id) {
+          // update check in UI
           newFolders[i].checked = e.target.checked
-          if (e.target.checked === false) {
+          if (e.target.checked) {
+            // load all image and set them to true
+            newFolders[i].currentlySelected = true
+            props.structure.folders.forEach(sFolder => {
+              if (i === sFolder.id) {
+                const newImages = sFolder.images.slice()
+                newImages.forEach(
+                  image =>
+                    (image.selected =
+                      image.can_be_modified === 'true'
+                        ? 'true'
+                        : image.selected),
+                )
+                setImages(newImages)
+                setImageRandom(imageRandom + 1)
+              }
+            })
+          } else {
+            // uncheck super check in UI
             setCheckAllFolders(false)
+            // update images state
+            newFolders[i].currentlySelected = true
+            props.structure.folders.forEach(sFolder => {
+              if (i === sFolder.id) {
+                const newImages = sFolder.images.slice()
+                newImages.forEach(
+                  image =>
+                    (image.selected =
+                      image.can_be_modified === 'true'
+                        ? 'false'
+                        : image.selected),
+                )
+                setImages(newImages)
+                setImageRandom(imageRandom + 1)
+              }
+            })
           }
+
           break
         }
       }
@@ -173,9 +213,14 @@ const DatasetPage1 = props => {
                         <Col>{folder.selectedCount.toString(2)}</Col>
                       </Row>
 
-                      {folder.currentlySelected ? (
+                      {imageRandom > 0 && folder.currentlySelected ? (
                         images.map(image => (
-                          <DatasetImageDiv key={image.name} image={image} />
+                          <DatasetImageDiv
+                            key={image.name}
+                            image={image}
+                            images={images}
+                            setImages={setImages}
+                          />
                         ))
                       ) : (
                         <div key={'none' + folder.id.toString(2)}></div>

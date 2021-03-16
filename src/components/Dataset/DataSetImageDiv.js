@@ -1,40 +1,16 @@
-import { React, useState, useEffect } from 'react'
+import { React } from 'react'
 import { Row, Col } from 'react-bootstrap'
 
 const DatasetImageDiv = props => {
-  const [isChecked, setIsChecked] = useState(false)
-
-  useEffect(() => {
-    console.log('isChecked updated in state: ', isChecked)
-  }, [isChecked])
-
-  useEffect(() => {
-    setIsChecked(props.image.selected === 'true')
-  }, [])
-
-  const handleImageCheckbox = checked => {
-    setIsChecked(checked)
-    // const newstructure = { ...structure }
-    // newstructure.folders.forEach(folder => {
-    //   if (folder.name === folderName) {
-    //     folder.selectedCount = selected
-    //       ? folder.selectedCount + 1
-    //       : folder.selectedCount - 1
-    //     folder.images.forEach(image => {
-    //       if (image.name == imageName) {
-    //         image.selected = selected.toString()
-    //         console.log(folderName, imageName, selected)
-    //       }
-    //     })
-    //   }
-    // })
-
-    // setStructure(newstructure)
-
-    // // isko mat hataana setstructure jaise hi hai ye
-    // if (props.initialDataHandler) {
-    //   props.initialDataHandler(structure)
-    // }
+  const handleImageCheckbox = async checked => {
+    const newImages = props.images.slice()
+    for (let i = 0; i < newImages.length; i++) {
+      if (newImages[i].name === props.image.name) {
+        newImages[i].selected =
+          props.image.can_be_modified === 'true' && checked ? 'true' : 'false'
+      }
+    }
+    await props.setImages(newImages)
   }
 
   return (
@@ -47,8 +23,8 @@ const DatasetImageDiv = props => {
           <input
             type="checkbox"
             id={props.image.name}
-            checked={isChecked}
-            disabled={props.image.can_be_modified === 'false' && false}
+            checked={props.image.selected === 'true'}
+            disabled={props.image.can_be_modified === 'false'}
             onChange={e => handleImageCheckbox(e.currentTarget.checked)}
           />
         </Col>
