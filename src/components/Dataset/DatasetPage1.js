@@ -120,7 +120,7 @@ const DatasetPage1 = props => {
     <>
       {!props.structure.empty ? (
         <Container fluid className="mx-0 px-0 dataset-page-1">
-          {!props.preview ? (
+          {props.showUploadTools ? (
             <Row className="py-3 border-bottom mx-0 px-0">
               <Col xs={2}>
                 <button
@@ -140,16 +140,30 @@ const DatasetPage1 = props => {
                 New Folder
               </Col>
             </Row>
-          ) : (
+          ) : props.showEmptyHeader ? (
             <div className="empty-header w-100"></div>
+          ) : (
+            <div></div>
           )}
-          <Row>
-            {props.preview ? (
-              <div className="ml-5 heading">Dataset</div>
-            ) : (
-              <div className="ml-5 heading">Select Dataset</div>
-            )}
-          </Row>
+          {!props.dontShowHeading && (
+            <Row>
+              {props.preview || props.showTrainRow || props.showTestRow ? (
+                <div className="ml-5 heading">Dataset</div>
+              ) : (
+                <div className="ml-5 heading">Select Dataset</div>
+              )}
+            </Row>
+          )}
+          {props.showTestRow && (
+            <Row className="ml-2 mb-2 select-dataset-header">
+              <Col>Test Data</Col>
+            </Row>
+          )}
+          {props.showTrainRow && (
+            <Row className="ml-2 mb-2 select-dataset-header">
+              <Col>Train Data</Col>
+            </Row>
+          )}
           <Row className="ml-0 select-dataset-header">
             {!props.preview && (
               <Col
@@ -253,6 +267,7 @@ const DatasetPage1 = props => {
                             setImages={setImages}
                             structure={props.structure}
                             setStructure={props.setStructure}
+                            preview={props.preview}
                           />
                         ))
                       ) : (

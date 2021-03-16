@@ -4,6 +4,7 @@ import RotatePreview from './RotatePreview'
 import AdjustPreview from './AdjustPreview'
 import NoisePreview from './NoisePreview'
 import TransformPreview from './TransformPreview'
+import RandomPreview from './RandomPreview'
 class ActionArea extends React.Component {
   render() {
     if (this.props.action) {
@@ -31,6 +32,11 @@ class ActionArea extends React.Component {
           )}
           {this.props.action === 'Transform' && (
             <TransformPreview
+              showActionAreaHandler={this.props.showActionAreaHandler}
+            />
+          )}
+          {this.props.action === 'Random' && (
+            <RandomPreview
               showActionAreaHandler={this.props.showActionAreaHandler}
             />
           )}

@@ -17,7 +17,6 @@ export const getSplitData = () => {
     .get(`/SendSplit`)
     .then(response => {
       const res = JSON.parse(response.request.response)
-      console.log('sendsplit: ', res)
       return res
     })
     .catch(error => {
@@ -38,5 +37,21 @@ export const splitDataset = async trainPercentageData => {
     method: 'post',
     url: `/SplitData`,
     data: trainPercentageData,
+  })
+}
+
+export const selectAugmentationRandom = async percentageData => {
+  return await axiosInstance({
+    method: 'post',
+    url: `/RandomType`,
+    data: percentageData,
+  })
+}
+
+export const selectAugmentationManual = async manualData => {
+  return await axiosInstance({
+    method: 'post',
+    url: `/ManualType`,
+    data: manualData,
   })
 }

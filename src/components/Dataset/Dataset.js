@@ -106,10 +106,16 @@ const Dataset = () => {
               setFolders={setFolders}
               toggleUpload={toggleUpload}
               toggleNewFolder={toggleNewFolder}
+              showUploadTools={true}
             />
           )}
           {datasetStep === 2 && (
-            <DatasetPage2 setSplitDataTraining={setSplitDataTraining} />
+            <DatasetPage2
+              setSplitDataTraining={setSplitDataTraining}
+              structure={structure}
+              folders={folders}
+              setFolders={setFolders}
+            />
           )}
           {datasetStep === 3 && <DatasetPage3Data />}
         </Col>

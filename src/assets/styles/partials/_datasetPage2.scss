@@ -1,5 +1,13 @@
 .dataset-page2 {
   width: 80%;
+  .heading {
+    @include primary-font-normal;
+    @include font-size-3244;
+    font-weight: 600;
+    color: $theme-color-black;
+    @include flex-row-center;
+    margin: 1.5rem 0;
+  }
 }
 
 .split-data {

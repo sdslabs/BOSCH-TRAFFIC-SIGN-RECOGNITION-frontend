@@ -35,10 +35,30 @@ const PrettoSlider = withStyles({
 
 const DatasetPage2 = props => {
   const [training, setTraining] = useState(70)
+
+  const getModifiedStructure = structure => {
+    structure.folders.forEach(folder => {
+      folder.images.forEach(image => {
+        if (image.selected === 'false') {
+          const index = folder.images.indexOf(image)
+          if (index > -1) {
+            folder.images.splice(index, 1)
+          }
+        }
+      })
+    })
+    return structure
+  }
   return (
     <div className="dataset-page2 h-100">
       <div className="data h-100">
-        <DatasetPage1 preview={true} />
+        <DatasetPage1
+          preview={true}
+          structure={getModifiedStructure(props.structure)}
+          folders={props.folders}
+          setFolders={props.setFolders}
+          showEmptyHeader={true}
+        />
       </div>
       <div className="action-area">
         <div className="empty-header" />
