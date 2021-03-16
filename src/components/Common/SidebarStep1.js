@@ -4,9 +4,11 @@ import Tick from '../../assets/images/tick.svg'
 import { generateDataset } from '../../api/datasetAPI'
 class Step1 extends React.Component {
   submitInitialDataset = async () => {
+    console.log('submit initial dataset!!!')
     const res = await generateDataset(JSON.stringify(this.props.initialData))
-    console.log(res)
+    console.log('response received: ', res)
     if (res.status === 200) {
+      console.log('setDatasetstep = 2')
       this.props.setDatasetStep(2)
     }
   }

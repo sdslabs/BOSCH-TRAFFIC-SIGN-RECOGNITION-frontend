@@ -12,7 +12,6 @@ import DatasetImageDiv from './DataSetImageDiv'
 const DatasetPage1 = props => {
   const [checkAllFolders, setCheckAllFolders] = useState(false) // are all folders checked?
   const [images, setImages] = useState([]) // the currently loaded images in frontend
-  const [imageRandom, setImageRandom] = useState(100) // random
 
   useEffect(() => {
     console.log('images updated in state: ', images)
@@ -32,20 +31,34 @@ const DatasetPage1 = props => {
         folder.checked = e.target.checked
       })
       props.setFolders(newFolders)
+      // update structure
+      const newStructure = { ...props.structure }
+      for (let i = 0; i < newStructure.folders.length; i++) {
+        for (let j = 0; j < newStructure.folders[i].images.length; j++) {
+          newStructure.folders[i].images[j].selected =
+            newStructure.folders[i].images[j].can_be_modified === 'true'
+              ? e.target.checked.toString()
+              : newStructure.folders[i].images[j].selected
+        }
+      }
+      props.setStructure(newStructure)
     }
     // handle checkAll Images
     else {
       const newFolders = props.folders.slice()
       for (let i = 0; i < newFolders.length; i++) {
         if (newFolders[i].id.toString() === e.target.id) {
-          // update check in UI
+          // update folder check in UI
           newFolders[i].checked = e.target.checked
+          // to make all images true
           if (e.target.checked) {
             // load all image and set them to true
             newFolders[i].currentlySelected = true
-            props.structure.folders.forEach(sFolder => {
+            const newStructure = { ...props.structure }
+            newStructure.folders.forEach(sFolder => {
               if (i === sFolder.id) {
                 const newImages = sFolder.images.slice()
+
                 newImages.forEach(
                   image =>
                     (image.selected =
@@ -53,16 +66,26 @@ const DatasetPage1 = props => {
                         ? 'true'
                         : image.selected),
                 )
+                // update structure
+                sFolder.images.forEach(
+                  image =>
+                    (image.selected =
+                      image.can_be_modified === 'true'
+                        ? 'true'
+                        : image.selected),
+                )
+                props.setStructure(newStructure)
                 setImages(newImages)
-                setImageRandom(imageRandom + 1)
               }
             })
+            // to make all images false
           } else {
             // uncheck super check in UI
             setCheckAllFolders(false)
             // update images state
             newFolders[i].currentlySelected = true
-            props.structure.folders.forEach(sFolder => {
+            const newStructure = { ...props.structure }
+            newStructure.folders.forEach(sFolder => {
               if (i === sFolder.id) {
                 const newImages = sFolder.images.slice()
                 newImages.forEach(
@@ -73,7 +96,15 @@ const DatasetPage1 = props => {
                         : image.selected),
                 )
                 setImages(newImages)
-                setImageRandom(imageRandom + 1)
+                // update structure
+                sFolder.images.forEach(
+                  image =>
+                    (image.selected =
+                      image.can_be_modified === 'true'
+                        ? 'false'
+                        : image.selected),
+                )
+                props.setStructure(newStructure)
               }
             })
           }
@@ -213,13 +244,15 @@ const DatasetPage1 = props => {
                         <Col>{folder.selectedCount.toString(2)}</Col>
                       </Row>
 
-                      {imageRandom > 0 && folder.currentlySelected ? (
+                      {folder.currentlySelected ? (
                         images.map(image => (
                           <DatasetImageDiv
                             key={image.name}
                             image={image}
                             images={images}
                             setImages={setImages}
+                            structure={props.structure}
+                            setStructure={props.setStructure}
                           />
                         ))
                       ) : (
