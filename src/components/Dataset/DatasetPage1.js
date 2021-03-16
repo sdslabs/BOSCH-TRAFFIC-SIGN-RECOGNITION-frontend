@@ -44,34 +44,6 @@ const DatasetPage1 = props => {
       props.setFolders(newFolders)
     }
   }
-  // const handleImageCheckbox = (folderName, imageName, selected) => {
-  //   const newstructure = { ...structure }
-  //   newstructure.folders.forEach(folder => {
-  //     if (folder.name === folderName) {
-  //       folder.selectedCount = selected
-  //         ? folder.selectedCount + 1
-  //         : folder.selectedCount - 1
-  //       folder.images.forEach(image => {
-  //         if (image.name == imageName) {
-  //           image.selected = selected.toString()
-  //           console.log(folderName, imageName, selected)
-  //         }
-  //       })
-  //     }
-  //   })
-
-  //   setStructure(newstructure)
-
-  //   // isko mat hataana setstructure jaise hi hai ye
-  //   if (props.initialDataHandler) {
-  //     props.initialDataHandler(structure)
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   console.log('useEffect called!')
-  //   handleGetInitialData()
-  // }, [])
 
   return (
     <>
