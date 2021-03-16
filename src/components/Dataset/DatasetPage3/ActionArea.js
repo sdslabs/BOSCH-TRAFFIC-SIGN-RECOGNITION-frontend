@@ -4,6 +4,7 @@ import RotatePreview from './RotatePreview'
 import AdjustPreview from './AdjustPreview'
 import NoisePreview from './NoisePreview'
 import TransformPreview from './TransformPreview'
+import ErasePreview from './ErasePreview'
 import RandomPreview from './RandomPreview'
 class ActionArea extends React.Component {
   render() {
@@ -27,6 +28,11 @@ class ActionArea extends React.Component {
           )}
           {this.props.action === 'Noise' && (
             <NoisePreview
+              showActionAreaHandler={this.props.showActionAreaHandler}
+            />
+          )}
+          {this.props.action === 'Erase' && (
+            <ErasePreview
               showActionAreaHandler={this.props.showActionAreaHandler}
             />
           )}

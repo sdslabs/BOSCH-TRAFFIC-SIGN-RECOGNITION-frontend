@@ -1,41 +1,40 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import AugmentationNavbar from './AugmentationNavbar'
 import ActionArea from './ActionArea'
-class DatasetPage2 extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      showActionArea: false,
-      augAction: null,
-    }
-    this.showActionAreaHandler = this.showActionAreaHandler.bind(this)
-    this.augActionHandler = this.augActionHandler.bind(this)
-  }
+import Preview from './Preview'
+import { getOriginalImages, getModifiedImages } from '../../../api/datasetAPI'
+const DatasetPage2 = () => {
+  const [showActionArea, setShowAction] = useState(false)
+  const [augAction, setAugAction] = useState(null)
+  const [originalImages, setOriginalImages] = useState([])
+  const [modifiedImages, setModifiedImages] = useState([])
+  useEffect(() => {
+    getImages()
+  }, [])
 
-  showActionAreaHandler(show) {
-    this.setState({ showActionArea: show })
+  const getImages = async () => {
+    let res = await getOriginalImages()
+    setOriginalImages(res.images)
+    res = await getModifiedImages()
+    setModifiedImages(res.images)
   }
-
-  augActionHandler(action) {
-    this.setState({ augAction: action })
-  }
-
-  render() {
-    return (
-      <div>
-        <AugmentationNavbar
-          showActionAreaHandler={this.showActionAreaHandler}
-          augActionHandler={this.augActionHandler}
-        />
-        {this.state.showActionArea && (
-          <ActionArea
-            showActionAreaHandler={this.showActionAreaHandler}
-            action={this.state.augAction}
-          />
-        )}
-      </div>
-    )
-  }
+  return (
+    <div className="h-100">
+      <AugmentationNavbar
+        showActionAreaHandler={setShowAction}
+        augActionHandler={setAugAction}
+      />
+      <Preview
+        originalImages={originalImages}
+        modifiedImages={modifiedImages}
+        setOriginalImages={setOriginalImages}
+        setModifiedImages={setModifiedImages}
+      />
+      {showActionArea && (
+        <ActionArea showActionAreaHandler={setShowAction} action={augAction} />
+      )}
+    </div>
+  )
 }
 
 export default DatasetPage2

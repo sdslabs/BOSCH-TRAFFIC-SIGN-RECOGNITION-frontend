@@ -25,6 +25,32 @@ export const getSplitData = () => {
     })
 }
 
+export const getOriginalImages = () => {
+  const timeString = Date.now().toString()
+  return axiosInstance
+    .get(`/GetOrg16/${timeString}`)
+    .then(response => {
+      const res = JSON.parse(response.request.response)
+      return res
+    })
+    .catch(error => {
+      return Promise.reject(error)
+    })
+}
+
+export const getModifiedImages = () => {
+  const timeString = Date.now().toString()
+  return axiosInstance
+    .get(`/GetMod16/${timeString}`)
+    .then(response => {
+      const res = JSON.parse(response.request.response)
+      return res
+    })
+    .catch(error => {
+      return Promise.reject(error)
+    })
+}
+
 export const generateDataset = async dataset => {
   return await axiosInstance({
     method: 'post',

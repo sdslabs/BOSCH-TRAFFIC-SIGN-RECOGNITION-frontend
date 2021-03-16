@@ -260,8 +260,8 @@ const DatasetPage1 = props => {
                             .replace('"', '')
                             .replace('"', '')}
                         </Col>
-                        <Col className="">{folder.imageCount.toString(2)}</Col>
-                        <Col>{folder.selectedCount.toString(2)}</Col>
+                        <Col className="">{folder.imageCount.toString()}</Col>
+                        <Col>{folder.selectedCount.toString()}</Col>
                       </Row>
 
                       {folder.currentlySelected ? (
@@ -280,7 +280,7 @@ const DatasetPage1 = props => {
                           />
                         ))
                       ) : (
-                        <div key={'none' + folder.id.toString(2)}></div>
+                        <div key={'none' + folder.id.toString()}></div>
                       )}
                     </div>
                   ))}
