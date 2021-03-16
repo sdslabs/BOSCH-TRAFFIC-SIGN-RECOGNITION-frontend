@@ -18,6 +18,7 @@ const Dataset = () => {
 
   const [structure, setStructure] = useState({ empty: true }) // main structure (this is initialData)
   const [folders, setFolders] = useState([]) // list of folders
+  const [allChecked, setAllChecked] = useState(false) // list of folders
 
   useEffect(() => {
     handleGetInitialData()
@@ -28,7 +29,18 @@ const Dataset = () => {
   }, [structure])
 
   useEffect(() => {
+    console.log('allChecked updated in state: ', allChecked)
+  }, [allChecked])
+
+  useEffect(() => {
     console.log('folders updated in state: ', folders)
+    let allChecked = true
+    folders.forEach(folder => {
+      if (!folder.checked) {
+        allChecked = false
+      }
+    })
+    setAllChecked(allChecked)
   }, [folders])
 
   const handleGetInitialData = async () => {
@@ -53,7 +65,7 @@ const Dataset = () => {
         imageCount: imageCount,
         id: id,
         currentlySelected: false,
-        checked: false,
+        checked: imageCount === selectedCount,
       })
     })
     setFolders(folders)
@@ -104,6 +116,7 @@ const Dataset = () => {
               setStructure={setStructure}
               folders={folders}
               setFolders={setFolders}
+              allChecked={allChecked}
               toggleUpload={toggleUpload}
               toggleNewFolder={toggleNewFolder}
               showUploadTools={true}

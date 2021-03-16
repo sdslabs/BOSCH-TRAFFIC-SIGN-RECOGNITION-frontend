@@ -14,6 +14,10 @@ const DatasetPage1 = props => {
   const [images, setImages] = useState([]) // the currently loaded images in frontend
 
   useEffect(() => {
+    setCheckAllFolders(props.allChecked)
+  }, [props.allChecked])
+
+  useEffect(() => {
     console.log('images updated in state: ', images)
   }, [images])
 
@@ -23,7 +27,7 @@ const DatasetPage1 = props => {
 
   const handleCheckMultiple = e => {
     const itemName = e.target.name
-    // handle check All folders
+    // checkAll the folders
     if (itemName === 'checkAll') {
       setCheckAllFolders(e.target.checked)
       const newFolders = props.folders.slice()
@@ -43,7 +47,7 @@ const DatasetPage1 = props => {
       }
       props.setStructure(newStructure)
     }
-    // handle checkAll Images
+    // handle checkAll Images in a folder
     else {
       const newFolders = props.folders.slice()
       for (let i = 0; i < newFolders.length; i++) {
