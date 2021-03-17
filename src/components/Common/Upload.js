@@ -24,9 +24,13 @@ const Upload = props => {
         if (element.name === folderName) {
           element.images.push({
             name: files[0].name,
-            can_be_modified: true,
-            selected: true,
+            can_be_modified: 'true',
+            selected: 'true',
           })
+          setFiles([])
+          setFolderName('')
+          setnooffiles(0)
+          document.getElementById(folderName).checked = false
         }
       })
     }
@@ -87,7 +91,7 @@ const Upload = props => {
       </Row>
       <Row className="heading-2"> Choose Folder for uploading </Row>
       {!props.structure.empty
-        ? structure.folders.map((folder, id) => (
+        ? props.structure.folders.map((folder, id) => (
             <Form key={id}>
               <Form.Check
                 type="checkbox"
