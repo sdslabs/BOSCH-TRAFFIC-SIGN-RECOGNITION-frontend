@@ -9,6 +9,7 @@ import { Container, Row, Col } from 'react-bootstrap'
 import Step1 from '../Common/SidebarStep1.js'
 import Step2 from '../Common/SidebarStep2.js'
 import Step3 from '../Common/SidebarStep3.js'
+import Step4 from '../Common/SidebarStep4.js'
 import { getInitialData } from '../../api/datasetAPI'
 
 const Dataset = () => {
@@ -82,6 +83,9 @@ const Dataset = () => {
               )}
               {datasetStep >= 3 && (
                 <Step3 done={datasetStep > 3} setDatasetStep={setDatasetStep} />
+              )}
+              {datasetStep >= 4 && (
+                <Step4 done={datasetStep > 4} setDatasetStep={setDatasetStep} />
               )}
             </Col>
           </Container>
