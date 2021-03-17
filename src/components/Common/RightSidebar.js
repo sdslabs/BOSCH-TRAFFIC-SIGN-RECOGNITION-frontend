@@ -12,13 +12,17 @@ class RightSidebar extends React.Component {
             <Upload
               isUpload={this.props.isUpload}
               toggleUpload={this.props.toggleUpload}
+              structure={this.props.structure}
+              setStructure={this.props.setStructure}
             />
-          ) : (
+          ) : this.props.isNewFolder ? (
             <NewFolder
               isNewFolder={this.props.isNewFolder}
               toggleNewFolder={this.props.toggleNewFolder}
+              structure={this.props.structure}
+              setStructure={this.props.setStructure}
             />
-          )}
+          ) : null}
         </Col>
       </Container>
     )

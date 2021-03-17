@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Container, Col, Row, Form } from 'react-bootstrap'
 import cross from '../../assets/images/cross.svg'
-import structure from '../Dataset/structure.json'
 
 const Upload = props => {
   const [folderName, setFolderName] = useState('')
@@ -21,18 +20,13 @@ const Upload = props => {
   }
   const uploadFiles = () => {
     if (files.length != 0) {
-      structure.folders.forEach(element => {
+      props.structure.folders.forEach(element => {
         if (element.name === folderName) {
-          console.log(element)
-          const newStructure = [
-            ...element.images,
-            {
-              name: files[0].name,
-              can_be_modified: true,
-              selected: true,
-            },
-          ]
-          console.log(newStructure, files[0])
+          element.images.push({
+            name: files[0].name,
+            can_be_modified: true,
+            selected: true,
+          })
         }
       })
     }
@@ -42,9 +36,6 @@ const Upload = props => {
     setFiles([])
     document.getElementById('file-input').value = ''
   }
-  useEffect(() => {
-    console.log(folderName)
-  })
   return (
     <Container className="upload">
       <div className="head">
@@ -95,22 +86,20 @@ const Upload = props => {
         ) : null}
       </Row>
       <Row className="heading-2"> Choose Folder for uploading </Row>
-      {!structure.empty ? (
-        structure.folders.map((folder, id) => (
-          <Form key={id}>
-            <Form.Check
-              type="checkbox"
-              label={folder.name}
-              key={id}
-              name={folder.name}
-              id={folder.name}
-              onChange={setSelectedFolderName}
-            />
-          </Form>
-        ))
-      ) : (
-        <p />
-      )}
+      {!props.structure.empty
+        ? structure.folders.map((folder, id) => (
+            <Form key={id}>
+              <Form.Check
+                type="checkbox"
+                label={folder.name}
+                key={id}
+                name={folder.name}
+                id={folder.name}
+                onChange={setSelectedFolderName}
+              />
+            </Form>
+          ))
+        : null}
     </Container>
   )
 }
