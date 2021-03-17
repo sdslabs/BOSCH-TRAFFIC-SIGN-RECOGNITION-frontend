@@ -14,10 +14,6 @@ const DatasetPage1 = props => {
   const [images, setImages] = useState([]) // the currently loaded images in frontend
 
   useEffect(() => {
-    setCheckAllFolders(props.allChecked)
-  }, [props.allChecked])
-
-  useEffect(() => {
     console.log('images updated in state: ', images)
   }, [images])
 
