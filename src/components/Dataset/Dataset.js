@@ -75,10 +75,12 @@ const Dataset = () => {
   const toggleUpload = () => {
     console.log('toggle upload')
     setUpload(!isUpload)
+    setNewFolder(false)
   }
 
   const toggleNewFolder = () => {
     setNewFolder(!isNewFolder)
+    setUpload(false)
   }
   return (
     <Container fluid className="h-100 mx-0 px-0">
@@ -117,8 +119,14 @@ const Dataset = () => {
               folders={folders}
               setFolders={setFolders}
               allChecked={allChecked}
-              toggleUpload={toggleUpload}
-              toggleNewFolder={toggleNewFolder}
+              toggleUpload={() => {
+                setUpload(true)
+                setNewFolder(false)
+              }}
+              toggleNewFolder={() => {
+                setNewFolder(true)
+                setUpload(false)
+              }}
               showUploadTools={true}
             />
           )}
@@ -140,6 +148,8 @@ const Dataset = () => {
               toggleUpload={toggleUpload}
               isNewFolder={isNewFolder}
               toggleNewFolder={toggleNewFolder}
+              structure={structure}
+              setStructure={setStructure}
             />{' '}
           </Col>
         ) : null}

@@ -16,20 +16,18 @@ const NewFolder = props => {
     setFolderName(e.target.value)
   }
   const uploadFiles = () => {
+    const images = []
     if (files.length != 0) {
-      structure.folders.forEach(element => {
-        if (element.name === folderName) {
-          console.log(element)
-          const newStructure = [
-            ...element.images,
-            {
-              name: files[0].name,
-              can_be_modified: true,
-              selected: true,
-            },
-          ]
-          console.log(newStructure, files[0])
-        }
+      for (let i = 0; i < files.length; i++) {
+        images.push({
+          name: files[i].name,
+          can_be_modified: true,
+          selected: true,
+        })
+      }
+      props.structure.folders.push({
+        name: folderName,
+        images: images,
       })
     }
   }
