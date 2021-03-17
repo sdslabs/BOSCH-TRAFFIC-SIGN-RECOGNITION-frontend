@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import DatasetPage1 from '../DatasetPage1'
+import DatasetPage1 from '../DatasetPage1/DatasetPage1'
 import { getSplitData, selectAugmentationManual } from '../../../api/datasetAPI'
 import { Row } from 'react-bootstrap'
 import Select from 'react-select'
@@ -8,8 +8,6 @@ import DatasetPage3 from './DatasetPage3'
 const DatasetPage3Data = () => {
   const [trainStructure, setTrainStructure] = useState({ empty: true })
   const [testStructure, setTestStructure] = useState({ empty: true })
-  const [testFolders, setTestFolders] = useState([])
-  const [trainFolders, setTrainFolders] = useState([])
   const [imageSelectable, setImageSelectable] = useState(false)
   const [selectedOption, setSelectedOption] = useState(null)
   const [showActionArea, setShowActionArea] = useState(false)
@@ -20,8 +18,6 @@ const DatasetPage3Data = () => {
     handleGetAugmentationData()
   }, [])
   const handleGetAugmentationData = async () => {
-    const trainFolders = []
-    const testFolders = []
     const structure = await getSplitData()
     structure.train.empty = false
     structure.test.empty = false
@@ -38,14 +34,6 @@ const DatasetPage3Data = () => {
       folder.selectedCount = selectedCount
       folder.imageCount = imageCount
       folder.id = id
-      testFolders.push({
-        name: folder.name,
-        selectedCount: selectedCount,
-        imageCount: imageCount,
-        id: id,
-        currentlySelected: false,
-        checked: false,
-      })
     })
     structure.train.folders.forEach((folder, id) => {
       let selectedCount = 0
@@ -59,20 +47,9 @@ const DatasetPage3Data = () => {
       folder.selectedCount = selectedCount
       folder.imageCount = imageCount
       folder.id = id
-      trainFolders.push({
-        name: folder.name,
-        selectedCount: selectedCount,
-        imageCount: imageCount,
-        id: id,
-        currentlySelected: false,
-        checked: false,
-      })
     })
-    setTrainFolders(trainFolders)
-    setTestFolders(testFolders)
     setTestStructure(structure.test)
     setTrainStructure(structure.train)
-    console.log(structure)
   }
 
   const handleSelectedChange = selectedOption => {
@@ -104,7 +81,14 @@ const DatasetPage3Data = () => {
     { value: 'manual', label: 'Manual Selection' },
   ]
   if (augmentationDataSelected) {
-    return <DatasetPage3 />
+    return (
+      <DatasetPage3
+        setAugmentationDataSelected={setAugmentationDataSelected}
+        setSelectedOption={setSelectedOption}
+        handleGetAugmentationData={handleGetAugmentationData}
+        setImageSelectable={setImageSelectable}
+      />
+    )
   }
   return (
     <div className="dataset-page2 h-100">
@@ -147,8 +131,6 @@ const DatasetPage3Data = () => {
           initialDataHandler={setTestStructure}
           structure={testStructure}
           setStructure={setTestStructure}
-          folders={testFolders}
-          setFolders={setTestFolders}
           showTestRow={true}
           preview={!imageSelectable}
         />
@@ -157,8 +139,6 @@ const DatasetPage3Data = () => {
           initialDataHandler={setTrainStructure}
           structure={trainStructure}
           setStructure={setTrainStructure}
-          folders={trainFolders}
-          setFolders={setTrainFolders}
           dontShowHeading={true}
           showTrainRow={true}
           preview={!imageSelectable}

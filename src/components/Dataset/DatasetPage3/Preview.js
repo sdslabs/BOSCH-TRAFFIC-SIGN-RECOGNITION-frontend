@@ -22,8 +22,14 @@ const ImageDisplayer = props => {
 const Preview = props => {
   return (
     <div className="images-preview">
-      <ImageDisplayer imagesType={'Original'} images={props.originalImages} />
-      <ImageDisplayer imagesType={'Modified'} images={props.modifiedImages} />
+      <ImageDisplayer
+        imagesType={'Original'}
+        images={props.originalImages.slice(0, 16)}
+      />
+      <ImageDisplayer
+        imagesType={'Modified'}
+        images={props.modifiedImages.slice(0, 16)}
+      />
     </div>
   )
 }

@@ -1,11 +1,15 @@
 import React from 'react'
 import Select from 'react-select'
-import Sample from '../../../assets/images/sample.jpg'
 import Slider from '@material-ui/core/Slider'
 import { withStyles } from '@material-ui/core/styles'
 import VerticalFlip from '../../../assets/images/vertical-flip.svg'
 import HorizontalFlip from '../../../assets/images/horizontal-flip.svg'
 import Cross from '../../../assets/images/cross.svg'
+import {
+  applyAugmentation,
+  getModifiedImages,
+  undoAugmentationAPI,
+} from '../../../api/datasetAPI'
 const rotationOptions = [
   { value: 'angle', label: 'Angle' },
   { value: 'flip', label: 'Flip' },
@@ -46,12 +50,15 @@ class RotatePreview extends React.Component {
       selectedOption: null,
       rotation: 0,
       flipStyle: '',
+      flipway: '',
+      undoDisabled: true,
     }
   }
 
   handleChange = selectedOption => {
     if (selectedOption.value === 'angle') {
       this.setState({ flipStyle: '' })
+      this.setState({ flipway: '' })
     } else if (selectedOption.value === 'flip') {
       this.setState({ rotation: 0 })
     }
@@ -63,16 +70,67 @@ class RotatePreview extends React.Component {
   }
   flipHorizontally = () => {
     this.setState({ flipStyle: ' scaleX(-1)' })
+    this.setState({ flipway: 'horizontal_flip' })
   }
   flipVertically = () => {
     this.setState({ flipStyle: ' scaleY(-1)' })
+    this.setState({ flipway: 'vertical_flip' })
+  }
+  applyRotation = async () => {
+    if (this.state.selectedOption.value === 'angle') {
+      const data = {
+        name: 'rotate',
+        params: {
+          angle: -this.state.rotation,
+        },
+      }
+      let res = await applyAugmentation(data)
+      if (res.status === 200) {
+        console.log('image rotated in the backend')
+        res = await getModifiedImages()
+        this.props.setModifiedImages(res.images)
+        this.setState({ rotation: 0 })
+        this.setState({ undoDisabled: false })
+      }
+    }
+    if (this.state.selectedOption.value === 'flip') {
+      const data = {
+        name: this.state.flipway,
+        params: {},
+      }
+      let res = await applyAugmentation(data)
+      if (res.status === 200) {
+        console.log('image flipped in the backend')
+        res = await getModifiedImages()
+        this.props.setModifiedImages(res.images)
+        this.setState({ flipStyle: '' })
+        this.setState({ flipway: '' })
+        this.setState({ undoDisabled: false })
+      }
+    }
+  }
+  undoAugmentation = async () => {
+    let res = await undoAugmentationAPI()
+    if (res.status === 200) {
+      res = await getModifiedImages()
+      this.props.setModifiedImages(res.images)
+      this.setState({ rotation: 0 })
+      this.setState({ undoDisabled: true })
+    }
   }
   render() {
-    const { selectedOption, rotation } = this.state
+    const { selectedOption } = this.state
     return (
       <div>
         <div className="confirm-cancel">
-          <button className="primary-cta">Execute</button>
+          <button
+            className="primary-cta"
+            onClick={() => {
+              this.applyRotation()
+            }}
+          >
+            Execute
+          </button>
           <img
             src={Cross}
             className="cross"
@@ -95,9 +153,10 @@ class RotatePreview extends React.Component {
           </div>
           <div className="aug-image-preview">
             <img
-              src={Sample}
+              src={`http://localhost:5000/${this.props.image.path}`}
               style={{
-                transform: `rotate(${rotation}deg)` + this.state.flipStyle,
+                transform:
+                  `rotate(${this.state.rotation}deg)` + this.state.flipStyle,
               }}
             ></img>
           </div>
@@ -125,6 +184,13 @@ class RotatePreview extends React.Component {
               </button>
             </div>
           )}
+          <button
+            className="secondary-cta mt-3"
+            disabled={this.state.undoDisabled}
+            onClick={this.undoAugmentation}
+          >
+            Undo
+          </button>
         </div>
       </div>
     )

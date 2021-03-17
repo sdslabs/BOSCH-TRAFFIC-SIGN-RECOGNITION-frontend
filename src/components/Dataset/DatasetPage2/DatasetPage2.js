@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import DatasetPage1 from './DatasetPage1.js'
+import DatasetPage1 from '../DatasetPage1/DatasetPage1.js'
 import Slider from '@material-ui/core/Slider'
 import { withStyles } from '@material-ui/core/styles'
 
@@ -55,9 +55,9 @@ const DatasetPage2 = props => {
         <DatasetPage1
           preview={true}
           structure={getModifiedStructure(props.structure)}
-          folders={props.folders}
-          setFolders={props.setFolders}
           showEmptyHeader={true}
+          setStructure={props.setStructure}
+          toggleNewFolder={props.toggleNewFolder}
         />
       </div>
       <div className="action-area">

@@ -2,14 +2,49 @@ import React from 'react'
 import Cross from '../../../assets/images/cross.svg'
 import Select from 'react-select'
 import Info from '../../../assets/images/info.svg'
+import {
+  applyAugmentation,
+  getModifiedImages,
+  undoAugmentationAPI,
+} from '../../../api/datasetAPI'
 const transforms = [
   {
     label: 'Wavelet Transform',
     value: 'Wavelet',
     types: [
-      { name: 'kjsgljlajslfjfla', info: 'kfjaklfjalkjfda' },
-      { name: 'aksfdhajksfhkjfhkj', info: 'akjfhdajkh' },
-      { name: 'alksfjaklfjdalf', info: 'alksfjalkjfalk' },
+      { name: 'haar', info: '' },
+      { name: 'coif10', info: '' },
+      { name: 'db10', info: '' },
+      { name: 'sym10', inof: '' },
+    ],
+  },
+  {
+    label: 'Colour Transform',
+    value: 'Colour',
+    types: [
+      { name: 'RGB', info: '' },
+      { name: 'HSV', info: '' },
+      { name: 'LAB', info: '' },
+      { name: 'Grey', info: '' },
+    ],
+  },
+  {
+    label: 'Surround Transform',
+    value: 'Surround',
+    types: [
+      { name: 'add_brightness', info: '' },
+      { name: 'add_shadow', info: '' },
+      { name: 'add_snow', info: '' },
+      { name: 'add_rain', info: '' },
+      { name: 'add_fog', info: '' },
+    ],
+  },
+  {
+    label: 'Histogram Transform',
+    value: 'histogram',
+    types: [
+      { name: 'Hist_Eq', info: '' },
+      { name: 'CLAHE', info: '' },
     ],
   },
 ]
@@ -20,6 +55,7 @@ class TransformPreview extends React.Component {
       transform: null,
       transformType: null,
       showInfoTransformType: null,
+      undoDisabled: true,
     }
   }
 
@@ -32,11 +68,47 @@ class TransformPreview extends React.Component {
   setShowInfoTransformType = showInfoTransformType => {
     this.setState({ showInfoTransformType })
   }
+  applyTransform = async () => {
+    let data = {
+      name: this.state.transformType,
+      params: {},
+    }
+    if (this.state.transform.value === 'Wavelet') {
+      data = {
+        name: 'Discrete_Wavelet',
+        params: {
+          type: this.state.transformType,
+        },
+      }
+    }
+    let res = await applyAugmentation(data)
+    if (res.status === 200) {
+      console.log('image transformed in the backend')
+      res = await getModifiedImages()
+      this.props.setModifiedImages(res.images)
+      this.setState({ undoDisabled: false })
+    }
+  }
+  undoAugmentation = async () => {
+    let res = await undoAugmentationAPI()
+    if (res.status === 200) {
+      res = await getModifiedImages()
+      this.props.setModifiedImages(res.images)
+      this.setState({ undoDisabled: true })
+    }
+  }
   render() {
     return (
       <div>
         <div className="confirm-cancel">
-          <button className="primary-cta">Execute</button>
+          <button
+            className="primary-cta"
+            onClick={() => {
+              this.applyTransform()
+            }}
+          >
+            Execute
+          </button>
           <img
             src={Cross}
             className="cross"
@@ -90,6 +162,13 @@ class TransformPreview extends React.Component {
                 </div>
               )
             })}
+          <button
+            className="secondary-cta mt-3"
+            disabled={this.state.undoDisabled}
+            onClick={this.undoAugmentation}
+          >
+            Undo
+          </button>
         </div>
       </div>
     )

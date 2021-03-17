@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import RightSidebar from '../Common/RightSidebar'
-import DatasetPage1 from './DatasetPage1.js'
-import DatasetPage2 from './DatasetPage2.js'
+import DatasetPage1 from './DatasetPage1/DatasetPage1'
+import DatasetPage2 from './DatasetPage2/DatasetPage2'
 import DatasetPage3Data from './DatasetPage3/DatasetPage3Data'
+import DatasetPage4 from './DatasetPage4/DatasetPage4.js'
 // import structure from './structure.json'
 import { Container, Row, Col } from 'react-bootstrap'
 import Step1 from '../Common/SidebarStep1.js'
@@ -17,8 +18,6 @@ const Dataset = () => {
   const [isNewFolder, setNewFolder] = useState(false)
 
   const [structure, setStructure] = useState({ empty: true }) // main structure (this is initialData)
-  const [folders, setFolders] = useState([]) // list of folders
-  const [allChecked, setAllChecked] = useState(false) // list of folders
 
   useEffect(() => {
     handleGetInitialData()
@@ -28,23 +27,7 @@ const Dataset = () => {
     console.log('structure updated in state: ', structure)
   }, [structure])
 
-  useEffect(() => {
-    console.log('allChecked updated in state: ', allChecked)
-  }, [allChecked])
-
-  useEffect(() => {
-    console.log('folders updated in state: ', folders)
-    let allChecked = true
-    folders.forEach(folder => {
-      if (!folder.checked) {
-        allChecked = false
-      }
-    })
-    setAllChecked(allChecked)
-  }, [folders])
-
   const handleGetInitialData = async () => {
-    const folders = []
     const structure = await getInitialData()
     structure.empty = false
     structure.folders.forEach((folder, id) => {
@@ -59,26 +42,21 @@ const Dataset = () => {
       folder.selectedCount = selectedCount
       folder.imageCount = imageCount
       folder.id = id
-      folders.push({
-        name: folder.name,
-        selectedCount: selectedCount,
-        imageCount: imageCount,
-        id: id,
-        currentlySelected: false,
-        checked: imageCount === selectedCount,
-      })
+      folder.currentlySelected = false
+      folder.checked = imageCount === selectedCount
     })
-    setFolders(folders)
     setStructure(structure)
   }
 
   const toggleUpload = () => {
     console.log('toggle upload')
     setUpload(!isUpload)
+    setNewFolder(false)
   }
 
   const toggleNewFolder = () => {
     setNewFolder(!isNewFolder)
+    setUpload(false)
   }
   return (
     <Container fluid className="h-100 mx-0 px-0">
@@ -111,14 +89,16 @@ const Dataset = () => {
         <Col className="mx-0 px-0">
           {datasetStep === 1 && (
             <DatasetPage1
-              initialDataHandler={setStructure}
               structure={structure}
               setStructure={setStructure}
-              folders={folders}
-              setFolders={setFolders}
-              allChecked={allChecked}
-              toggleUpload={toggleUpload}
-              toggleNewFolder={toggleNewFolder}
+              toggleUpload={() => {
+                setUpload(true)
+                setNewFolder(false)
+              }}
+              toggleNewFolder={() => {
+                setNewFolder(true)
+                setUpload(false)
+              }}
               showUploadTools={true}
             />
           )}
@@ -126,11 +106,13 @@ const Dataset = () => {
             <DatasetPage2
               setSplitDataTraining={setSplitDataTraining}
               structure={structure}
-              folders={folders}
-              setFolders={setFolders}
+              setStructure={setStructure}
             />
           )}
           {datasetStep === 3 && <DatasetPage3Data />}
+          {datasetStep === 4 && (
+            <DatasetPage4 structure={structure} setStructure={setStructure} />
+          )}
         </Col>
         {isUpload || isNewFolder ? (
           <Col xs={2.4}>
@@ -140,6 +122,8 @@ const Dataset = () => {
               toggleUpload={toggleUpload}
               isNewFolder={isNewFolder}
               toggleNewFolder={toggleNewFolder}
+              structure={structure}
+              setStructure={setStructure}
             />{' '}
           </Col>
         ) : null}

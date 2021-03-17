@@ -3,7 +3,7 @@ import AugmentationNavbar from './AugmentationNavbar'
 import ActionArea from './ActionArea'
 import Preview from './Preview'
 import { getOriginalImages, getModifiedImages } from '../../../api/datasetAPI'
-const DatasetPage2 = () => {
+const DatasetPage3 = props => {
   const [showActionArea, setShowAction] = useState(false)
   const [augAction, setAugAction] = useState(null)
   const [originalImages, setOriginalImages] = useState([])
@@ -23,6 +23,10 @@ const DatasetPage2 = () => {
       <AugmentationNavbar
         showActionAreaHandler={setShowAction}
         augActionHandler={setAugAction}
+        setAugmentationDataSelected={props.setAugmentationDataSelected}
+        setSelectedOption={props.setSelectedOption}
+        handleGetAugmentationData={props.handleGetAugmentationData}
+        setImageSelectable={props.setImageSelectable}
       />
       <Preview
         originalImages={originalImages}
@@ -31,10 +35,16 @@ const DatasetPage2 = () => {
         setModifiedImages={setModifiedImages}
       />
       {showActionArea && (
-        <ActionArea showActionAreaHandler={setShowAction} action={augAction} />
+        <ActionArea
+          showActionAreaHandler={setShowAction}
+          action={augAction}
+          image={modifiedImages[0]}
+          setOriginalImages={setOriginalImages}
+          setModifiedImages={setModifiedImages}
+        />
       )}
     </div>
   )
 }
 
-export default DatasetPage2
+export default DatasetPage3

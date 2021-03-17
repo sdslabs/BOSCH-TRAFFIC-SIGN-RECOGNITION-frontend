@@ -6,7 +6,6 @@ export const axiosInstance = axios.create({
   headers: {
     'Content-Type': 'application/json',
     Accept: '*/*',
-    'User-Agent': 'PostmanRuntime/7.26.8',
   },
   baseURL: baseURL,
 })

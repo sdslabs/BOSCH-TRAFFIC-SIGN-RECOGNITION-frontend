@@ -1,9 +1,13 @@
 import React from 'react'
 import Select from 'react-select'
-import Sample from '../../../assets/images/sample.jpg'
 import Slider from '@material-ui/core/Slider'
 import { withStyles } from '@material-ui/core/styles'
 import Cross from '../../../assets/images/cross.svg'
+import {
+  applyAugmentation,
+  getModifiedImages,
+  undoAugmentationAPI,
+} from '../../../api/datasetAPI'
 const adjustOptions = [
   { value: 'blur', label: 'Blur' },
   { value: 'sharpen', label: 'Sharpen' },
@@ -42,8 +46,9 @@ class AdjustPreview extends React.Component {
     super(props)
     this.state = {
       selectedOption: null,
-      blur: 0,
+      blur: 1,
       sharpen: 0,
+      undoDisabled: true,
     }
   }
 
@@ -62,12 +67,55 @@ class AdjustPreview extends React.Component {
   setSharpness = sharpen => {
     this.setState({ sharpen })
   }
+  applyAdjust = async () => {
+    if (this.state.selectedOption.value === 'blur') {
+      const data = {
+        name: 'blur',
+        params: {
+          k_dim: this.state.blur,
+        },
+      }
+      let res = await applyAugmentation(data)
+      if (res.status === 200) {
+        console.log('image blurred in the backend')
+        res = await getModifiedImages()
+        this.props.setModifiedImages(res.images)
+        this.setState({ undoDisabled: false })
+      }
+    }
+    if (this.state.selectedOption.value === 'sharpen') {
+      const data = {
+        name: 'sharpen',
+        params: {
+          amount: this.state.sharpen,
+        },
+      }
+      let res = await applyAugmentation(data)
+      if (res.status === 200) {
+        console.log('image shapren in the backend')
+        res = await getModifiedImages()
+        this.props.setModifiedImages(res.images)
+        this.setState({ undoDisabled: false })
+      }
+    }
+  }
+
+  undoAugmentation = async () => {
+    let res = await undoAugmentationAPI()
+    if (res.status === 200) {
+      res = await getModifiedImages()
+      this.props.setModifiedImages(res.images)
+      this.setState({ undoDisabled: true })
+    }
+  }
   render() {
     const { selectedOption } = this.state
     return (
       <div>
         <div className="confirm-cancel">
-          <button className="primary-cta">Execute</button>
+          <button className="primary-cta" onClick={this.applyAdjust}>
+            Execute
+          </button>
           <img
             src={Cross}
             className="cross"
@@ -89,7 +137,7 @@ class AdjustPreview extends React.Component {
             ></Select>
           </div>
           <div className="aug-image-preview">
-            <img src={Sample}></img>
+            <img src={`http://localhost:5000/${this.props.image.path}`}></img>
           </div>
           {selectedOption && (
             <div className="action-option">{selectedOption.label}</div>
@@ -98,9 +146,9 @@ class AdjustPreview extends React.Component {
             <PrettoSlider
               valueLabelDisplay="auto"
               aria-label="pretto slider"
-              defaultValue={0}
-              min={0}
-              max={32}
+              defaultValue={1}
+              min={1}
+              max={4}
               step={1}
               value={this.state.blur}
               onChange={(e, val) => this.setBlur(val)}
@@ -118,7 +166,13 @@ class AdjustPreview extends React.Component {
               onChange={(e, val) => this.setSharpness(val)}
             />
           )}
-          {selectedOption && <button className="secondary-cta">Apply</button>}
+          <button
+            className="secondary-cta mt-3"
+            disabled={this.state.undoDisabled}
+            onClick={this.undoAugmentation}
+          >
+            Undo
+          </button>
         </div>
       </div>
     )

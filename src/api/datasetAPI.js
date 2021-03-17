@@ -1,8 +1,9 @@
 import { axiosInstance } from './AxiosInstance.js'
 
 export const getInitialData = () => {
+  const timeString = Date.now().toString()
   return axiosInstance
-    .get(`/InitialData`)
+    .get(`/InitialData/${timeString}`)
     .then(response => {
       const res = JSON.parse(response.request.response)
       return res
@@ -80,5 +81,29 @@ export const selectAugmentationManual = async manualData => {
     method: 'post',
     url: `/ManualType`,
     data: manualData,
+  })
+}
+
+export const applyAugmentation = async data => {
+  return await axiosInstance({
+    method: 'post',
+    url: `/SendTransform16`,
+    data: data,
+  })
+}
+
+export const undoAugmentationAPI = async () => {
+  return await axiosInstance({
+    method: 'post',
+    url: `/Undo`,
+    data: {},
+  })
+}
+
+export const copyAndSaveAPI = async () => {
+  return await axiosInstance({
+    method: 'post',
+    url: `/SendTransformBatch`,
+    data: {},
   })
 }

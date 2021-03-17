@@ -2,20 +2,16 @@
 import { React, useState, useEffect } from 'react'
 import { Row, Col, Form, Container } from 'react-bootstrap'
 // assets
-import { ReactComponent as UploadIcon } from '../../assets/images/upload.svg'
-import ArrowDownIcon from '../../assets/images/arrowdown.svg'
-import { ReactComponent as NewFolderIcon } from '../../assets/images/newfolder.svg'
-import ArrowUpIcon from '../../assets/images/arrowup.svg'
+import { ReactComponent as UploadIcon } from '../../../assets/images/upload.svg'
+import ArrowDownIcon from '../../../assets/images/arrowdown.svg'
+import { ReactComponent as NewFolderIcon } from '../../../assets/images/newfolder.svg'
+import ArrowUpIcon from '../../../assets/images/arrowup.svg'
 // components
 import DatasetImageDiv from './DataSetImageDiv'
 
 const DatasetPage1 = props => {
   const [checkAllFolders, setCheckAllFolders] = useState(false) // are all folders checked?
   const [images, setImages] = useState([]) // the currently loaded images in frontend
-
-  useEffect(() => {
-    setCheckAllFolders(props.allChecked)
-  }, [props.allChecked])
 
   useEffect(() => {
     console.log('images updated in state: ', images)
@@ -27,98 +23,70 @@ const DatasetPage1 = props => {
 
   const handleCheckMultiple = e => {
     const itemName = e.target.name
+    const checked = e.target.checked
+    const id = e.target.id
     // checkAll the folders
     if (itemName === 'checkAll') {
-      setCheckAllFolders(e.target.checked)
-      const newFolders = props.folders.slice()
-      newFolders.forEach(folder => {
-        folder.checked = e.target.checked
-      })
-      props.setFolders(newFolders)
-      // update structure
+      // set the checkbox
+      setCheckAllFolders(checked)
+      // update the structure
       const newStructure = { ...props.structure }
       for (let i = 0; i < newStructure.folders.length; i++) {
+        // set checkbox
+        newStructure.folders[i].checked = checked
+        // set all images that can be modified to checked
         for (let j = 0; j < newStructure.folders[i].images.length; j++) {
-          newStructure.folders[i].images[j].selected =
-            newStructure.folders[i].images[j].can_be_modified === 'true'
-              ? e.target.checked.toString()
-              : newStructure.folders[i].images[j].selected
+          if (newStructure.folders[i].images[j].can_be_modified === 'true') {
+            if (checked) {
+              if (!(newStructure.folders[i].images[j].selected === 'true')) {
+                newStructure.folders[i].selectedCount++
+              }
+            } else {
+              newStructure.folders[i].selectedCount--
+            }
+            newStructure.folders[i].images[j].selected = checked.toString()
+          }
         }
       }
       props.setStructure(newStructure)
     }
+
     // handle checkAll Images in a folder
     else {
-      const newFolders = props.folders.slice()
-      for (let i = 0; i < newFolders.length; i++) {
-        if (newFolders[i].id.toString() === e.target.id) {
-          // update folder check in UI
-          newFolders[i].checked = e.target.checked
-          // to make all images true
-          if (e.target.checked) {
-            // load all image and set them to true
-            newFolders[i].currentlySelected = true
-            newFolders[i].selectedCount = newFolders[i].imageCount
-            const newStructure = { ...props.structure }
-            newStructure.folders.forEach(sFolder => {
-              if (i === sFolder.id) {
-                const newImages = sFolder.images.slice()
-
-                newImages.forEach(
-                  image =>
-                    (image.selected =
-                      image.can_be_modified === 'true'
-                        ? 'true'
-                        : image.selected),
-                )
-                // update structure
-                sFolder.images.forEach(
-                  image =>
-                    (image.selected =
-                      image.can_be_modified === 'true'
-                        ? 'true'
-                        : image.selected),
-                )
-                props.setStructure(newStructure)
-                setImages(newImages)
+      // if unchecked, then uncheck the super check
+      if (!checked) {
+        setCheckAllFolders(false)
+      }
+      const newStructure = { ...props.structure }
+      let checkedCount = 0
+      for (let i = 0; i < newStructure.folders.length; i++) {
+        // find the folder in question
+        if (newStructure.folders[i].id.toString() === id) {
+          // iterate over all images of that folder
+          for (let j = 0; j < newStructure.folders[i].images.length; j++) {
+            if (newStructure.folders[i].images[j].can_be_modified === 'true') {
+              if (checked) {
+                if (!(newStructure.folders[i].images[j].selected === 'true')) {
+                  newStructure.folders[i].selectedCount++
+                }
+              } else {
+                newStructure.folders[i].selectedCount--
               }
-            })
-            // to make all images false
-          } else {
-            // uncheck super check in UI
-            setCheckAllFolders(false)
-            // update images state
-            newFolders[i].currentlySelected = true
-            newFolders[i].selectedCount = 0
-            const newStructure = { ...props.structure }
-            newStructure.folders.forEach(sFolder => {
-              if (i === sFolder.id) {
-                const newImages = sFolder.images.slice()
-                newImages.forEach(
-                  image =>
-                    (image.selected =
-                      image.can_be_modified === 'true'
-                        ? 'false'
-                        : image.selected),
-                )
-                setImages(newImages)
-                // update structure
-                sFolder.images.forEach(
-                  image =>
-                    (image.selected =
-                      image.can_be_modified === 'true'
-                        ? 'false'
-                        : image.selected),
-                )
-                props.setStructure(newStructure)
-              }
-            })
+              newStructure.folders[i].images[j].selected = checked.toString()
+            }
           }
-
-          break
+          newStructure.folders[i].checked = checked
+        }
+        // handle manually select all folders
+        if (newStructure.folders[i].checked) {
+          checkedCount++
         }
       }
-      props.setFolders(newFolders)
+      // handle manually select all folders
+      if (checkedCount === newStructure.folders.length) {
+        setCheckAllFolders(true)
+      }
+      props.setStructure(newStructure)
     }
   }
 
@@ -194,7 +162,7 @@ const DatasetPage1 = props => {
             <Form className="w-100">
               <Container fluid className="mx-0 px-0">
                 <Col className="mx-0 px-0">
-                  {props.folders.map(folder => (
+                  {props.structure.folders.map(folder => (
                     <div key={folder.id}>
                       <Row className="mx-0 px-0 border-bottom d-flex align-items-center select-dataset-folder">
                         {!props.preview && (
@@ -217,24 +185,40 @@ const DatasetPage1 = props => {
                           folder={folder}
                           onClick={async () => {
                             if (folder.currentlySelected === true) {
-                              const newFolders = props.folders.slice()
-                              for (let i = 0; i < newFolders.length; i++) {
-                                if (newFolders[i].id === folder.id) {
-                                  newFolders[i].currentlySelected = false
+                              // Folder is currently selected, unselect it
+                              const newStructure = { ...props.structure }
+                              for (
+                                let i = 0;
+                                i < newStructure.folders.length;
+                                i++
+                              ) {
+                                if (newStructure.folders[i].id === folder.id) {
+                                  newStructure.folders[
+                                    i
+                                  ].currentlySelected = false
                                 }
                               }
-                              props.setFolders(newFolders)
+                              props.setStructure(newStructure)
                               setImages([])
                             } else {
-                              const newFolders = props.folders.slice()
-                              for (let i = 0; i < newFolders.length; i++) {
-                                if (newFolders[i].id === folder.id) {
-                                  newFolders[i].currentlySelected = true
+                              // Folder is currently unselected, select it
+                              const newStructure = { ...props.structure }
+                              for (
+                                let i = 0;
+                                i < newStructure.folders.length;
+                                i++
+                              ) {
+                                if (newStructure.folders[i].id === folder.id) {
+                                  newStructure.folders[
+                                    i
+                                  ].currentlySelected = true
                                 } else {
-                                  newFolders[i].currentlySelected = false
+                                  newStructure.folders[
+                                    i
+                                  ].currentlySelected = false
                                 }
                               }
-                              props.setFolders(newFolders)
+                              props.setStructure(newStructure)
                               props.structure.folders.forEach(sFolder => {
                                 if (folder.id === sFolder.id) {
                                   setImages(sFolder.images)

@@ -14,36 +14,49 @@ class ActionArea extends React.Component {
           {this.props.action === 'Rotate' && (
             <RotatePreview
               showActionAreaHandler={this.props.showActionAreaHandler}
+              image={this.props.image}
+              setModifiedImages={this.props.setModifiedImages}
             />
           )}
           {this.props.action === 'Crop' && (
             <CropPreview
               showActionAreaHandler={this.props.showActionAreaHandler}
+              image={this.props.image}
+              setModifiedImages={this.props.setModifiedImages}
             />
           )}
           {this.props.action === 'Adjust' && (
             <AdjustPreview
               showActionAreaHandler={this.props.showActionAreaHandler}
+              image={this.props.image}
+              setModifiedImages={this.props.setModifiedImages}
             />
           )}
           {this.props.action === 'Noise' && (
             <NoisePreview
               showActionAreaHandler={this.props.showActionAreaHandler}
+              image={this.props.image}
+              setModifiedImages={this.props.setModifiedImages}
             />
           )}
           {this.props.action === 'Erase' && (
             <ErasePreview
               showActionAreaHandler={this.props.showActionAreaHandler}
+              image={this.props.image}
+              setModifiedImages={this.props.setModifiedImages}
             />
           )}
           {this.props.action === 'Transform' && (
             <TransformPreview
               showActionAreaHandler={this.props.showActionAreaHandler}
+              image={this.props.image}
+              setModifiedImages={this.props.setModifiedImages}
             />
           )}
           {this.props.action === 'Random' && (
             <RandomPreview
               showActionAreaHandler={this.props.showActionAreaHandler}
+              image={this.props.image}
               editingHandler={this.props.editingHandler}
             />
           )}

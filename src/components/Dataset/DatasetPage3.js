@@ -9,7 +9,7 @@ import ArrowDownIcon from '../../assets/images/arrowdown.svg'
 import { ReactComponent as NewFolderIcon } from '../../assets/images/newfolder.svg'
 import ArrowUpIcon from '../../assets/images/arrowup.svg'
 // components
-import DatasetImageDiv from './DataSetImageDiv'
+import DatasetImageDiv from './DatasetPage1/DataSetImageDiv'
 
 const DatasetPage3 = props => {
   const [checkAllFolders, setCheckAllFolders] = useState(false) // are all folders checked?

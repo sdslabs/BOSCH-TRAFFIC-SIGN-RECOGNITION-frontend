@@ -7,34 +7,42 @@ const DatasetImageDiv = props => {
     const newStructure = { ...props.structure }
     for (let i = 0; i < newStructure.folders.length; i++) {
       for (let j = 0; j < newStructure.folders[i].images.length; j++) {
+        // find the image in question
         if (newStructure.folders[i].images[j].name === props.image.name) {
-          newStructure.folders[i].images[j].selected =
-            props.image.can_be_modified === 'true' && checked ? 'true' : 'false'
+          // check if it can be modified
+          if (newStructure.folders[i].images[j].can_be_modified === 'true') {
+            // if it has to be checked to true
+            if (checked) {
+              // if it is not selected
+              if (!(newStructure.folders[i].images[j].selected === 'true')) {
+                newStructure.folders[i].selectedCount++
+              }
+              newStructure.folders[i].images[j].selected = 'true'
+            } else {
+              // if image is unchecked, then uncheck the parent folder as well
+              newStructure.folders[i].checked = false
+              newStructure.folders[i].selectedCount--
+              newStructure.folders[i].images[j].selected = 'false'
+            }
+          }
         }
+      }
+      if (
+        newStructure.folders[i].imageCount ===
+        newStructure.folders[i].selectedCount
+      ) {
+        newStructure.folders[i].checked = true
       }
     }
     props.setStructure(newStructure)
-    // update UI
-    const newFolders = props.folders.slice()
-    for (let i = 0; i < newFolders.length; i++) {
-      if (newFolders[i] === props.folder) {
-        newFolders[i].selectedCount = checked
-          ? newFolders[i].selectedCount + 1
-          : newFolders[i].selectedCount - 1
-        console.log('selected count: ', newFolders[i].selectedCount)
-        newFolders[i].checked =
-          checked && newFolders[i].selectedCount === props.folder.imageCount
-            ? true
-            : false
-      }
-    }
-    props.setFolders(newFolders)
 
+    // update the images state
     const newImages = props.images.slice()
     for (let i = 0; i < newImages.length; i++) {
       if (newImages[i].name === props.image.name) {
-        newImages[i].selected =
-          props.image.can_be_modified === 'true' && checked ? 'true' : 'false'
+        if (props.image.can_be_modified === 'true') {
+          newImages[i].selected = checked ? 'true' : 'false'
+        }
       }
     }
     await props.setImages(newImages)
