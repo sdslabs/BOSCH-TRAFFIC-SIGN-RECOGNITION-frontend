@@ -2,10 +2,10 @@
 import { React, useState, useEffect } from 'react'
 import { Row, Col, Form, Container } from 'react-bootstrap'
 // assets
-import { ReactComponent as UploadIcon } from '../../assets/images/upload.svg'
-import ArrowDownIcon from '../../assets/images/arrowdown.svg'
-import { ReactComponent as NewFolderIcon } from '../../assets/images/newfolder.svg'
-import ArrowUpIcon from '../../assets/images/arrowup.svg'
+import { ReactComponent as UploadIcon } from '../../../assets/images/upload.svg'
+import ArrowDownIcon from '../../../assets/images/arrowdown.svg'
+import { ReactComponent as NewFolderIcon } from '../../../assets/images/newfolder.svg'
+import ArrowUpIcon from '../../../assets/images/arrowup.svg'
 // components
 import DatasetImageDiv from './DataSetImageDiv'
 

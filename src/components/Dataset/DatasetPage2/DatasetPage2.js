@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import DatasetPage1 from './DatasetPage1.js'
+import DatasetPage1 from '../DatasetPage1/DatasetPage1.js'
 import Slider from '@material-ui/core/Slider'
 import { withStyles } from '@material-ui/core/styles'
 

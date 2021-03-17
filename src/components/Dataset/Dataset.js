@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import RightSidebar from '../Common/RightSidebar'
-import DatasetPage1 from './DatasetPage1.js'
-import DatasetPage2 from './DatasetPage2.js'
+import DatasetPage1 from './DatasetPage1/DatasetPage1'
+import DatasetPage2 from './DatasetPage2/DatasetPage2'
 import DatasetPage3Data from './DatasetPage3/DatasetPage3Data'
+import DatasetPage4 from './DatasetPage1/DatasetPage4.js'
 // import structure from './structure.json'
 import { Container, Row, Col } from 'react-bootstrap'
 import Step1 from '../Common/SidebarStep1.js'
@@ -88,7 +89,6 @@ const Dataset = () => {
         <Col className="mx-0 px-0">
           {datasetStep === 1 && (
             <DatasetPage1
-              initialDataHandler={setStructure}
               structure={structure}
               setStructure={setStructure}
               toggleUpload={() => {
@@ -109,6 +109,9 @@ const Dataset = () => {
             />
           )}
           {datasetStep === 3 && <DatasetPage3Data />}
+          {datasetStep === 4 && (
+            <DatasetPage4 structure={structure} setStructure={setStructure} />
+          )}
         </Col>
         {isUpload || isNewFolder ? (
           <Col xs={2.4}>

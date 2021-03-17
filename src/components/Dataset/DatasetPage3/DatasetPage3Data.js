@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import DatasetPage1 from '../DatasetPage1'
+import DatasetPage1 from '../DatasetPage1/DatasetPage1'
 import { getSplitData, selectAugmentationManual } from '../../../api/datasetAPI'
 import { Row } from 'react-bootstrap'
 import Select from 'react-select'
