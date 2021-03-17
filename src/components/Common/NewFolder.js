@@ -29,6 +29,8 @@ const NewFolder = props => {
         name: folderName,
         images: images,
       })
+      props.setStructure(props.structure)
+      console.log(props.structure)
     }
   }
   const deselectFiles = () => {
