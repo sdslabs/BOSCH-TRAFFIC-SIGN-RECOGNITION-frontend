@@ -55,8 +55,6 @@ const DatasetPage2 = props => {
         <DatasetPage1
           preview={true}
           structure={getModifiedStructure(props.structure)}
-          folders={props.folders}
-          setFolders={props.setFolders}
           showEmptyHeader={true}
         />
       </div>

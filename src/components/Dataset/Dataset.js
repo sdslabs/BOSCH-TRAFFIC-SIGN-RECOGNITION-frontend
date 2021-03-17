@@ -17,8 +17,6 @@ const Dataset = () => {
   const [isNewFolder, setNewFolder] = useState(false)
 
   const [structure, setStructure] = useState({ empty: true }) // main structure (this is initialData)
-  const [folders, setFolders] = useState([]) // list of folders
-  const [allChecked, setAllChecked] = useState(false) // list of folders
 
   useEffect(() => {
     handleGetInitialData()
@@ -28,23 +26,7 @@ const Dataset = () => {
     console.log('structure updated in state: ', structure)
   }, [structure])
 
-  useEffect(() => {
-    console.log('allChecked updated in state: ', allChecked)
-  }, [allChecked])
-
-  useEffect(() => {
-    console.log('folders updated in state: ', folders)
-    let allChecked = true
-    folders.forEach(folder => {
-      if (!folder.checked) {
-        allChecked = false
-      }
-    })
-    setAllChecked(allChecked)
-  }, [folders])
-
   const handleGetInitialData = async () => {
-    const folders = []
     const structure = await getInitialData()
     structure.empty = false
     structure.folders.forEach((folder, id) => {
@@ -59,16 +41,9 @@ const Dataset = () => {
       folder.selectedCount = selectedCount
       folder.imageCount = imageCount
       folder.id = id
-      folders.push({
-        name: folder.name,
-        selectedCount: selectedCount,
-        imageCount: imageCount,
-        id: id,
-        currentlySelected: false,
-        checked: imageCount === selectedCount,
-      })
+      folder.currentlySelected = false
+      folder.checked = imageCount === selectedCount
     })
-    setFolders(folders)
     setStructure(structure)
   }
 
@@ -116,9 +91,6 @@ const Dataset = () => {
               initialDataHandler={setStructure}
               structure={structure}
               setStructure={setStructure}
-              folders={folders}
-              setFolders={setFolders}
-              allChecked={allChecked}
               toggleUpload={() => {
                 setUpload(true)
                 setNewFolder(false)
@@ -134,8 +106,6 @@ const Dataset = () => {
             <DatasetPage2
               setSplitDataTraining={setSplitDataTraining}
               structure={structure}
-              folders={folders}
-              setFolders={setFolders}
             />
           )}
           {datasetStep === 3 && <DatasetPage3Data />}
