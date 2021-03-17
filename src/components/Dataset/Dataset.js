@@ -3,7 +3,7 @@ import RightSidebar from '../Common/RightSidebar'
 import DatasetPage1 from './DatasetPage1/DatasetPage1'
 import DatasetPage2 from './DatasetPage2/DatasetPage2'
 import DatasetPage3Data from './DatasetPage3/DatasetPage3Data'
-import DatasetPage4 from './DatasetPage1/DatasetPage4.js'
+import DatasetPage4 from './DatasetPage4/DatasetPage4.js'
 // import structure from './structure.json'
 import { Container, Row, Col } from 'react-bootstrap'
 import Step1 from '../Common/SidebarStep1.js'
@@ -12,7 +12,7 @@ import Step3 from '../Common/SidebarStep3.js'
 import { getInitialData } from '../../api/datasetAPI'
 
 const Dataset = () => {
-  const [datasetStep, setDatasetStep] = useState(1) // current step of dataset generation
+  const [datasetStep, setDatasetStep] = useState(4) // current step of dataset generation
   const [splitDataTraining, setSplitDataTraining] = useState(70) // percentage of training data in split
   const [isUpload, setUpload] = useState(false)
   const [isNewFolder, setNewFolder] = useState(false)
