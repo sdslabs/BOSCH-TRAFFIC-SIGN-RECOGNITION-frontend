@@ -59,6 +59,8 @@ const Dataset = () => {
       folder.selectedCount = selectedCount
       folder.imageCount = imageCount
       folder.id = id
+      folder.currentlySelected = false
+      folder.checked = imageCount === selectedCount
       folders.push({
         name: folder.name,
         selectedCount: selectedCount,
