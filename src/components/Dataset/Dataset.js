@@ -12,7 +12,7 @@ import Step3 from '../Common/SidebarStep3.js'
 import { getInitialData } from '../../api/datasetAPI'
 
 const Dataset = () => {
-  const [datasetStep, setDatasetStep] = useState(4) // current step of dataset generation
+  const [datasetStep, setDatasetStep] = useState(1) // current step of dataset generation
   const [splitDataTraining, setSplitDataTraining] = useState(70) // percentage of training data in split
   const [isUpload, setUpload] = useState(false)
   const [isNewFolder, setNewFolder] = useState(false)
