@@ -1,0 +1,38 @@
+.react-select2-container {
+  width: 12rem;
+  margin-left: 2rem;
+  box-sizing: border-box;
+  border-radius: 3px;
+  outline: none;
+}
+
+.react-select2-large {
+  width: 90%;
+}
+
+.react-select2__control {
+  background-color: $theme-color-dark-blue !important;
+  border: none;
+}
+
+.react-select2__placeholder,
+.react-select2__single-value,
+.react-select2__indicator {
+  color: $theme-color-white !important;
+  @include primary-font-normal;
+}
+.react-select2__option {
+  @include primary-font-normal;
+}
+
+.header-step3 {
+  @include flex-row-center;
+}
+
+.manual-options {
+  margin-left: 2rem;
+  button {
+    cursor: pointer;
+    margin-right: 1rem;
+  }
+}

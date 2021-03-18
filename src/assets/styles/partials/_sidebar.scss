@@ -1,0 +1,38 @@
+.sidebar {
+  background-color: #f8f8f8;
+  min-height: 100%;
+  .heading {
+    @include primary-font-normal;
+    @include font-size-2433;
+    font-weight: 600;
+    color: $theme-color-black;
+    min-height: 5rem;
+    @include flex-row-center;
+    justify-content: center;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+.stepContainer {
+  padding: 2rem 1.5rem;
+  .stepHeading {
+    @include primary-font-normal;
+    @include font-size-2027;
+    font-weight: 600;
+    color: $theme-color-black;
+  }
+  .stepInfo {
+    @include primary-font-normal;
+    @include font-size-1622;
+    color: $theme-color-black39;
+  }
+  img {
+    margin-left: auto;
+  }
+}
+
+.grey-bg {
+  background-color: rgba(196, 196, 196, 0.2);
+  border: 1px solid #00902B;
+}

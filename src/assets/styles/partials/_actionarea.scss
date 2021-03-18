@@ -1,0 +1,35 @@
+.action-area {
+  position: absolute;
+  background-color: $theme-color-white;
+  width: 20%;
+  height: 100%;
+  right: 0;
+  top: 0;
+  filter: drop-shadow(-3px 0px 8px rgba(25, 25, 25, 0.25));
+  z-index: 1;
+}
+
+.action-option {
+  color: $theme-color-black;
+  @include primary-font-normal;
+  font-weight: 600;
+  @include font-size-1622;
+  margin-bottom:2px;
+}
+
+.action-option-large{
+  font-size: 1.2rem;
+  margin: 1rem 0;
+}
+
+.confirm-cancel {
+  height: 5rem;
+  padding: 1rem 1.5rem;
+  @include flex-row-center;
+  justify-content: space-between;
+}
+
+.cross {
+  cursor: pointer;
+}
+

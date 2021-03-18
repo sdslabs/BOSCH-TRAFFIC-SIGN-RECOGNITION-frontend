@@ -1,0 +1,26 @@
+.transform-radio-row {
+  @include flex-row-center;
+  margin: 0.75rem 0;
+  img {
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
+  }
+  input {
+    margin-right: 5px;
+  }
+}
+
+.transform-info {
+  background-color: $theme-color-white;
+  box-shadow: none;
+  border: 2px solid $theme-color-black;
+  padding: 0.2rem 1rem;
+  display: flex;
+  flex-direction: row-reverse;
+  position: absolute;
+  right: 90%;
+  border-radius: 10px;
+  text-align: right;
+}
+

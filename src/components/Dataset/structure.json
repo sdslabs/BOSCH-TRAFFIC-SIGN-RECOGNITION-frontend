@@ -1,0 +1,184 @@
+{
+    "folders": [
+        {
+            "name": "00014",
+            "path": "./GTSRB/trainingset/00014",
+            "images": [
+                {
+                    "name": "00001_00002.ppm",
+                    "path": "./GTSRB/trainingset/00014/00001_00002.ppm",
+                    "can_be_modified": "false",
+                    "selected": "false"
+                },
+                {
+                    "name": "00019_00018.ppm",
+                    "path": "./GTSRB/trainingset/00014/00019_00018.ppm",
+                    "can_be_modified": "false",
+                    "selected": "true"
+                },
+                {
+                    "name": "00020_00028.ppm",
+                    "path": "./GTSRB/trainingset/00014/00020_00028.ppm",
+                    "can_be_modified": "false",
+                    "selected": "true"
+                },
+                {
+                    "name": "00010_00008.ppm",
+                    "path": "./GTSRB/trainingset/00014/00010_00008.ppm",
+                    "can_be_modified": "false",
+                    "selected": "true"
+                },
+                {
+                    "name": "00001_00008.ppm",
+                    "path": "./GTSRB/trainingset/00014/00001_00008.ppm",
+                    "can_be_modified": "false",
+                    "selected": "true"
+                }
+            ]
+        },
+        {
+            "name": "00019",
+            "path": "./GTSRB/trainingset/00019",
+            "images": [
+                {
+                    "name": "00001_00002.ppm",
+                    "path": "./GTSRB/trainingset/00019/00001_00002.ppm",
+                    "can_be_modified": "false",
+                    "selected": "true"
+                },
+                {
+                    "name": "00001_00008.ppm",
+                    "path": "./GTSRB/trainingset/00019/00001_00008.ppm",
+                    "can_be_modified": "false",
+                    "selected": "true"
+                },
+                {
+                    "name": "00002_00003.ppm",
+                    "path": "./GTSRB/trainingset/00019/00002_00003.ppm",
+                    "can_be_modified": "false",
+                    "selected": "true"
+                },
+                {
+                    "name": "00004_00010.ppm",
+                    "path": "./GTSRB/trainingset/00019/00004_00010.ppm",
+                    "can_be_modified": "false",
+                    "selected": "true"
+                },
+                {
+                    "name": "00003_00011.ppm",
+                    "path": "./GTSRB/trainingset/00019/00003_00011.ppm",
+                    "can_be_modified": "false",
+                    "selected": "true"
+                }
+            ]
+        },
+        {
+            "name": "00023",
+            "path": "./GTSRB/trainingset/00023",
+            "images": [
+                {
+                    "name": "00001_00002.ppm",
+                    "path": "./GTSRB/trainingset/00023/00001_00002.ppm",
+                    "can_be_modified": "false",
+                    "selected": "true"
+                },
+                {
+                    "name": "00010_00008.ppm",
+                    "path": "./GTSRB/trainingset/00023/00010_00008.ppm",
+                    "can_be_modified": "false",
+                    "selected": "true"
+                },
+                {
+                    "name": "00001_00008.ppm",
+                    "path": "./GTSRB/trainingset/00023/00001_00008.ppm",
+                    "can_be_modified": "false",
+                    "selected": "true"
+                },
+                {
+                    "name": "00016_00005.ppm",
+                    "path": "./GTSRB/trainingset/00023/00016_00005.ppm",
+                    "can_be_modified": "false",
+                    "selected": "true"
+                },
+                {
+                    "name": "00002_00003.ppm",
+                    "path": "./GTSRB/trainingset/00023/00002_00003.ppm",
+                    "can_be_modified": "false",
+                    "selected": "true"
+                }
+            ]
+        },
+        {
+            "name": "00024",
+            "path": "./GTSRB/trainingset/00024",
+            "images": [
+                {
+                    "name": "00001_00002.ppm",
+                    "path": "./GTSRB/trainingset/00024/00001_00002.ppm",
+                    "can_be_modified": "false",
+                    "selected": "true"
+                },
+                {
+                    "name": "00001_00008.ppm",
+                    "path": "./GTSRB/trainingset/00024/00001_00008.ppm",
+                    "can_be_modified": "false",
+                    "selected": "true"
+                },
+                {
+                    "name": "00002_00003.ppm",
+                    "path": "./GTSRB/trainingset/00024/00002_00003.ppm",
+                    "can_be_modified": "false",
+                    "selected": "true"
+                },
+                {
+                    "name": "00004_00010.ppm",
+                    "path": "./GTSRB/trainingset/00024/00004_00010.ppm",
+                    "can_be_modified": "false",
+                    "selected": "true"
+                },
+                {
+                    "name": "00008_00013.ppm",
+                    "path": "./GTSRB/trainingset/00024/00008_00013.ppm",
+                    "can_be_modified": "false",
+                    "selected": "true"
+                }
+            ]
+        },
+        {
+            "name": "00042",
+            "path": "./GTSRB/trainingset/00042",
+            "images": [
+                {
+                    "name": "00001_00002.ppm",
+                    "path": "./GTSRB/trainingset/00042/00001_00002.ppm",
+                    "can_be_modified": "false",
+                    "selected": "true"
+                },
+                {
+                    "name": "00001_00008.ppm",
+                    "path": "./GTSRB/trainingset/00042/00001_00008.ppm",
+                    "can_be_modified": "false",
+                    "selected": "true"
+                },
+                {
+                    "name": "00002_00003.ppm",
+                    "path": "./GTSRB/trainingset/00042/00002_00003.ppm",
+                    "can_be_modified": "false",
+                    "selected": "true"
+                },
+                {
+                    "name": "00004_00010.ppm",
+                    "path": "./GTSRB/trainingset/00042/00004_00010.ppm",
+                    "can_be_modified": "false",
+                    "selected": "true"
+                },
+                {
+                    "name": "00003_00011.ppm",
+                    "path": "./GTSRB/trainingset/00042/00003_00011.ppm",
+                    "can_be_modified": "false",
+                    "selected": "true"
+                }
+            ]
+        }
+    ]
+}
