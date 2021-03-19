@@ -27,12 +27,15 @@ const Upload = props => {
             can_be_modified: 'true',
             selected: 'true',
           })
+          element.imageCount += 1
+          element.selectedCount += 1
           setFiles([])
           setFolderName('')
           setnooffiles(0)
           document.getElementById(folderName).checked = false
         }
       })
+      props.setStructure({ ...props.structure })
     }
   }
   const deselectFiles = () => {
