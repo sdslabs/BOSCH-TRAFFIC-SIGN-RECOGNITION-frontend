@@ -5,16 +5,19 @@ import DatasetPage2 from './DatasetPage2/DatasetPage2'
 import DatasetPage3Data from './DatasetPage3/DatasetPage3Data'
 import DatasetPage4 from './DatasetPage4/DatasetPage4.js'
 import DatasetPage6 from './DatasetPage6/DatasetPage6.js'
+import DatasetPage5 from './DatasetPage5/DatasetPage5.js'
 // import structure from './structure.json'
 import { Container, Row, Col } from 'react-bootstrap'
 import Step1 from '../Common/SidebarStep1.js'
 import Step2 from '../Common/SidebarStep2.js'
 import Step3 from '../Common/SidebarStep3.js'
 import Step4 from '../Common/SidebarStep4.js'
+import Step5 from '../Common/SidebarStep5.js'
 import { getInitialData } from '../../api/datasetAPI'
+import DatasetPage3 from './DatasetPage3/DatasetPage3'
 
 const Dataset = () => {
-  const [datasetStep, setDatasetStep] = useState(1) // current step of dataset generation
+  const [datasetStep, setDatasetStep] = useState(5) // current step of dataset generation
   const [splitDataTraining, setSplitDataTraining] = useState(70) // percentage of training data in split
   const [isUpload, setUpload] = useState(false)
   const [isNewFolder, setNewFolder] = useState(false)
@@ -61,8 +64,7 @@ const Dataset = () => {
     setUpload(false)
   }
   return (
-    <Container fluid className="h-100 mx-0 px-0">
-      <Row className="mx-auto h-100">
+      <Row className="h-100">
         <Col xs={2.4} className="h-100">
           {' '}
           <Container className="sidebar border-right border-dark p-0">
@@ -87,6 +89,9 @@ const Dataset = () => {
               )}
               {datasetStep >= 4 && (
                 <Step4 done={datasetStep > 4} setDatasetStep={setDatasetStep} />
+              )}
+              {datasetStep >= 5 && (
+                <Step5 done={datasetStep > 5} setDatasetStep={setDatasetStep} />
               )}
             </Col>
           </Container>
@@ -125,6 +130,7 @@ const Dataset = () => {
           {datasetStep === 6 && (
             <DatasetPage6 structure={structure} setStructure={setStructure} />
           )}
+          {datasetStep === 5 && <DatasetPage5 />}
         </Col>
         {isUpload || isNewFolder ? (
           <Col xs={2.4}>
@@ -140,7 +146,6 @@ const Dataset = () => {
           </Col>
         ) : null}
       </Row>
-    </Container>
   )
 }
 
