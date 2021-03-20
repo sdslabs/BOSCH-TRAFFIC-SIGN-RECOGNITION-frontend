@@ -1,6 +1,5 @@
 import React from 'react'
 import { Bar } from 'react-chartjs-2'
-
 const BarGraph = props => {
   let data = {
     labels: props.labels,
@@ -33,7 +32,7 @@ const BarGraph = props => {
           display: false,
           barPercentage: 1.3,
           ticks: {
-            max: 3,
+            max: Math.max(...props.labels) - 1,
           },
         },
         {
@@ -44,7 +43,7 @@ const BarGraph = props => {
           },
           ticks: {
             autoSkip: false,
-            max: 4,
+            max: Math.max(...props.labels),
           },
         },
       ]

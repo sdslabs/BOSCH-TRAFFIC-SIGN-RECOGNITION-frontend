@@ -1,56 +1,101 @@
 .navbar-container {
-    width: 100%;
-    height: 4.5rem;
+  width: 100%;
+  height: 4.5rem;
+  @include flex-row-center;
+  background-color: $theme-color-dark-blue;
+
+  .navbar-logo-container {
     @include flex-row-center;
-    background-color: $theme-color-dark-blue;
+    justify-content: center;
+    width: 20%;
+    height: 100%;
+  }
 
-    .navbar-logo-container {
-        @include flex-row-center;
-        justify-content: center;
-        width: 20%;
-        height: 100%;
+  .navbar-links-container {
+    @include flex-row-center;
+    width: 80%;
+    height: 100%;
+  }
+
+  .navbar-link-element {
+    padding: 0 1.5rem;
+
+    &:first-child {
+      padding-left: 0;
     }
+  }
 
-    .navbar-links-container {
-        @include flex-row-center;
-        width: 80%;
-        height: 100%;
+  .navbar-links-list {
+    @include flex-row-center;
+    list-style: none;
+    padding-inline-start: 0;
+    height: 80%;
+  }
+
+  .navbar-link {
+    @include primary-font-normal;
+    @include font-size-2027;
+    color: $theme-color-white-low-transp;
+    text-decoration: none;
+    // pointer-events: none;
+    height: 100%;
+
+    &.active,
+    &:hover {
+      color: $theme-color-white;
+      font-weight: 600;
+      border-bottom: 3px solid $theme-color-white;
+      padding: 8px 0;
     }
-
-    .navbar-link-element {
-        padding: 0 1.5rem;
-
-        &:first-child {
-            padding-left: 0;
-        }
-    }
-
-    .navbar-links-list {
-        @include flex-row-center;
-        list-style: none;
-        padding-inline-start: 0;
-        height: 80%;
-    }
-
-    .navbar-link {
-        @include primary-font-normal;
-        @include font-size-2027;
-        color: $theme-color-white-low-transp;
-        text-decoration: none;
-        // pointer-events: none;
-        height: 100%;
-
-        &.active , &:hover{
-            color: $theme-color-white;
-            font-weight: 600;
-            border-bottom: 3px solid $theme-color-white;
-            padding: 8px 0;
-        }
-    }
-
+  }
 }
 
 .main-logo {
+  width: 80%;
+  height: 2rem;
+}
+
+.navbar-container-sec {
+  width: 100%;
+  height: 5rem;
+  @include flex-row-center;
+  background-color: $theme-color-grey;
+
+  .navbar-links-container {
+    @include flex-row-center;
     width: 80%;
-    height: 2rem;
+    height: 100%;
+  }
+
+  .navbar-link-element {
+    padding: 0 1.5rem;
+
+    &:first-child {
+      padding-left: 0;
+    }
+  }
+
+  .navbar-links-list {
+    @include flex-row-center;
+    list-style: none;
+    padding-inline-start: 0;
+    height: 80%;
+  }
+
+  .navbar-link {
+    @include primary-font-normal;
+    @include font-size-2027;
+    color: rgba(87, 87, 87, 0.9);
+    text-decoration: none;
+    // pointer-events: none;
+    height: 100%;
+
+    &.active,
+    &:hover {
+      color: $theme-color-black19;
+      font-weight: 600;
+      border-bottom: 3px solid $theme-color-black19;
+      padding: 8px 0;
+    }
+  }
 }

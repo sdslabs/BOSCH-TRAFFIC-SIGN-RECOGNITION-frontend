@@ -138,26 +138,28 @@ const DatasetPage1 = props => {
               <Col>Train Data</Col>
             </Row>
           )}
-          <Row className="ml-0 select-dataset-header">
-            {!props.preview && (
-              <Col
-                xs={1}
-                className="d-flex align-items-center justify-content-center"
-              >
-                <input
-                  type="checkbox"
-                  name="checkAll"
-                  checked={checkAllFolders}
-                  onChange={handleCheckMultiple}
-                  className="d-flex align-items-center"
-                ></input>
-              </Col>
-            )}
-            <Col xs={1}></Col>
-            <Col> Name</Col>
-            <Col> No of Images</Col>
-            <Col>Images Selected</Col>
-          </Row>
+          {!props.notShowHeader && (
+            <Row className="ml-0 select-dataset-header">
+              {!props.preview && (
+                <Col
+                  xs={1}
+                  className="d-flex align-items-center justify-content-center"
+                >
+                  <input
+                    type="checkbox"
+                    name="checkAll"
+                    checked={checkAllFolders}
+                    onChange={handleCheckMultiple}
+                    className="d-flex align-items-center"
+                  ></input>
+                </Col>
+              )}
+              <Col xs={1}></Col>
+              <Col> Name</Col>
+              <Col> No of Images</Col>
+              <Col>Images Selected</Col>
+            </Row>
+          )}
           <Row className="ml-0">
             <Form className="w-100">
               <Container fluid className="mx-0 px-0">
@@ -245,7 +247,9 @@ const DatasetPage1 = props => {
                             .replace('"', '')}
                         </Col>
                         <Col className="">{folder.imageCount.toString()}</Col>
-                        <Col>{folder.selectedCount.toString()}</Col>
+                        {!props.isAnalysis && (
+                          <Col>{folder.selectedCount.toString()}</Col>
+                        )}
                       </Row>
 
                       {folder.currentlySelected ? (
@@ -261,6 +265,9 @@ const DatasetPage1 = props => {
                             structure={props.structure}
                             setStructure={props.setStructure}
                             preview={props.preview}
+                            isAnalysis={props.isAnalysis}
+                            setSelectedImg={props.setSelectedImg}
+                            selectedImg={props.selectedImg}
                           />
                         ))
                       ) : (

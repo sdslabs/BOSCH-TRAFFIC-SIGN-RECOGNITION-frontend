@@ -25,7 +25,8 @@
     "no-invalid-this": 0,
     "react/prop-types": 0,
     "no-unused-vars": 0,
-    "react/no-string-refs": 0
+    "react/no-string-refs": 0,
+    "no-var": 0
   },
   "settings": {
     "react": {
