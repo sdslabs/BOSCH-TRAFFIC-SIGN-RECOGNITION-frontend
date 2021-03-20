@@ -8,39 +8,26 @@ import hiddenlayers from '../../../assets/images/hiddenlayers.svg'
 import trash from '../../../assets/images/trash.png'
 
 export const InnerDisplay = props => {
-  const [nooflayers, setNoofLayers] = useState(0)
-  const [layers, setLayers] = useState([])
-  const increaseLayers = () => {
-    setNoofLayers(nooflayers + 1)
-  }
-  const decreaseLayers = () => {
-    nooflayers > 0 ? setNoofLayers(nooflayers - 1) : null
-  }
-  const addLayer = layer => {
-    layers.push({ name: layer, id: nooflayers })
-    increaseLayers()
-    console.log(props.selectedValues)
+  const addLayer = layerName => {
     const newValues = { ...props.selectedValues }
-    newValues.layers = layers
+    newValues.layers.push({ name: layerName })
     props.setSelectedValues(newValues)
-    console.log(props.selectedValues)
   }
-  const deleteLayer = id => {
-    for (let i = 0; i < layers.length; i++) {
-      if (layers[i].id == id) {
-        layers.splice(i, 1)
-        decreaseLayers()
-        const newValues = { ...props.selectedValues }
-        newValues.layers = layers
-        props.setSelectedValues(newValues)
-        console.log(props.selectedValues)
-        break
-      }
-    }
+
+  const deleteLayer = index => {
+    const newValues = { ...props.selectedValues }
+    newValues.layers.splice(index, 1)
+    props.setSelectedValues(newValues)
   }
-  useEffect(() => {
-    console.log(layers)
-  }, [layers])
+
+  // const handleInput = e => {
+  //   const newNoOfLayers = e.target.value
+  //   const newValues = { ...props.selectedValues }
+  //   newValues.hiddenlayers = newNoOfLayers
+  //   setNoofLayers(newNoOfLayers)
+  //   props.setSelectedValues(newValues)
+  // }
+
   return (
     <Container className="innerdisplay">
       <h2> Hidden Layers </h2>
@@ -48,23 +35,13 @@ export const InnerDisplay = props => {
         <Col className="image">
           <img className="img-inner" src={hiddenlayers} alt="Image here" />
         </Col>
+
         <Col className="number-picker-outer">
-          <p className="num-pick-text">Number of Hidden layers</p>
-          <Row className="number-picker-inner">
-            <input className="num-pick-input" value={nooflayers} />
-            <Col className="num-pick-arrows">
-              <img
-                className="num-pick-down"
-                src={arrowup}
-                onClick={increaseLayers}
-              />
-              <img
-                className="num-pick-up"
-                src={arrowdown}
-                onClick={decreaseLayers}
-              />
-            </Col>
-          </Row>
+          {false && (
+            <p className="num-pick-text">
+              Number of Hidden layers: {selectedValues.layers.length}
+            </p>
+          )}
         </Col>
       </Row>
       <Col className="lowerleft">
@@ -72,23 +49,29 @@ export const InnerDisplay = props => {
           <img src={arrowdown4} />
           <div className="input-text">Input</div>
         </Row>
-        {layers.length != 0 ? (
-          <div className="layers">
-            {layers.map(layer => (
-              <div className="layer" key={layer.id}>
-                <div className="layer-text">{layer.name}</div>
+        <div className="layers">
+          {props.selectedValues.layers.map((layer, index) => (
+            <div
+              className="layer d-flex align-items-center justify-content-center"
+              key={index}
+            >
+              <div className="layer-text">{layer.name}</div>
+              {index > 2 ? (
                 <img
                   className="trash"
                   src={trash}
                   onClick={() => {
-                    deleteLayer(layer.id)
+                    deleteLayer(index)
                   }}
                 />
-                <div />
-              </div>
-            ))}
-          </div>
-        ) : null}
+              ) : (
+                <img className="trash" src={''} alt={''} />
+              )}
+              <div />
+            </div>
+          ))}
+        </div>
+
         <Row className="button">
           <img className="plus" src={plus} />
           <Dropdown>
@@ -111,7 +94,6 @@ export const InnerDisplay = props => {
         <div className="const-btn">FC</div>
         <div className="const-btn">FC</div>
       </Col>
-      <Col className="lowerright"> Text here </Col>
     </Container>
   )
 }

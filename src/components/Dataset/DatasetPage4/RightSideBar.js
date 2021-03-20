@@ -1,32 +1,29 @@
 import React, { useEffect, useState } from 'react'
 import { Container, Col, Row } from 'react-bootstrap'
+
 import Select from 'react-select'
 export const RightSidebar = props => {
-  useEffect(() => {
-    console.log('selectedValues updated in state', props.selectedValues)
-  }, [props.selectedValues])
-
   const handleSelectedChange = e => {
     const newValues = { ...props.selectedValues }
     switch (e.target.id) {
-      case 'learningRate1':
-        newValues.learningRate1 = e.target.value
+      case 'learningRate':
+        newValues.learningRate = e.target.value
         props.setSelectedValues(newValues)
         break
-      case 'learningRate2':
-        newValues.learningRate2 = e.target.value
+      case 'epochs':
+        newValues.epochs = e.target.value
         props.setSelectedValues(newValues)
         break
-      case 'learningRate3':
-        newValues.learningRate3 = e.target.value
+      case 'centroidSize':
+        newValues.centroidSize = e.target.value
         props.setSelectedValues(newValues)
         break
-      case 'learningRate4':
-        newValues.learningRate4 = e.target.value
+      case 'lm':
+        newValues.lm = e.target.value
         props.setSelectedValues(newValues)
         break
-      case 'lambda':
-        newValues.lambda = e.target.value
+      case 'weightDecay':
+        newValues.weightDecay = e.target.value
         props.setSelectedValues(newValues)
         break
       case 'batchSize':
@@ -58,7 +55,7 @@ export const RightSidebar = props => {
         <Row>
           <Select
             styles={customStyles}
-            value={props.selectedValues.optimizer}
+            // value={props.selectedValues.optimizer}
             onChange={optimizerChoose}
             options={options}
             id="optimizer"
@@ -69,64 +66,60 @@ export const RightSidebar = props => {
         </Row>
         <Row className="py-3">
           <Col className="p-0 m-0">
-            Learning Rate
+            <Row className="p-0 m-0">Learning Rate</Row>
             <input
               type="number"
-              id="learningRate1"
-              value={props.selectedValues.learningRate1}
+              id="learningRate"
+              // value={props.selectedValues.learningRate}
               onChange={handleSelectedChange}
             />
           </Col>
           <Col className="p-0 m-0">
-            Learning Rate
+            <Row className="p-0 m-0"> Epochs</Row>
             <input
               type="number"
-              id="learningRate2"
-              value={props.selectedValues.learningRate2}
+              id="epochs"
+              // value={props.selectedValues.epochs}
               onChange={handleSelectedChange}
             />
           </Col>
         </Row>
         <Row className="py-3">
           <Col className="p-0 m-0">
-            {' '}
-            Batch Size
+            <Row className="p-0 m-0"> Batch Size</Row>
             <input
               type="number"
               id="batchSize"
-              value={props.selectedValues.batchSize}
+              // value={props.selectedValues.batchSize}
               onChange={handleSelectedChange}
             />
           </Col>
           <Col className="p-0 m-0">
-            {' '}
-            Learning Rate
+            <Row className="p-0 m-0">Centroid Size</Row>
             <input
               type="number"
-              id="learningRate3"
-              value={props.selectedValues.learningRate3}
+              id="centroidSize"
+              // value={props.selectedValues.centroidSize}
               onChange={handleSelectedChange}
             />
           </Col>
         </Row>
         <Row className="py-3">
           <Col className="p-0 m-0">
-            {' '}
-            <Row className="p-0 m-0">Lambda</Row>
+            <Row className="p-0 m-0">Weight Decay</Row>
             <input
               type="number"
-              id="lambda"
-              value={props.selectedValues.lambda}
+              id="weightDecay"
+              // value={props.selectedValues.weightDecay}
               onChange={handleSelectedChange}
             />
           </Col>
           <Col className="p-0 m-0">
-            {' '}
-            Learning Rate
+            <Row className="p-0 m-0">LM</Row>
             <input
               type="number"
-              id="learningRate4"
-              value={props.selectedValues.learningRate4}
+              id="lm"
+              // value={props.selectedValues.lm}
               onChange={handleSelectedChange}
             />
           </Col>
