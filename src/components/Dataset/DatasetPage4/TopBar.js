@@ -1,9 +1,11 @@
 import { Container, Row, Col } from 'react-bootstrap'
-import { sendHP } from '../../../api/datasetAPI'
+import { sendHP, getEmbedLink } from '../../../api/datasetAPI'
 
 export const Topbar = props => {
-  const handleSend = () => {
-    sendHP(props.selectedValues)
+  const handleSend = async () => {
+    console.log('Sending Selected Values: ', props.selectedValues)
+    await sendHP(props.selectedValues)
+    props.setDatasetStep(6)
   }
   return (
     <Container fluid className="m-0 p-0">

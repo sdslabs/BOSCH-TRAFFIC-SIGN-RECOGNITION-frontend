@@ -4,6 +4,7 @@ import DatasetPage1 from './DatasetPage1/DatasetPage1'
 import DatasetPage2 from './DatasetPage2/DatasetPage2'
 import DatasetPage3Data from './DatasetPage3/DatasetPage3Data'
 import DatasetPage4 from './DatasetPage4/DatasetPage4.js'
+import DatasetPage6 from './DatasetPage6/DatasetPage6.js'
 // import structure from './structure.json'
 import { Container, Row, Col } from 'react-bootstrap'
 import Step1 from '../Common/SidebarStep1.js'
@@ -115,7 +116,14 @@ const Dataset = () => {
           )}
           {datasetStep === 3 && <DatasetPage3Data />}
           {datasetStep === 4 && (
-            <DatasetPage4 structure={structure} setStructure={setStructure} />
+            <DatasetPage4
+              structure={structure}
+              setStructure={setStructure}
+              setDatasetStep={setDatasetStep}
+            />
+          )}
+          {datasetStep === 6 && (
+            <DatasetPage6 structure={structure} setStructure={setStructure} />
           )}
         </Col>
         {isUpload || isNewFolder ? (

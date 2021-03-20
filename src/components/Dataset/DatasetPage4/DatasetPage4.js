@@ -36,6 +36,7 @@ const DatasetPage4 = props => {
             selectedValues={selectedValues}
             readyToSend={readyToSend}
             setReadyToSend={setReadyToSend}
+            setDatasetStep={props.setDatasetStep}
           />
         </Row>
         <Row>
