@@ -17,7 +17,7 @@ import { getInitialData } from '../../api/datasetAPI'
 import DatasetPage3 from './DatasetPage3/DatasetPage3'
 
 const Dataset = () => {
-  const [datasetStep, setDatasetStep] = useState(5) // current step of dataset generation
+  const [datasetStep, setDatasetStep] = useState(4) // current step of dataset generation
   const [splitDataTraining, setSplitDataTraining] = useState(70) // percentage of training data in split
   const [isUpload, setUpload] = useState(false)
   const [isNewFolder, setNewFolder] = useState(false)

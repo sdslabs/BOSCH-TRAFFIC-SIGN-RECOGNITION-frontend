@@ -32,68 +32,70 @@ export const InnerDisplay = props => {
     <Container className="innerdisplay">
       <h2> Hidden Layers </h2>
       <Row className="upperlayer">
-        <Col className="image">
+        <div className="image">
           <img className="img-inner" src={hiddenlayers} alt="Image here" />
-        </Col>
+        </div>
 
-        <Col className="number-picker-outer">
+        {/* <Col className="number-picker-outer">
           {false && (
             <p className="num-pick-text">
               Number of Hidden layers: {selectedValues.layers.length}
             </p>
           )}
+        </Col> */}
+      </Row>
+      <Row className="lowerleft">
+        <Col>
+          <Row className="middlelayer">
+            <img src={arrowdown4} />
+            <div className="input-text">Input</div>
+          </Row>
+          <div className="layers">
+            {props.selectedValues.layers.map((layer, index) => (
+              <div
+                className="layer d-flex align-items-center justify-content-center"
+                key={index}
+              >
+                <div className="layer-text">{layer.name}</div>
+                {index > 2 ? (
+                  <img
+                    className="trash"
+                    src={trash}
+                    onClick={() => {
+                      deleteLayer(index)
+                    }}
+                  />
+                ) : (
+                  <img className="trash" src={''} alt={''} />
+                )}
+                <div />
+              </div>
+            ))}
+          </div>
+
+          <Row className="button">
+            <img className="plus" src={plus} />
+            <Dropdown>
+              <Dropdown.Toggle id="dropdown-basic" as="span">
+                Add layer
+              </Dropdown.Toggle>
+              <Dropdown.Menu>
+                <Dropdown.Item onClick={() => addLayer('Conv')}>
+                  Conv
+                </Dropdown.Item>
+                <Dropdown.Item onClick={() => addLayer('Relu')}>
+                  Relu
+                </Dropdown.Item>
+                <Dropdown.Item onClick={() => addLayer('Batch_Norm')}>
+                  Batch_Norm
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+          </Row>
+          <div className="const-btn">FC</div>
+          <div className="const-btn">FC</div>
         </Col>
       </Row>
-      <Col className="lowerleft">
-        <Row className="middlelayer">
-          <img src={arrowdown4} />
-          <div className="input-text">Input</div>
-        </Row>
-        <div className="layers">
-          {props.selectedValues.layers.map((layer, index) => (
-            <div
-              className="layer d-flex align-items-center justify-content-center"
-              key={index}
-            >
-              <div className="layer-text">{layer.name}</div>
-              {index > 2 ? (
-                <img
-                  className="trash"
-                  src={trash}
-                  onClick={() => {
-                    deleteLayer(index)
-                  }}
-                />
-              ) : (
-                <img className="trash" src={''} alt={''} />
-              )}
-              <div />
-            </div>
-          ))}
-        </div>
-
-        <Row className="button">
-          <img className="plus" src={plus} />
-          <Dropdown>
-            <Dropdown.Toggle id="dropdown-basic" as="span">
-              Add layer
-            </Dropdown.Toggle>
-            <Dropdown.Menu>
-              <Dropdown.Item onClick={() => addLayer('Conv')}>
-                Conv
-              </Dropdown.Item>
-              <Dropdown.Item onClick={() => addLayer('Relu')}>
-                Relu
-              </Dropdown.Item>
-              <Dropdown.Item onClick={() => addLayer('Batch_Norm')}>
-                Batch_Norm
-              </Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-        </Row>
-        <div className="const-btn">FC</div>
-        <div className="const-btn">FC</div>
-      </Col>
     </Container>
   )
 }
