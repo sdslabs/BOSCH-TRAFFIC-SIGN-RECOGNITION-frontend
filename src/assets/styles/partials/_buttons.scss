@@ -35,6 +35,19 @@
   text-align: center;
 }
 
+.secondary-cta-enabled {
+  background-color: $theme-color-white;
+  border: 1px solid $theme-color-dark-blue;
+  box-sizing: border-box;
+  border-radius: 3px;
+  @include font-size-1628;
+  @include primary-font-normal;
+  color: $theme-color-dark-blue;
+  padding: 0.5rem 1rem;
+  outline: none;
+  text-align: center;
+}
+
 .secondary-cta-disabled {
   background-color: $theme-color-greyD7;
   border: none;

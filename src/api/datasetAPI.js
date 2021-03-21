@@ -107,3 +107,28 @@ export const copyAndSaveAPI = async () => {
     data: {},
   })
 }
+
+export const sendHP = async data => {
+  return axiosInstance
+    .post('/SendHP', { data })
+    .then(response => {
+      const res = JSON.parse(response.request.response)
+      return res
+    })
+    .catch(error => {
+      return Promise.reject(error)
+    })
+}
+
+export const getEmbedLink = () => {
+  const timeString = Date.now().toString()
+  return axiosInstance
+    .get(`/GetLink/${timeString}`)
+    .then(response => {
+      const res = JSON.parse(response.request.response)
+      return res
+    })
+    .catch(error => {
+      return Promise.reject(error)
+    })
+}
