@@ -26,6 +26,7 @@
     @include primary-font-normal;
     @include font-size-1622;
     color: $theme-color-black39;
+    max-width: 20rem;
   }
   img {
     margin-left: auto;
@@ -34,5 +35,5 @@
 
 .grey-bg {
   background-color: rgba(196, 196, 196, 0.2);
-  border: 1px solid #00902B;
+  border: 1px solid #00902b;
 }

@@ -104,13 +104,50 @@ export const copyAndSaveAPI = async () => {
   return await axiosInstance({
     method: 'post',
     url: `/SendTransformBatch`,
-    data: {},
+    data: {
+      action: 'copy',
+    },
+  })
+}
+export const replaceAndSaveAPI = async () => {
+  return await axiosInstance({
+    method: 'post',
+    url: `/SendTransformBatch`,
+    data: {
+      action: 'replace',
+    },
   })
 }
 
 export const sendHP = async data => {
   return axiosInstance
     .post('/SendHP', { data })
+    .then(response => {
+      const res = JSON.parse(response.request.response)
+      return res
+    })
+    .catch(error => {
+      return Promise.reject(error)
+    })
+}
+
+export const getGraphData1 = () => {
+  const timeString = Date.now().toString()
+  return axiosInstance
+    .get(`/GetGraphs1/${timeString}`)
+    .then(response => {
+      const res = JSON.parse(response.request.response)
+      return res
+    })
+    .catch(error => {
+      return Promise.reject(error)
+    })
+}
+
+export const getGraphData2 = () => {
+  const timeString = Date.now().toString()
+  return axiosInstance
+    .get(`/GetGraphs2/${timeString}`)
     .then(response => {
       const res = JSON.parse(response.request.response)
       return res
@@ -131,4 +168,38 @@ export const getEmbedLink = () => {
     .catch(error => {
       return Promise.reject(error)
     })
+}
+
+export const getGraphData3 = () => {
+  const timeString = Date.now().toString()
+  return axiosInstance
+    .get(`/GetGraphs3/${timeString}`)
+    .then(response => {
+      const res = JSON.parse(response.request.response)
+      return res
+    })
+    .catch(error => {
+      return Promise.reject(error)
+    })
+}
+
+export const getGraphData5 = () => {
+  const timeString = Date.now().toString()
+  return axiosInstance
+    .get(`/GetGraphs5/${timeString}`)
+    .then(response => {
+      const res = JSON.parse(response.request.response)
+      return res
+    })
+    .catch(error => {
+      return Promise.reject(error)
+    })
+}
+
+export const augAnalysis = async data => {
+  return await axiosInstance({
+    method: 'post',
+    url: `/SendData4`,
+    data: data,
+  })
 }

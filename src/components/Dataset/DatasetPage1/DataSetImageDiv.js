@@ -64,6 +64,21 @@ const DatasetImageDiv = props => {
           />
         </Col>
       )}
+      {props.isAnalysis && (
+        <Col
+          xs={1}
+          className="d-flex justify-content-center align-items-center"
+        >
+          <input
+            type="radio"
+            id={props.image.name}
+            checked={props.selectedImg === props.image.path}
+            onChange={e => {
+              props.setSelectedImg(props.image.path)
+            }}
+          />
+        </Col>
+      )}
       <Col xs={1}></Col>
       <Col className="">{props.image.name}</Col>
     </Row>

@@ -28,15 +28,16 @@ class Step1 extends React.Component {
               Select and generate dataset for model building
             </div>
           </Row>
-          <Row className="d-flex justify-content-flex-start mt-3">
-            <button
-              className="primary-cta primary-shadow"
-              onClick={this.submitInitialDataset}
-              disabled={this.props.done}
-            >
-              Generate Dataset
-            </button>
-          </Row>
+          {!this.props.done && (
+            <Row className="d-flex justify-content-flex-start mt-3">
+              <button
+                className="primary-cta primary-shadow"
+                onClick={this.submitInitialDataset}
+              >
+                Generate Dataset
+              </button>
+            </Row>
+          )}
         </Col>
       </Container>
     )

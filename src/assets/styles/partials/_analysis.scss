@@ -1,0 +1,149 @@
+.analysis-heading {
+  @include primary-font-normal;
+  font-weight: 600;
+  @include font-size-3244;
+  color: $theme-color-black19;
+}
+
+.analysis-page {
+  padding-left: 3rem;
+  padding-top: 2rem;
+}
+
+.analysis-graph-f1 {
+  width: 70%;
+}
+
+.f1-container {
+  @include flex-row-center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.f1-score-display {
+  @include flex-column-center;
+  margin-right: 3rem;
+  @include primary-font-normal;
+  color: $theme-color-black19;
+  @include font-size-2027;
+}
+
+.analysis-graph-multiple {
+  margin-top: 1rem;
+  @include flex-row-center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  height: 15rem;
+  width: 100%;
+  overflow-y: overlay;
+  margin-bottom: 5rem;
+  .analysis-roc-curve {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    width: 32%;
+    height: 10rem;
+  }
+}
+
+.confusion-matrix {
+  margin-top: 2rem;
+  width: 70%;
+}
+
+.uncertainity-container {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  @include flex-row-center;
+  width: 95%;
+  justify-content: space-evenly;
+  .analysis-graph-uc {
+    width: 45%;
+  }
+}
+
+.analysis-about {
+  width: 90%;
+  @include primary-font-normal;
+  @include font-size-1622;
+  color: $theme-color-black39;
+}
+
+.aug-analysis {
+  @include flex-row-center;
+  height: calc(100% - 5rem);
+}
+.aug-analysis-column {
+  width: 50%;
+  height: 100%;
+  padding: 2rem;
+  .heading-row {
+    @include flex-row-center;
+  }
+  .selector {
+    height: 25vh;
+    overflow-y: overlay;
+    overflow-x: hidden;
+  }
+  .aug-options {
+    padding-left: 2rem;
+  }
+  .aug-rotate {
+    width: 100%;
+    padding-right: 40%;
+  }
+  .noise-input {
+    @include flex-row-center;
+    input {
+      width: 50%;
+    }
+  }
+}
+
+.row-last-button {
+  margin-left: auto;
+  margin-right: 1rem;
+}
+
+.selector,
+.analysis-graph-multiple {
+  &::-webkit-scrollbar {
+    width: 0.5rem;
+    height: 2rem;
+  }
+
+  &::-webkit-scrollbar-button {
+    display: none;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(57, 57, 57, 0.35);
+    border-radius: 3px;
+  }
+
+  ​ &::-webkit-scrollbar-track-piece {
+    background: rgba(57, 57, 57, 0.35);
+  }
+}
+
+.analysis-img-container {
+  @include flex-row-center;
+  width: 100%;
+  height: 12rem;
+  margin: 1.5rem 0;
+  
+  .analysis-img {
+    height: 10rem;
+    @include flex-column-center;
+    justify-content: space-between;
+    margin-right: 2rem;
+    img {
+      height: 8rem;
+      width: 8rem;
+    }
+    span {
+      @include primary-font-normal;
+      @include font-size-2027;
+      color: $theme-color-black39;
+    }
+  }
+}

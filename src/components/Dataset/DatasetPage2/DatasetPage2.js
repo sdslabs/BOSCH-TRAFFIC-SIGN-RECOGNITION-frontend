@@ -78,7 +78,7 @@ const DatasetPage2 = props => {
               props.setSplitDataTraining(val)
             }}
           />
-          <div className="action-option">Test Data</div>
+          <div className="action-option">Validation Data</div>
           <PrettoSlider
             valueLabelDisplay="auto"
             aria-label="pretto slider"

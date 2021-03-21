@@ -1,6 +1,6 @@
 import React from 'react'
 import { transforms } from '../../../constants/AugmentationNavbarItems'
-import { copyAndSaveAPI } from '../../../api/datasetAPI'
+import { copyAndSaveAPI, replaceAndSaveAPI } from '../../../api/datasetAPI'
 class AugmentationNavbar extends React.Component {
   showActionArea(title) {
     this.props.augActionHandler(title)
@@ -16,6 +16,16 @@ class AugmentationNavbar extends React.Component {
       await this.props.handleGetAugmentationData()
     }
   }
+  replaceAndSave = async () => {
+    const res = await replaceAndSaveAPI()
+    if (res.status === 200) {
+      console.log('data replace and saved successfully')
+      this.props.setAugmentationDataSelected(false)
+      this.props.setSelectedOption(null)
+      this.props.setImageSelectable(false)
+      await this.props.handleGetAugmentationData()
+    }
+  }
   render() {
     return (
       <div className="augmentation-navbar">
@@ -24,6 +34,12 @@ class AugmentationNavbar extends React.Component {
           onClick={this.copyAndSave}
         >
           Copy and Save
+        </button>
+        <button
+          className="primary-cta augmentation-navbar-element"
+          onClick={this.replaceAndSave}
+        >
+          Replace and Save
         </button>
         <button
           className="secondary-cta augmentation-navbar-element"

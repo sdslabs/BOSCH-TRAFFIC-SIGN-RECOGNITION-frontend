@@ -27,14 +27,16 @@ class Step2 extends React.Component {
               Split Selected Data into Training and Test Data{' '}
             </div>
           </Row>
-          <Row className="d-flex justify-content-flex-start mt-3">
-            <button
-              className="primary-cta primary-shadow"
-              onClick={this.splitData}
-            >
-              Split Data
-            </button>
-          </Row>
+          {!this.props.done && (
+            <Row className="d-flex justify-content-flex-start mt-3">
+              <button
+                className="primary-cta primary-shadow"
+                onClick={this.splitData}
+              >
+                Split Data
+              </button>
+            </Row>
+          )}
         </Col>
       </Container>
     )
