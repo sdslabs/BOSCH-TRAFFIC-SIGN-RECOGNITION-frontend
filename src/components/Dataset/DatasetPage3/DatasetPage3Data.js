@@ -20,9 +20,9 @@ const DatasetPage3Data = () => {
   const handleGetAugmentationData = async () => {
     const structure = await getSplitData()
     structure.train.empty = false
-    structure.test.empty = false
+    structure.valid.empty = false
     console.log(structure)
-    structure.test.folders.forEach((folder, id) => {
+    structure.valid.folders.forEach((folder, id) => {
       let selectedCount = 0
       let imageCount = 0
       folder.images.forEach(image => {
@@ -48,7 +48,7 @@ const DatasetPage3Data = () => {
       folder.imageCount = imageCount
       folder.id = id
     })
-    setTestStructure(structure.test)
+    setTestStructure(structure.valid)
     setTrainStructure(structure.train)
   }
 

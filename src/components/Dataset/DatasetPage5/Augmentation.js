@@ -45,7 +45,7 @@ const Augmentation = props => {
   const [totalTestImages, setTotalTestImages] = useState(0)
   const [totalTrainImages, setTotalTrainImages] = useState(0)
   const [rotation, setRotation] = useState(0)
-  const [blur, setBlur] = useState(0)
+  const [blur, setBlur] = useState(1)
   const [sharpen, setSharpen] = useState(0)
   const [mean, setMean] = useState(0)
   const [variance, setVariance] = useState(0)
@@ -57,11 +57,11 @@ const Augmentation = props => {
   const handleGetAugmentationData = async () => {
     const structure = await getSplitData()
     structure.train.empty = false
-    structure.test.empty = false
+    structure.valid.empty = false
     console.log(structure)
     let trainImages = 0
     let testImages = 0
-    structure.test.folders.forEach((folder, id) => {
+    structure.valid.folders.forEach((folder, id) => {
       let selectedCount = 0
       let imageCount = 0
       folder.images.forEach(image => {
@@ -91,14 +91,12 @@ const Augmentation = props => {
     })
     setTotalTrainImages(trainImages)
     setTotalTestImages(testImages)
-    setTestStructure(structure.test)
+    setTestStructure(structure.valid)
     setTrainStructure(structure.train)
   }
   const execute = async () => {
     const data = {
-      // img_path: selectedImg,
-      img_path:
-        '/home/burnerlee/projects/sdslabs/BOSCH-TRAFFIC-SIGN-RECOGNITION/data/split/test/0/10054.jpg',
+      img_path: selectedImg,
       rotate: {
         angle: rotation,
       },
@@ -190,7 +188,7 @@ const Augmentation = props => {
                   />
                 )}
               </Col>
-              <Col className="">Test Data</Col>
+              <Col className="">Validation Data</Col>
               <Col className="">{totalTestImages}</Col>
             </Row>
             {isTestSelected && (
@@ -236,8 +234,8 @@ const Augmentation = props => {
               <PrettoSlider
                 valueLabelDisplay="auto"
                 aria-label="pretto slider"
-                defaultValue={0}
-                min={0}
+                defaultValue={1}
+                min={1}
                 max={4}
                 step={1}
                 value={blur}

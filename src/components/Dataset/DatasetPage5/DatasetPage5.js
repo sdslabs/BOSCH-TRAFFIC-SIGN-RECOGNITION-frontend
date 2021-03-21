@@ -10,10 +10,11 @@ import Model from './Model'
 import Confusion from './Confusion'
 import Uncertainity from './Uncertainity'
 import Augmentation from './Augmentation'
+import Weight from './Weight'
 const DatasetPage5 = () => {
   const history = useHistory()
   const gotoDefault = () => {
-    history.push('/dataset/analysis/augmentation')
+    history.push('/dataset/analysis/model')
   }
   const [generalData, setGeneralData] = useState('')
   useEffect(() => {
@@ -43,6 +44,9 @@ const DatasetPage5 = () => {
         </Route>
         <Route exact path="/dataset/analysis/augmentation">
           <Augmentation setGeneralData={setGeneralData} />
+        </Route>
+        <Route exact path="/dataset/analysis/weight">
+          <Weight setGeneralData={setGeneralData} />
         </Route>
       </Switch>
     </div>

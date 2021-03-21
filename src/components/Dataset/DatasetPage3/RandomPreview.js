@@ -6,7 +6,7 @@ import Cross from '../../../assets/images/cross.svg'
 import { selectAugmentationRandom } from '../../../api/datasetAPI'
 const options = [
   { value: 'complete', label: 'Complete Data' },
-  { value: 'test', label: 'Test Data' },
+  { value: 'valid', label: 'Validation Data' },
   { value: 'train', label: 'Train Data' },
 ]
 const PrettoSlider = withStyles({

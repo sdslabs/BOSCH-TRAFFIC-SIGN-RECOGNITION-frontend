@@ -130,7 +130,7 @@ const DatasetPage1 = props => {
           )}
           {props.showTestRow && (
             <Row className="ml-2 mb-2 select-dataset-header">
-              <Col>Test Data</Col>
+              <Col>Validation Data</Col>
             </Row>
           )}
           {props.showTrainRow && (

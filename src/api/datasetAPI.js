@@ -104,7 +104,18 @@ export const copyAndSaveAPI = async () => {
   return await axiosInstance({
     method: 'post',
     url: `/SendTransformBatch`,
-    data: {},
+    data: {
+      action: 'copy',
+    },
+  })
+}
+export const replaceAndSaveAPI = async () => {
+  return await axiosInstance({
+    method: 'post',
+    url: `/SendTransformBatch`,
+    data: {
+      action: 'replace',
+    },
   })
 }
 
@@ -163,6 +174,19 @@ export const getGraphData3 = () => {
   const timeString = Date.now().toString()
   return axiosInstance
     .get(`/GetGraphs3/${timeString}`)
+    .then(response => {
+      const res = JSON.parse(response.request.response)
+      return res
+    })
+    .catch(error => {
+      return Promise.reject(error)
+    })
+}
+
+export const getGraphData5 = () => {
+  const timeString = Date.now().toString()
+  return axiosInstance
+    .get(`/GetGraphs5/${timeString}`)
     .then(response => {
       const res = JSON.parse(response.request.response)
       return res

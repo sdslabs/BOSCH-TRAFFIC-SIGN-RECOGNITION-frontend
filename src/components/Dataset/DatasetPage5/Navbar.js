@@ -17,6 +17,10 @@ const MenuItems = [
     title: 'Augmentation analysis',
     url: '/dataset/analysis/augmentation',
   },
+  {
+    title: 'Weight analysis',
+    url: '/dataset/analysis/weight',
+  },
 ]
 class Navbar extends React.Component {
   render() {
