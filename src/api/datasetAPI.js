@@ -157,10 +157,23 @@ export const getGraphData2 = () => {
     })
 }
 
-export const getEmbedLink = () => {
+export const getEmbedLink = async () => {
   const timeString = Date.now().toString()
   return axiosInstance
     .get(`/GetLink/${timeString}`)
+    .then(response => {
+      const res = JSON.parse(response.request.response)
+      return res
+    })
+    .catch(error => {
+      return Promise.reject(error)
+    })
+}
+
+export const getTensorflowExitLink = () => {
+  const timeString = Date.now().toString()
+  return axiosInstance
+    .get(`/CheckExit/${timeString}`)
     .then(response => {
       const res = JSON.parse(response.request.response)
       return res

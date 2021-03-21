@@ -17,7 +17,7 @@ import { getInitialData } from '../../api/datasetAPI'
 import DatasetPage3 from './DatasetPage3/DatasetPage3'
 
 const Dataset = () => {
-  const [datasetStep, setDatasetStep] = useState(4) // current step of dataset generation
+  const [datasetStep, setDatasetStep] = useState(6) // current step of dataset generation
   const [splitDataTraining, setSplitDataTraining] = useState(70) // percentage of training data in split
   const [isUpload, setUpload] = useState(false)
   const [isNewFolder, setNewFolder] = useState(false)
@@ -64,88 +64,92 @@ const Dataset = () => {
     setUpload(false)
   }
   return (
-      <Row className="h-100">
-        <Col xs={2.4} className="h-100">
-          {' '}
-          <Container className="sidebar border-right border-dark p-0">
-            <Col className="p-0">
-              <Row className="border-bottom heading">Heading for model</Row>
-              {datasetStep >= 1 && (
-                <Step1
-                  done={datasetStep > 1}
-                  initialData={structure}
-                  setDatasetStep={setDatasetStep}
-                />
-              )}
-              {datasetStep >= 2 && (
-                <Step2
-                  done={datasetStep > 2}
-                  splitDataTraining={splitDataTraining}
-                  setDatasetStep={setDatasetStep}
-                />
-              )}
-              {datasetStep >= 3 && (
-                <Step3 done={datasetStep > 3} setDatasetStep={setDatasetStep} />
-              )}
-              {datasetStep >= 4 && (
-                <Step4 done={datasetStep > 4} setDatasetStep={setDatasetStep} />
-              )}
-              {datasetStep >= 5 && (
-                <Step5 done={datasetStep > 5} setDatasetStep={setDatasetStep} />
-              )}
-            </Col>
-          </Container>
-        </Col>
-        <Col className="mx-0 px-0">
-          {datasetStep === 1 && (
-            <DatasetPage1
-              structure={structure}
-              setStructure={setStructure}
-              toggleUpload={() => {
-                setUpload(true)
-                setNewFolder(false)
-              }}
-              toggleNewFolder={() => {
-                setNewFolder(true)
-                setUpload(false)
-              }}
-              showUploadTools={true}
-            />
-          )}
-          {datasetStep === 2 && (
-            <DatasetPage2
-              setSplitDataTraining={setSplitDataTraining}
-              structure={structure}
-              setStructure={setStructure}
-            />
-          )}
-          {datasetStep === 3 && <DatasetPage3Data />}
-          {datasetStep === 4 && (
-            <DatasetPage4
-              structure={structure}
-              setStructure={setStructure}
-              setDatasetStep={setDatasetStep}
-            />
-          )}
-          {datasetStep === 6 && (
-            <DatasetPage6 structure={structure} setStructure={setStructure} />
-          )}
-          {datasetStep === 5 && <DatasetPage5 />}
-        </Col>
-        {isUpload || isNewFolder ? (
-          <Col xs={2.4}>
-            {' '}
-            <RightSidebar
-              isUpload={isUpload}
-              toggleUpload={toggleUpload}
-              isNewFolder={isNewFolder}
-              toggleNewFolder={toggleNewFolder}
-              structure={structure}
-              setStructure={setStructure}
-            />{' '}
+    <Row className="h-100">
+      <Col xs={2.4} className="h-100">
+        {' '}
+        <Container className="sidebar border-right border-dark p-0">
+          <Col className="p-0">
+            <Row className="border-bottom heading">Heading for model</Row>
+            {datasetStep >= 1 && (
+              <Step1
+                done={datasetStep > 1}
+                initialData={structure}
+                setDatasetStep={setDatasetStep}
+              />
+            )}
+            {datasetStep >= 2 && (
+              <Step2
+                done={datasetStep > 2}
+                splitDataTraining={splitDataTraining}
+                setDatasetStep={setDatasetStep}
+              />
+            )}
+            {datasetStep >= 3 && (
+              <Step3 done={datasetStep > 3} setDatasetStep={setDatasetStep} />
+            )}
+            {datasetStep >= 4 && (
+              <Step4 done={datasetStep > 4} setDatasetStep={setDatasetStep} />
+            )}
+            {datasetStep >= 5 && (
+              <Step5 done={datasetStep > 5} setDatasetStep={setDatasetStep} />
+            )}
           </Col>
-        ) : null}
-      </Row>
+        </Container>
+      </Col>
+      <Col className="mx-0 px-0">
+        {datasetStep === 1 && (
+          <DatasetPage1
+            structure={structure}
+            setStructure={setStructure}
+            toggleUpload={() => {
+              setUpload(true)
+              setNewFolder(false)
+            }}
+            toggleNewFolder={() => {
+              setNewFolder(true)
+              setUpload(false)
+            }}
+            showUploadTools={true}
+          />
+        )}
+        {datasetStep === 2 && (
+          <DatasetPage2
+            setSplitDataTraining={setSplitDataTraining}
+            structure={structure}
+            setStructure={setStructure}
+          />
+        )}
+        {datasetStep === 3 && <DatasetPage3Data />}
+        {datasetStep === 4 && (
+          <DatasetPage4
+            structure={structure}
+            setStructure={setStructure}
+            setDatasetStep={setDatasetStep}
+          />
+        )}
+        {datasetStep === 6 && (
+          <DatasetPage6
+            structure={structure}
+            setStructure={setStructure}
+            setDatasetStep={setDatasetStep}
+          />
+        )}
+        {datasetStep === 5 && <DatasetPage5 />}
+      </Col>
+      {isUpload || isNewFolder ? (
+        <Col xs={2.4}>
+          {' '}
+          <RightSidebar
+            isUpload={isUpload}
+            toggleUpload={toggleUpload}
+            isNewFolder={isNewFolder}
+            toggleNewFolder={toggleNewFolder}
+            structure={structure}
+            setStructure={setStructure}
+          />{' '}
+        </Col>
+      ) : null}
+    </Row>
   )
 }
 
