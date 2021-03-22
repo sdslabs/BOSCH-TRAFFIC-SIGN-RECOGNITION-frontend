@@ -28,9 +28,13 @@ const NewFolder = props => {
       props.structure.folders.push({
         name: folderName,
         images: images,
+        checked: false,
+        currentlySelected: false,
+        imageCount: files.length,
+        selectedCount: files.length,
+        id: props.structure.folders[props.structure.folders.length - 1].id + 1,
       })
-      props.setStructure(props.structure)
-      console.log(props.structure)
+      props.setStructure({ ...props.structure })
     }
   }
   const deselectFiles = () => {
