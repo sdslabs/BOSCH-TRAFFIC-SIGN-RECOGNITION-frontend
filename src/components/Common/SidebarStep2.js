@@ -18,9 +18,9 @@ class Step2 extends React.Component {
         className={'stepContainer ' + (this.props.done ? 'grey-bg' : '')}
       >
         <Col>
-          <Row className="d-flex mb-2">
+          <Row className="d-flex mb-0.8">
             <div className="stepHeading">Step 2</div>
-            {this.props.done && <img src={Tick} className="mr-2" />}
+            {this.props.done && <img src={Tick} />}
           </Row>
           <Row>
             <div className="stepInfo">

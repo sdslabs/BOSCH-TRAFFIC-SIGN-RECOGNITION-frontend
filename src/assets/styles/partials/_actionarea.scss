@@ -9,15 +9,21 @@
   z-index: 1;
 }
 
+.action-area-sec {
+  @extend .action-area;
+  filter: none;
+  border-left: 1px solid rgba(25, 25, 25, 0.3);
+}
+
 .action-option {
   color: $theme-color-black;
   @include primary-font-normal;
   font-weight: 600;
   @include font-size-1622;
-  margin-bottom:2px;
+  margin-bottom: 2px;
 }
 
-.action-option-large{
+.action-option-large {
   font-size: 1.2rem;
   margin: 1rem 0;
 }
@@ -32,4 +38,3 @@
 .cross {
   cursor: pointer;
 }
-

@@ -74,7 +74,7 @@ const Dataset = () => {
   }
   return (
     <Row className="h-100">
-      <Col xs={2.4} className="h-100">
+      <div className="h-100 steps-bar">
         {' '}
         <Container className="sidebar border-right border-dark p-0">
           <Col className="p-0">
@@ -108,7 +108,7 @@ const Dataset = () => {
             )}
           </Col>
         </Container>
-      </Col>
+      </div>
       <Col className="mx-0 px-0">
         {datasetStep === 1 && (
           <DatasetPage1

@@ -8,6 +8,5 @@ $primary-font-family: "Nunito Sans";
 
 @mixin primary-font-bold {
     font-family: $primary-font-family;
-    font-weight: bold;
-    font-style: normal;
+    font-weight: 700;
 }

@@ -9,12 +9,15 @@ class Step3 extends React.Component {
         className={'stepContainer ' + (this.props.done ? 'grey-bg' : '')}
       >
         <Col>
-          <Row className="d-flex mb-2">
+          <Row className="d-flex mb-0.8">
             <div className="stepHeading">Step 3</div>
-            {this.props.done && <img src={Tick} className="mr-2" />}
+            {this.props.done && <img src={Tick} />}
           </Row>
           <Row>
-            <div className="stepInfo">Augmentation of data</div>
+            <div className="stepInfo">
+              Apply Augumentation and Transformation on Data and continue to
+              Model Building after necessary changes in dataset are made
+            </div>
           </Row>
           {!this.props.done && (
             <Row className="d-flex justify-content-flex-start mt-3">
@@ -24,7 +27,7 @@ class Step3 extends React.Component {
                   this.props.setDatasetStep(4)
                 }}
               >
-                Augmentation done
+                Build Model
               </button>
             </Row>
           )}

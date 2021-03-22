@@ -60,7 +60,7 @@ const DatasetPage2 = props => {
           toggleNewFolder={props.toggleNewFolder}
         />
       </div>
-      <div className="action-area">
+      <div className="action-area-sec">
         <div className="empty-header" />
         <div className="rotate-preview split-data">
           <div className="action-name split-heading">Split Data</div>

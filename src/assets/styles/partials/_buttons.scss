@@ -1,17 +1,36 @@
 .primary-cta {
+  height: 40px;
   background-color: $theme-color-dark-blue;
   border-radius: 3px;
   @include font-size-1628;
   @include primary-font-bold;
   color: $theme-color-white;
-  padding: 0.5rem 1rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  @include flex-row-center;
   border: none;
   outline: none;
   text-align: center;
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3);
+  &:hover {
+    background: rgb(53, 81, 152);
+  }
+  &:disabled {
+    background: #d7d7d7;
+    color: #393939;
+  }
+}
+
+.invert-btn-color{
+  color: $theme-color-dark-blue;
+  background-color: $theme-color-white;
+  &:hover {
+    background-color: $theme-color-white;
+    color: rgb(53, 81, 152);
+  }
 }
 
 .primary-shadow {
-  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3);
 }
 
 .bw-10 {
