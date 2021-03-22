@@ -60,6 +60,7 @@ const Dataset = () => {
   }
 
   const toggleNewFolder = () => {
+    console.log('toggle new folder')
     setNewFolder(!isNewFolder)
     setUpload(false)
   }

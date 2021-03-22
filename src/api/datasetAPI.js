@@ -78,6 +78,18 @@ export const sendFile = (file, path) => {
   }
 }
 
+export const createFolder = path => {
+  var fd = new FormData()
+  fd.append('path', path)
+  axiosInstance({
+    method: 'post',
+    url: `/newfolder`,
+    data: fd,
+  }).then(res => {
+    console.log(res)
+  })
+}
+
 export const splitDataset = async trainPercentageData => {
   return await axiosInstance({
     method: 'post',
