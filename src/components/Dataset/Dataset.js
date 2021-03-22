@@ -21,6 +21,8 @@ const Dataset = () => {
   const [splitDataTraining, setSplitDataTraining] = useState(70) // percentage of training data in split
   const [isUpload, setUpload] = useState(false)
   const [isNewFolder, setNewFolder] = useState(false)
+  const [tensorFlowLink, setTensorFlowLink] = useState()
+  const [trainingCompleted, setTrainingCompleted] = useState(false)
 
   const [structure, setStructure] = useState({ empty: true }) // main structure (this is initialData)
 
@@ -31,6 +33,13 @@ const Dataset = () => {
   useEffect(() => {
     console.log('structure updated in state: ', structure)
   }, [structure])
+  useEffect(() => {
+    console.log('TensorFlow link updated: ', tensorFlowLink)
+  }, [tensorFlowLink])
+
+  useEffect(() => {
+    console.log('trainingCompleted updated: ', trainingCompleted)
+  }, [trainingCompleted])
 
   const handleGetInitialData = async () => {
     const structure = await getInitialData()
@@ -88,7 +97,11 @@ const Dataset = () => {
               <Step3 done={datasetStep > 3} setDatasetStep={setDatasetStep} />
             )}
             {datasetStep >= 4 && (
-              <Step4 done={datasetStep > 4} setDatasetStep={setDatasetStep} />
+              <Step4
+                done={datasetStep > 4}
+                setDatasetStep={setDatasetStep}
+                trainingCompleted={trainingCompleted}
+              />
             )}
             {datasetStep >= 7 && (
               <Step5 done={datasetStep > 7} setDatasetStep={setDatasetStep} />
@@ -125,6 +138,10 @@ const Dataset = () => {
             structure={structure}
             setStructure={setStructure}
             setDatasetStep={setDatasetStep}
+            tensorFlowLink={tensorFlowLink}
+            setTensorFlowLink={setTensorFlowLink}
+            trainingCompleted={trainingCompleted}
+            setTrainingCompleted={setTrainingCompleted}
           />
         )}
         {datasetStep === 6 && (
@@ -132,6 +149,8 @@ const Dataset = () => {
             structure={structure}
             setStructure={setStructure}
             setDatasetStep={setDatasetStep}
+            tensorFlowLink={tensorFlowLink}
+            setTensorFlowLink={setTensorFlowLink}
           />
         )}
         {datasetStep === 7 && <DatasetPage5 />}

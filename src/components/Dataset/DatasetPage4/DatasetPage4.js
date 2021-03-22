@@ -44,6 +44,10 @@ const DatasetPage4 = props => {
             readyToSend={readyToSend}
             setReadyToSend={setReadyToSend}
             setDatasetStep={props.setDatasetStep}
+            tensorFlowLink={props.tensorFlowLink}
+            setTensorFlowLink={props.setTensorFlowLink}
+            trainingCompleted={props.trainingCompleted}
+            setTrainingCompleted={props.setTrainingCompleted}
           />
         </Row>
         <Row>
