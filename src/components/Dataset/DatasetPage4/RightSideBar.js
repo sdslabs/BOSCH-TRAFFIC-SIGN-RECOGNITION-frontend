@@ -55,7 +55,10 @@ export const RightSidebar = props => {
         <Row>
           <Select
             styles={customStyles}
-            // value={props.selectedValues.optimizer}
+            value={{
+              value: props.selectedValues.optimizer,
+              label: props.selectedValues.optimizer,
+            }}
             onChange={optimizerChoose}
             options={options}
             id="optimizer"
@@ -70,7 +73,8 @@ export const RightSidebar = props => {
             <input
               type="number"
               id="learningRate"
-              // value={props.selectedValues.learningRate}
+              step={0.01}
+              value={props.selectedValues.learningRate}
               onChange={handleSelectedChange}
             />
           </Col>
@@ -79,8 +83,9 @@ export const RightSidebar = props => {
             <input
               type="number"
               id="epochs"
-              // value={props.selectedValues.epochs}
+              value={props.selectedValues.epochs}
               onChange={handleSelectedChange}
+              min={1}
             />
           </Col>
         </Row>
@@ -90,7 +95,7 @@ export const RightSidebar = props => {
             <input
               type="number"
               id="batchSize"
-              // value={props.selectedValues.batchSize}
+              value={props.selectedValues.batchSize}
               onChange={handleSelectedChange}
             />
           </Col>
@@ -99,7 +104,7 @@ export const RightSidebar = props => {
             <input
               type="number"
               id="centroidSize"
-              // value={props.selectedValues.centroidSize}
+              value={props.selectedValues.centroidSize}
               onChange={handleSelectedChange}
             />
           </Col>
@@ -110,7 +115,7 @@ export const RightSidebar = props => {
             <input
               type="number"
               id="weightDecay"
-              // value={props.selectedValues.weightDecay}
+              value={props.selectedValues.weightDecay}
               onChange={handleSelectedChange}
             />
           </Col>
@@ -119,7 +124,7 @@ export const RightSidebar = props => {
             <input
               type="number"
               id="lm"
-              // value={props.selectedValues.lm}
+              value={props.selectedValues.lm}
               onChange={handleSelectedChange}
             />
           </Col>
