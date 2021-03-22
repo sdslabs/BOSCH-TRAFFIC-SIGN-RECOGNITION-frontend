@@ -17,7 +17,7 @@ import { getInitialData } from '../../api/datasetAPI'
 import DatasetPage3 from './DatasetPage3/DatasetPage3'
 
 const Dataset = () => {
-  const [datasetStep, setDatasetStep] = useState(6) // current step of dataset generation
+  const [datasetStep, setDatasetStep] = useState(1) // current step of dataset generation
   const [splitDataTraining, setSplitDataTraining] = useState(70) // percentage of training data in split
   const [isUpload, setUpload] = useState(false)
   const [isNewFolder, setNewFolder] = useState(false)
@@ -90,8 +90,8 @@ const Dataset = () => {
             {datasetStep >= 4 && (
               <Step4 done={datasetStep > 4} setDatasetStep={setDatasetStep} />
             )}
-            {datasetStep >= 5 && (
-              <Step5 done={datasetStep > 5} setDatasetStep={setDatasetStep} />
+            {datasetStep >= 7 && (
+              <Step5 done={datasetStep > 7} setDatasetStep={setDatasetStep} />
             )}
           </Col>
         </Container>
@@ -134,7 +134,7 @@ const Dataset = () => {
             setDatasetStep={setDatasetStep}
           />
         )}
-        {datasetStep === 5 && <DatasetPage5 />}
+        {datasetStep === 7 && <DatasetPage5 />}
       </Col>
       {isUpload || isNewFolder ? (
         <Col xs={2.4}>
