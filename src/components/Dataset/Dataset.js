@@ -17,7 +17,7 @@ import { getInitialData } from '../../api/datasetAPI'
 import DatasetPage3 from './DatasetPage3/DatasetPage3'
 
 const Dataset = () => {
-  const [datasetStep, setDatasetStep] = useState(1) // current step of dataset generation
+  const [datasetStep, setDatasetStep] = useState(4) // current step of dataset generation
   const [splitDataTraining, setSplitDataTraining] = useState(70) // percentage of training data in split
   const [isUpload, setUpload] = useState(false)
   const [isNewFolder, setNewFolder] = useState(false)
@@ -68,7 +68,13 @@ const Dataset = () => {
     <Row className="h-100">
       <Col xs={2.4} className="h-100">
         {' '}
-        <Container className="sidebar border-right border-dark p-0">
+        <Container
+          className="sidebar border-right border-dark p-0"
+          style={{
+            backgroundColor:
+              isUpload || isNewFolder ? 'rgba(196, 196, 196, 0.2)' : 'white',
+          }}
+        >
           <Col className="p-0">
             <Row className="border-bottom heading">Heading for model</Row>
             {datasetStep >= 1 && (
@@ -76,6 +82,8 @@ const Dataset = () => {
                 done={datasetStep > 1}
                 initialData={structure}
                 setDatasetStep={setDatasetStep}
+                isUpload={isUpload}
+                isNewFolder={isNewFolder}
               />
             )}
             {datasetStep >= 2 && (
@@ -100,6 +108,7 @@ const Dataset = () => {
       <Col className="mx-0 px-0">
         {datasetStep === 1 && (
           <DatasetPage1
+            xs={7}
             structure={structure}
             setStructure={setStructure}
             toggleUpload={() => {
@@ -110,6 +119,8 @@ const Dataset = () => {
               setNewFolder(true)
               setUpload(false)
             }}
+            isUpload={isUpload}
+            isNewFolder={isNewFolder}
             showUploadTools={true}
           />
         )}
@@ -138,7 +149,7 @@ const Dataset = () => {
         {datasetStep === 5 && <DatasetPage5 />}
       </Col>
       {isUpload || isNewFolder ? (
-        <Col xs={2.4}>
+        <Col xs={2.9}>
           {' '}
           <RightSidebar
             isUpload={isUpload}

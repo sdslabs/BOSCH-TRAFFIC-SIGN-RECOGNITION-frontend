@@ -93,7 +93,16 @@ const DatasetPage1 = props => {
   return (
     <>
       {!props.structure.empty ? (
-        <Container fluid className="mx-0 px-0 dataset-page-1">
+        <Container
+          fluid
+          className="mx-0 px-0 dataset-page-1"
+          style={{
+            backgroundColor:
+              props.isUpload || props.isNewFolder
+                ? 'rgba(196, 196, 196, 0.2)'
+                : 'white',
+          }}
+        >
           {props.showUploadTools ? (
             <Row className="py-3 border-bottom mx-0 px-0">
               <Col xs={2}>

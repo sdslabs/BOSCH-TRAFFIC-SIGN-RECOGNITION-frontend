@@ -56,19 +56,24 @@ export const InnerDisplay = props => {
                 className="layer d-flex align-items-center justify-content-center"
                 key={index}
               >
-                <div className="layer-text">{layer.name}</div>
                 {index > 2 ? (
-                  <img
-                    className="trash"
-                    src={trash}
-                    onClick={() => {
-                      deleteLayer(index)
-                    }}
-                  />
+                  <div className="layer-inner">
+                    <div className={'layer-text-' + layer.name}>
+                      {layer.name}
+                    </div>
+                    <div className="trash-outer">
+                      <img
+                        className={'trash-' + layer.name}
+                        src={trash}
+                        onClick={() => {
+                          deleteLayer(index)
+                        }}
+                      />
+                    </div>
+                  </div>
                 ) : (
-                  <img className="trash" src={''} alt={''} />
+                  <div className={'layer-text'}>{layer.name}</div>
                 )}
-                <div />
               </div>
             ))}
           </div>
