@@ -318,8 +318,12 @@ const Augmentation = props => {
               </div>
             </div>
             <div className="analysis-heading">Uncertainity Scores</div>
-            <div className="action-name mbt-1">Epistemic -> {analysisImages.uc_scores.epistemic}</div>
-            <div className="action-name mbt-1">Aleatoric -> {analysisImages.uc_scores.aleatoric}</div>
+            <div className="action-name mbt-1">
+              Epistemic -> {analysisImages.uc_scores.epistemic}
+            </div>
+            <div className="action-name mbt-1">
+              Aleatoric -> {analysisImages.uc_scores.aleatoric}
+            </div>
           </div>
         )}
       </div>

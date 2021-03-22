@@ -60,6 +60,24 @@ export const generateDataset = async dataset => {
   })
 }
 
+export const sendFile = (file, path) => {
+  if (file) {
+    console.log(file)
+    var fd = new FormData()
+    fd.append('file', file)
+    fd.append('path', path)
+
+    axiosInstance({
+      method: 'post',
+      url: `/sendfile`,
+      data: fd,
+      contentType: 'application/x-www-form-urlencoded',
+    }).then(res => {
+      console.log(res)
+    })
+  }
+}
+
 export const splitDataset = async trainPercentageData => {
   return await axiosInstance({
     method: 'post',

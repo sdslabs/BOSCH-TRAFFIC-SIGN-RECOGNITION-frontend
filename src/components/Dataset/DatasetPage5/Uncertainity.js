@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { getGraphData3 } from '../../../api/datasetAPI'
 import BarGraph from '../../Common/BarGraph'
-import {generalData} from "../../../constants/Analysis"
-const Uncertainity = (props) => {
+import { generalData } from '../../../constants/Analysis'
+const Uncertainity = props => {
   const [graphData, setGraphData] = useState(null)
   useEffect(() => {
     graphDataHandler()
