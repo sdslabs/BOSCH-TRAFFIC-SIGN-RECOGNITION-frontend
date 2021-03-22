@@ -21,6 +21,7 @@ const Dataset = () => {
   const [splitDataTraining, setSplitDataTraining] = useState(70) // percentage of training data in split
   const [isUpload, setUpload] = useState(false)
   const [isNewFolder, setNewFolder] = useState(false)
+  const [tensorFlowLink, setTensorFlowLink] = useState()
 
   const [structure, setStructure] = useState({ empty: true }) // main structure (this is initialData)
 
@@ -31,6 +32,9 @@ const Dataset = () => {
   useEffect(() => {
     console.log('structure updated in state: ', structure)
   }, [structure])
+  useEffect(() => {
+    console.log('TensorFlow link updated: ', tensorFlowLink)
+  }, [tensorFlowLink])
 
   const handleGetInitialData = async () => {
     const structure = await getInitialData()
@@ -125,6 +129,8 @@ const Dataset = () => {
             structure={structure}
             setStructure={setStructure}
             setDatasetStep={setDatasetStep}
+            tensorFlowLink={tensorFlowLink}
+            setTensorFlowLink={setTensorFlowLink}
           />
         )}
         {datasetStep === 6 && (
@@ -132,6 +138,8 @@ const Dataset = () => {
             structure={structure}
             setStructure={setStructure}
             setDatasetStep={setDatasetStep}
+            tensorFlowLink={tensorFlowLink}
+            setTensorFlowLink={setTensorFlowLink}
           />
         )}
         {datasetStep === 7 && <DatasetPage5 />}
