@@ -18,7 +18,12 @@ class Step4 extends React.Component {
           </Row>
           {!this.props.done && (
             <Row className="d-flex justify-content-flex-start mt-3">
-              <button className="primary-cta primary-shadow">
+              <button
+                className="primary-cta primary-shadow"
+                onClick={() => {
+                  this.props.setDatasetStep(5)
+                }}
+              >
                 Augmentation done
               </button>
             </Row>
