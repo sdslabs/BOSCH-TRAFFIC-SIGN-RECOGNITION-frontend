@@ -21,10 +21,10 @@ class Step4 extends React.Component {
               <button
                 className="primary-cta primary-shadow"
                 onClick={() => {
-                  this.props.setDatasetStep(5)
+                  this.props.setDatasetStep(7)
                 }}
               >
-                Augmentation done
+                Model Analysis
               </button>
             </Row>
           )}

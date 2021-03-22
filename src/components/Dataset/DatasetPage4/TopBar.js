@@ -1,18 +1,16 @@
 import { Container, Row, Col } from 'react-bootstrap'
-import {
-  sendHP,
-  getEmbedLink,
-  getTensorflowExitLink,
-} from '../../../api/datasetAPI'
+import { sendHP, getEmbedLink } from '../../../api/datasetAPI'
 
 export const Topbar = props => {
   const handleSend = async () => {
+    props.setReadyToSend(false)
     console.log('Sending Selected Values: ', props.selectedValues)
     sendHP(props.selectedValues).then(response => {
       console.log(
-        'received response from backend after sending selected values... initializing tensorboard UI ',
+        'Training has been completed, now you can go to the next page',
         response,
       )
+      props.setTrainingCompleted(true)
     })
     pingForEmbedLink()
   }
