@@ -4,7 +4,11 @@ import { sendHP, getEmbedLink } from '../../../api/datasetAPI'
 export const Topbar = props => {
   const handleSend = async () => {
     console.log('Sending Selected Values: ', props.selectedValues)
-    await sendHP(props.selectedValues)
+    const response = await sendHP(props.selectedValues)
+    console.log(
+      'received response from backend after sending selected values... initializing tensorboard UI ',
+      response,
+    )
     props.setDatasetStep(6)
   }
   return (
