@@ -80,7 +80,7 @@ const Dataset = props => {
           {' '}
           <Container className="sidebar border-right border-dark p-0">
             <Col className="p-0">
-              <Row className="border-bottom heading">Heading for model</Row>
+              <Row className="border-bottom heading">STN + EDUQ</Row>
               {datasetStep >= 1 && (
                 <Step1
                   done={datasetStep > 1}

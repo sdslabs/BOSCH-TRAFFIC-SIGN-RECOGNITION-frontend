@@ -50,6 +50,7 @@ const Augmentation = props => {
   const [mean, setMean] = useState(0)
   const [variance, setVariance] = useState(0)
   const [analysisImages, setAnalysisImages] = useState(null)
+  const [step, setStep] = useState(1)
   useEffect(() => {
     props.setGeneralData(generalData[3])
     handleGetAugmentationData()
@@ -113,25 +114,53 @@ const Augmentation = props => {
     }
     const res = await augAnalysis(data)
     if (res.status === 200) {
+      setStep(3)
       setAnalysisImages(res.data)
     }
   }
   return (
     <div className="aug-analysis">
       <div className="aug-analysis-column">
-        <div className="select-image">
+        <div className={'select-image'}>
           <div className="heading-row">
-            <div className="analysis-heading">1. Select Image</div>
-            <button className="primary-cta-sec row-last-button">Reset</button>
+            <div className={'analysis-heading' + (step > 1 ? ' opacity' : '')}>
+              1. Select Image
+            </div>
+            {step === 1 && (
+              <button
+                className="primary-cta-sec row-last-button"
+                disabled={!selectedImg}
+                onClick={() => {
+                  setStep(2)
+                }}
+              >
+                Next
+              </button>
+            )}
+            {step > 1 && (
+              <button
+                className="primary-cta-sec row-last-button"
+                onClick={() => {
+                  setStep(1)
+                  setSelectedImg('')
+                }}
+              >
+                Reset
+              </button>
+            )}
           </div>
           <Row className="mb-4" />
 
-          <Row className="ml-0 select-dataset-header">
+          <Row
+            className={
+              'ml-0 select-dataset-header' + (step > 1 ? ' opacity' : '')
+            }
+          >
             <Col xs={1}></Col>
             <Col> Name</Col>
             <Col> No of Images</Col>
           </Row>
-          <div className="selector">
+          <div className={'selector' + (step > 1 ? ' opacity' : '')}>
             <Row className="ml-0 d-flex align-items-center border-bottom select-dataset-header">
               <Col
                 xs={1}
@@ -206,90 +235,106 @@ const Augmentation = props => {
             )}
           </div>
         </div>
-        <div className="augment-select">
-          <div className="heading-row">
-            <div className="analysis-heading">2. Augment</div>
-            <button className="secondary-cta row-last-button">Reset</button>
-            <button className="primary-cta-sec row-button" onClick={execute} disabled={!selectedImg}>
-              Execute
-            </button>
-          </div>
-          <Row className="mb-4" />
-          <div className="aug-options">
-            <div className="action-name mbt-1">Rotate</div>
-            <div className="aug-rotate">
-              <PrettoSlider
-                valueLabelDisplay="auto"
-                aria-label="pretto slider"
-                defaultValue={0}
-                min={-180}
-                max={180}
-                step={0.1}
-                value={rotation}
-                onChange={(e, val) => setRotation(val)}
-              />
+        {step >= 2 && (
+          <div className={'augment-select' + (step > 2 ? ' opacity' : '')}>
+            <div className="heading-row">
+              <div className="analysis-heading">2. Augment</div>
+              <button
+                className="secondary-cta row-last-button"
+                onClick={() => {
+                  setRotation(0)
+                  setBlur(1)
+                  setSharpen(0)
+                  setMean(0)
+                  setVariance(0)
+                }}
+              >
+                Reset
+              </button>
+              <button
+                className="primary-cta-sec row-button"
+                onClick={execute}
+                disabled={!selectedImg}
+              >
+                Execute
+              </button>
             </div>
-            <div className="action-name mbt-1">Blur</div>
-            <div className="aug-rotate">
-              <PrettoSlider
-                valueLabelDisplay="auto"
-                aria-label="pretto slider"
-                defaultValue={1}
-                min={1}
-                max={4}
-                step={1}
-                value={blur}
-                onChange={(e, val) => setBlur(val)}
-              />
-            </div>
-            <div className="action-name mbt-1">Sharpen</div>
-            <div className="aug-rotate">
-              <PrettoSlider
-                valueLabelDisplay="auto"
-                aria-label="pretto slider"
-                defaultValue={0}
-                min={0}
-                max={32}
-                step={1}
-                value={sharpen}
-                onChange={(e, val) => setSharpen(val)}
-              />
-            </div>
-            <div className="action-name mbt-1">Noise</div>
-            <div className="noise-input">
-              <div className="augmentation-input">
-                <div className="action-option">Mean</div>
-                <input
-                  type="number"
-                  step="0.01"
-                  className="input-box"
-                  placeholder="Mean"
-                  name="Mean"
-                  value={mean}
-                  onChange={e => setMean(e.target.value)}
+            <div className="aug-options">
+              <div className="action-name">Rotate</div>
+              <div className="aug-rotate">
+                <PrettoSlider
+                  valueLabelDisplay="auto"
+                  aria-label="pretto slider"
+                  defaultValue={0}
+                  min={-180}
+                  max={180}
+                  step={0.1}
+                  value={rotation}
+                  onChange={(e, val) => setRotation(val)}
                 />
               </div>
-              <div className="augmentation-input">
-                <div className="action-option">Standard Deviation</div>
-                <input
-                  type="number"
-                  step="0.01"
-                  className="input-box"
-                  placeholder="Standard Deviation"
-                  name="Standard Deviation"
-                  value={variance}
-                  onChange={e => setVariance(e.target.value)}
+              <div className="action-name mt-1">Blur</div>
+              <div className="aug-rotate">
+                <PrettoSlider
+                  valueLabelDisplay="auto"
+                  aria-label="pretto slider"
+                  defaultValue={1}
+                  min={1}
+                  max={4}
+                  step={1}
+                  value={blur}
+                  onChange={(e, val) => setBlur(val)}
                 />
+              </div>
+              <div className="action-name mt-1">Sharpen</div>
+              <div className="aug-rotate">
+                <PrettoSlider
+                  valueLabelDisplay="auto"
+                  aria-label="pretto slider"
+                  defaultValue={0}
+                  min={0}
+                  max={32}
+                  step={1}
+                  value={sharpen}
+                  onChange={(e, val) => setSharpen(val)}
+                />
+              </div>
+              <div className="action-name mt-1">Noise</div>
+              <div className="noise-input">
+                <div className="augmentation-input">
+                  <div className="action-option">Mean</div>
+                  <input
+                    type="number"
+                    step="0.01"
+                    className="input-box"
+                    placeholder="Mean"
+                    name="Mean"
+                    value={mean}
+                    onChange={e => setMean(e.target.value)}
+                  />
+                </div>
+                <div className="augmentation-input">
+                  <div className="action-option">Standard Deviation</div>
+                  <input
+                    type="number"
+                    step="0.01"
+                    className="input-box"
+                    placeholder="Standard Deviation"
+                    name="Standard Deviation"
+                    value={variance}
+                    onChange={e => setVariance(e.target.value)}
+                  />
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
       <div className="aug-analysis-column">
         <div className="heading-row">
-          <div className="analysis-heading">3. Analysis</div>
+          {step >= 3 && <div className="analysis-heading">3. Analysis</div>}
         </div>
-        {analysisImages && (
+        {step >= 3 && analysisImages && (
           <div>
             <div className="analysis-img-container">
               <div className="analysis-img">
@@ -314,12 +359,16 @@ const Augmentation = props => {
                 <img
                   src={`http://localhost:5000/${analysisImages.gradcam_noise}`}
                 />
-                <span>GRAD CAM Noise</span>
+                <span>GCAM Noise</span>
               </div>
             </div>
             <div className="analysis-heading">Uncertainity Scores</div>
-            <div className="action-name mbt-1">Epistemic -> {analysisImages.uc_scores.epistemic}</div>
-            <div className="action-name mbt-1">Aleatoric -> {analysisImages.uc_scores.aleatoric}</div>
+            <div className="action-name mbt-1">
+              Epistemic -> {analysisImages.uc_scores.epistemic}
+            </div>
+            <div className="action-name mbt-1">
+              Aleatoric -> {analysisImages.uc_scores.aleatoric}
+            </div>
           </div>
         )}
       </div>
