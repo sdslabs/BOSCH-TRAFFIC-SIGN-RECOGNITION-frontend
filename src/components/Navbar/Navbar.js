@@ -1,13 +1,14 @@
 import React from 'react'
 import { MenuItems } from '../../constants/NavbarItems'
 import { NavLink, useHistory, useLocation } from 'react-router-dom'
+import Logo from "../../assets/images/main-logo.png"
 const Navbar = () => {
   const history = useHistory()
   const location = useLocation()
   return (
     <nav className="navbar-container">
       <div className="navbar-logo-container">
-        <img src="../../assets/images/main-logo.svg" className="main-logo" />
+        <img src={Logo} className="main-logo" />
       </div>
       <div className="navbar-links-container">
         <ul className="navbar-links-list">
@@ -29,7 +30,7 @@ const Navbar = () => {
           <button
             className="primary-cta invert-btn-color row-last-button mr-2"
             onClick={() => {
-              history.push('/dataset')
+              history.push('/')
               window.location.reload(false)
             }}
           >

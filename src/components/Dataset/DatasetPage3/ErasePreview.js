@@ -26,6 +26,7 @@ const ErasePreview = props => {
     console.log(randomize)
   }, [randomize])
   const doSomething = async () => {
+    console.log(crop)
     const data = {
       name: 'erase',
       params: {

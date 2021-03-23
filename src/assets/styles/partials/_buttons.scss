@@ -126,7 +126,7 @@
   @include font-size-1424;
   @include primary-font-normal;
   color: $theme-color-black39;
-  padding: 0.2rem 0.75rem;
+  padding: 0.2rem 1rem;
   outline: none;
   text-align: center;
   img {
@@ -135,15 +135,16 @@
 }
 
 .tertiary-cta {
+  height: 2rem;
   background: none;
   @include flex-row-center;
-  @include font-size-1628;
+  @include font-size-1424;
   @include primary-font-normal;
   color: $theme-color-black39;
   border: none;
   outline: none;
   padding: 0.5rem 1rem;
-  img {
-    margin-right: 4px;
+  &:hover {
+    background-color: rgba(196, 196, 196, 0.2);
   }
 }

@@ -95,25 +95,23 @@ const DatasetPage1 = props => {
       {!props.structure.empty ? (
         <Container fluid className="mx-0 px-0 dataset-page-1">
           {props.showUploadTools ? (
-            <Row className="py-3 border-bottom mx-0 px-0">
-              <Col xs={2}>
-                <button
-                  className="primary-cta bw-8"
-                  onClick={() => props.toggleUpload()}
-                >
-                  <UploadIcon className="mr-3" />
-                  Upload
-                </button>
-              </Col>
-              <Col
-                className="p-auto my-auto"
+            <div className="empty-header border-bottom header-step3">
+              <button
+                className="primary-cta-sec ml-3"
+                onClick={() => props.toggleUpload()}
+              >
+                <UploadIcon className="mr-3" />
+                Upload
+              </button>
+              <button
+                className="tertiary-cta ml-2"
                 onClick={() => props.toggleNewFolder()}
                 style={{ cursor: 'pointer' }}
               >
                 <NewFolderIcon className="mr-3" />
                 New Folder
-              </Col>
-            </Row>
+              </button>
+            </div>
           ) : props.showEmptyHeader ? (
             <div className="empty-header w-100"></div>
           ) : (

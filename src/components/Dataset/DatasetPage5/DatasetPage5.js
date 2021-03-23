@@ -14,7 +14,7 @@ import Weight from './Weight'
 import Markdown from 'markdown-it'
 const DatasetPage5 = () => {
   const history = useHistory()
-  const md = new Markdown();
+  const md = new Markdown()
   const gotoDefault = () => {
     history.push('/analysis/model')
   }
@@ -26,15 +26,13 @@ const DatasetPage5 = () => {
     <div className="dataset-page2">
       <Navbar />
       <div className="action-area-sec">
-        <div className="action-wrapper">
-          <div className="rotate-preview">
-            <div className="analysis-heading">General</div>
-            <div className="analysis-about"></div>
-            <div
-              className="analysis-about"
-              dangerouslySetInnerHTML={{ __html: md.render(generalData) }}
-            ></div>
-          </div>
+        <div className="rotate-preview">
+          <div className="analysis-heading">General</div>
+          <div className="analysis-about"></div>
+          <div
+            className="analysis-about"
+            dangerouslySetInnerHTML={{ __html: md.render(generalData) }}
+          ></div>
         </div>
       </div>
       <Switch>
