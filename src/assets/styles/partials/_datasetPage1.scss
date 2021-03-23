@@ -25,6 +25,10 @@
   justify-content: flex-start;
 }
 
+.select-dataset-folder:hover {
+  background-color: $theme-color-bg-hover;
+}
+
 .select-dataset-image {
   @include primary-font-normal;
   @include font-size-912;
@@ -32,6 +36,9 @@
   @include flex-row-center;
   justify-content: flex-start;
   min-height: 2rem;
+}
+.select-dataset-image:hover {
+  background-color: $theme-color-bg-hover;
 }
 
 .open-close-folder {
