@@ -36,7 +36,7 @@ const DatasetPage6 = props => {
   }
 
   return (
-    <Container className="m-0 p-0">
+    <Container className="m-0 p-0 h-100" fluid>
       <iframe
         src={tensorFlowLink}
         frameBorder="0"

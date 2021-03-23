@@ -7,8 +7,9 @@ import { useEffect, useState } from 'react'
 const DatasetPage4 = props => {
   const [selectedValues, setSelectedValues] = useState({
     layers: [{ name: 'Conv' }, { name: 'Conv' }, { name: 'Conv' }],
+    optimizer: 'Adam',
     learningRate: 0.01,
-    epochs: 2,
+    epochs: 1,
     centroidSize: 100,
     lm: 0.1,
     weightDecay: 0.01,
@@ -43,6 +44,10 @@ const DatasetPage4 = props => {
             readyToSend={readyToSend}
             setReadyToSend={setReadyToSend}
             setDatasetStep={props.setDatasetStep}
+            tensorFlowLink={props.tensorFlowLink}
+            setTensorFlowLink={props.setTensorFlowLink}
+            trainingCompleted={props.trainingCompleted}
+            setTrainingCompleted={props.setTrainingCompleted}
           />
         </Row>
         <Row>

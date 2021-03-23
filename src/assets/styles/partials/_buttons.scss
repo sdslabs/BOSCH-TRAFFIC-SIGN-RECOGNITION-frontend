@@ -1,17 +1,59 @@
 .primary-cta {
+  height: 40px;
   background-color: $theme-color-dark-blue;
   border-radius: 3px;
   @include font-size-1628;
   @include primary-font-bold;
   color: $theme-color-white;
-  padding: 0.5rem 1rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  @include flex-row-center;
   border: none;
   outline: none;
   text-align: center;
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3);
+  &:hover {
+    background: rgb(53, 81, 152);
+  }
+  &:disabled {
+    background: #d7d7d7;
+    color: #393939;
+    box-shadow: none;
+  }
+}
+.primary-cta-sec {
+  height: 32px;
+  background-color: $theme-color-dark-blue;
+  border-radius: 3px;
+  @include font-size-1424;
+  @include primary-font-normal;
+  font-weight: 600;
+  color: $theme-color-white;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  @include flex-row-center;
+  border: none;
+  outline: none;
+  text-align: center;
+  &:hover {
+    background: rgb(53, 81, 152);
+  }
+  &:disabled {
+    background: #d7d7d7;
+    color: #393939;
+    box-shadow: none;
+  }
+}
+.invert-btn-color {
+  color: $theme-color-dark-blue;
+  background-color: $theme-color-white;
+  &:hover {
+    background-color: $theme-color-white;
+    color: rgb(53, 81, 152);
+  }
 }
 
 .primary-shadow {
-  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3);
 }
 
 .bw-10 {
@@ -23,16 +65,30 @@
 }
 
 .secondary-cta {
+  height: 2rem;
   background-color: $theme-color-white;
   border: 1px solid $theme-color-dark-blue;
   box-sizing: border-box;
   border-radius: 3px;
-  @include font-size-1628;
+  @include font-size-1424;
   @include primary-font-normal;
+  font-weight: 600;
+  @include flex-row-center;
   color: $theme-color-dark-blue;
   padding: 0.5rem 1rem;
   outline: none;
   text-align: center;
+  &:hover {
+    background: rgba(196, 196, 196, 0.2);
+    border: 1px solid #335bc0;
+    color: $theme-color-dark-blue;
+  }
+  &:disabled {
+    color: rgba(57, 57, 57, 0.57);
+    border: 1px solid rgba(57, 57, 57, 0.57);
+    background-color: $theme-color-white;
+    cursor: default;
+  }
 }
 
 .secondary-cta-enabled {
@@ -62,14 +118,15 @@
 }
 
 .action-cta {
+  height: 2rem;
   background-color: $theme-color-white;
   border: 1px solid $theme-color-black39;
   box-sizing: border-box;
   border-radius: 3px;
-  @include font-size-1628;
+  @include font-size-1424;
   @include primary-font-normal;
   color: $theme-color-black39;
-  padding: 0.2rem 0.75rem;
+  padding: 0.2rem 0.5rem;
   outline: none;
   text-align: center;
   img {
@@ -78,15 +135,16 @@
 }
 
 .tertiary-cta {
+  height: 2rem;
   background: none;
   @include flex-row-center;
-  @include font-size-1628;
+  @include font-size-1424;
   @include primary-font-normal;
   color: $theme-color-black39;
   border: none;
   outline: none;
   padding: 0.5rem 1rem;
-  img {
-    margin-right: 4px;
+  &:hover {
+    background-color: rgba(196, 196, 196, 0.2);
   }
 }

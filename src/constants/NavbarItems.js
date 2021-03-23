@@ -4,7 +4,7 @@ export const MenuItems = [
     url: '/dataset',
   },
   {
-    title: 'Trained Models',
+    title: 'Train Model',
     url: '/trainedmodels',
   },
   {

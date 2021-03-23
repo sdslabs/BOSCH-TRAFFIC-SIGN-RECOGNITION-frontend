@@ -2,12 +2,14 @@
   @include primary-font-normal;
   font-weight: 600;
   @include font-size-3244;
+  height: 3.75rem;
+  @include flex-row-center;
   color: $theme-color-black19;
 }
 
 .analysis-page {
   padding-left: 3rem;
-  padding-top: 2rem;
+  padding-top: 5rem;
 }
 
 .analysis-graph-f1 {
@@ -33,10 +35,12 @@
   @include flex-row-center;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  height: 15rem;
-  width: 100%;
+  height: 12rem;
+  width: 90%;
   overflow-y: overlay;
+  overflow-x: hidden;
   margin-bottom: 5rem;
+  border: 2px solid #c4c4c4;
   .analysis-roc-curve {
     margin-top: 2rem;
     margin-bottom: 2rem;
@@ -46,36 +50,43 @@
 }
 
 .confusion-matrix {
-  margin-top: 2rem;
-  width: 70%;
+  margin-top: 0rem;
+  width: 60%;
 }
 
-.uncertainity-container {
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
-  @include flex-row-center;
-  width: 95%;
-  justify-content: space-evenly;
-  .analysis-graph-uc {
-    width: 45%;
-  }
+.analysis-graph-uc {
+  width: 75%;
 }
 
 .analysis-about {
-  width: 90%;
+  text-align: justify;
+  width: 100%;
   @include primary-font-normal;
-  @include font-size-1622;
+  font-size: 12px;
+  line-height: 18px;
   color: $theme-color-black39;
+  ol {
+    margin-block-start: 0;
+    padding-inline-start: 0px;
+  }
+  strong {
+    font-weight: 700;
+  }
+  li {
+    margin: 0.5rem 0;
+  }
 }
 
 .aug-analysis {
   @include flex-row-center;
-  height: calc(100% - 5rem);
+  height: 100%;
+  padding-top: 3.75rem;
 }
 .aug-analysis-column {
   width: 50%;
   height: 100%;
   padding: 2rem;
+  border-left: 2px solid #c4c4c4;
   .heading-row {
     @include flex-row-center;
   }
@@ -83,11 +94,14 @@
     height: 25vh;
     overflow-y: overlay;
     overflow-x: hidden;
+    border-bottom: 2px solid #c4c4c4;
   }
   .aug-options {
     padding-left: 2rem;
   }
   .aug-rotate {
+    margin-top: -0.75rem;
+    height: 0.75rem;
     width: 100%;
     padding-right: 40%;
   }
@@ -130,7 +144,7 @@
   width: 100%;
   height: 12rem;
   margin: 1.5rem 0;
-  
+
   .analysis-img {
     height: 10rem;
     @include flex-column-center;
@@ -146,4 +160,8 @@
       color: $theme-color-black39;
     }
   }
+}
+
+input[type='radio'] {
+  cursor: pointer;
 }

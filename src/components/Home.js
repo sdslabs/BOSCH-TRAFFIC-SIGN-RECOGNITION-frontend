@@ -1,5 +1,6 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom'
+import Illustration  from '../assets/images/main-illustration.svg'
 class Home extends React.Component {
   state = {
     redirect: false,
@@ -14,7 +15,9 @@ class Home extends React.Component {
     }
     return (
       <div className="home-main-container">
-        <div className="home-illustration"></div>
+        <div className="home-illustration">
+          <img src={Illustration} />
+        </div>
         <button
           className="primary-cta"
           onClick={() => this.startBuildingModel()}

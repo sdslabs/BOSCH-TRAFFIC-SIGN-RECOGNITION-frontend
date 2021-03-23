@@ -1,13 +1,12 @@
-$primary-font-family: "Nunito Sans";
+$primary-font-family: 'Nunito Sans', sans-serif;
 
 @mixin primary-font-normal {
-    font-family: $primary-font-family;
-    font-weight: normal;
-    font-style: normal;
+  font-family: $primary-font-family;
+  font-weight: normal;
+  font-style: normal;
 }
 
 @mixin primary-font-bold {
-    font-family: $primary-font-family;
-    font-weight: bold;
-    font-style: normal;
+  font-family: $primary-font-family;
+  font-weight: 700;
 }

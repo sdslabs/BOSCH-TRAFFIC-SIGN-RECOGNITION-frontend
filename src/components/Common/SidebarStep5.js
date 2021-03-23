@@ -9,9 +9,9 @@ class Step5 extends React.Component {
         className={'stepContainer ' + (this.props.done ? 'grey-bg' : '')}
       >
         <Col>
-          <Row className="d-flex mb-2">
+          <Row className="d-flex mb-0.8">
             <div className="stepHeading">Step 5</div>
-            {this.props.done && <img src={Tick} className="mr-2" />}
+            {this.props.done && <img src={Tick} />}
           </Row>
           <Row className="stepInfo">
             Modify the layers of model to be trained & train the model and then

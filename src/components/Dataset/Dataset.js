@@ -16,12 +16,14 @@ import Step5 from '../Common/SidebarStep5.js'
 import { getInitialData } from '../../api/datasetAPI'
 import DatasetPage3 from './DatasetPage3/DatasetPage3'
 
-const Dataset = () => {
-  const [datasetStep, setDatasetStep] = useState(4) // current step of dataset generation
+const Dataset = props => {
+  const [datasetStep, setDatasetStep] = useState(props.page) // current step of dataset generation
   const [splitDataTraining, setSplitDataTraining] = useState(70) // percentage of training data in split
   const [isUpload, setUpload] = useState(false)
   const [isNewFolder, setNewFolder] = useState(false)
-
+  const [tensorFlowLink, setTensorFlowLink] = useState()
+  const [trainingCompleted, setTrainingCompleted] = useState(false)
+  const [showSidebar, setShowSidebar] = useState(true)
   const [structure, setStructure] = useState({ empty: true }) // main structure (this is initialData)
 
   useEffect(() => {
@@ -31,6 +33,13 @@ const Dataset = () => {
   useEffect(() => {
     console.log('structure updated in state: ', structure)
   }, [structure])
+  useEffect(() => {
+    console.log('TensorFlow link updated: ', tensorFlowLink)
+  }, [tensorFlowLink])
+
+  useEffect(() => {
+    console.log('trainingCompleted updated: ', trainingCompleted)
+  }, [trainingCompleted])
 
   const handleGetInitialData = async () => {
     const structure = await getInitialData()

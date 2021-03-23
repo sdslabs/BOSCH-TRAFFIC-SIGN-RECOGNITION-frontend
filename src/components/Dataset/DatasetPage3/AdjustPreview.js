@@ -113,7 +113,7 @@ class AdjustPreview extends React.Component {
     return (
       <div>
         <div className="confirm-cancel">
-          <button className="primary-cta" onClick={this.applyAdjust}>
+          <button className="primary-cta-sec" onClick={this.applyAdjust} disabled={!this.state.selectedOption}>
             Execute
           </button>
           <img

@@ -27,6 +27,8 @@ const DatasetPage3 = props => {
         setSelectedOption={props.setSelectedOption}
         handleGetAugmentationData={props.handleGetAugmentationData}
         setImageSelectable={props.setImageSelectable}
+        setShowActionArea={props.setShowActionArea}
+        setShowSidebar={props.setShowSidebar}
       />
       <Preview
         originalImages={originalImages}

@@ -44,6 +44,7 @@ class RandomPreview extends React.Component {
     this.state = {
       selectedOption: null,
       percentage: 50,
+      disabled: false,
     }
   }
 
@@ -57,6 +58,7 @@ class RandomPreview extends React.Component {
   }
 
   sendPercentageData = async () => {
+    this.setState({ disabled: true })
     const res = await selectAugmentationRandom({
       type_of_data: this.state.selectedOption.value,
       percentage: this.state.percentage,
@@ -73,10 +75,11 @@ class RandomPreview extends React.Component {
       <div>
         <div className="confirm-cancel">
           <button
-            className="primary-cta p-05"
+            className="primary-cta-sec p-05"
             onClick={() => {
               this.sendPercentageData()
             }}
+            disabled={!this.state.selectedOption || this.state.disabled}
           >
             Augmentation & Transform
           </button>

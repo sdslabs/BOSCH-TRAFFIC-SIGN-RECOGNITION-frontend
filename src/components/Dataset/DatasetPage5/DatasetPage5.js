@@ -11,10 +11,12 @@ import Confusion from './Confusion'
 import Uncertainity from './Uncertainity'
 import Augmentation from './Augmentation'
 import Weight from './Weight'
+import Markdown from 'markdown-it'
 const DatasetPage5 = () => {
   const history = useHistory()
+  const md = new Markdown()
   const gotoDefault = () => {
-    history.push('/dataset/analysis/model')
+    history.push('/analysis/model')
   }
   const [generalData, setGeneralData] = useState('')
   useEffect(() => {
@@ -23,29 +25,30 @@ const DatasetPage5 = () => {
   return (
     <div className="dataset-page2">
       <Navbar />
-      <div className="action-area">
-        <div className="empty-header"></div>
+      <div className="action-area-sec">
         <div className="rotate-preview">
-          <div className="analysis-heading mt-2">General</div>
-          <div className="analysis-about">
-            <p>{generalData}</p>
-          </div>
+          <div className="analysis-heading">General</div>
+          <div className="analysis-about"></div>
+          <div
+            className="analysis-about"
+            dangerouslySetInnerHTML={{ __html: md.render(generalData) }}
+          ></div>
         </div>
       </div>
       <Switch>
-        <Route exact path="/dataset/analysis/model">
+        <Route exact path="/analysis/model">
           <Model setGeneralData={setGeneralData} />
         </Route>
-        <Route exact path="/dataset/analysis/confusion">
+        <Route exact path="/analysis/confusion">
           <Confusion setGeneralData={setGeneralData} />
         </Route>
-        <Route exact path="/dataset/analysis/uncertainity">
+        <Route exact path="/analysis/uncertainity">
           <Uncertainity setGeneralData={setGeneralData} />
         </Route>
-        <Route exact path="/dataset/analysis/augmentation">
+        <Route exact path="/analysis/augmentation">
           <Augmentation setGeneralData={setGeneralData} />
         </Route>
-        <Route exact path="/dataset/analysis/weight">
+        <Route exact path="/analysis/weight">
           <Weight setGeneralData={setGeneralData} />
         </Route>
       </Switch>

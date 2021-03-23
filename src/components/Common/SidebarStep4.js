@@ -1,32 +1,42 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import Tick from '../../assets/images/tick.svg'
-class Step4 extends React.Component {
-  render() {
-    return (
-      <Container
-        fluid
-        className={'stepContainer ' + (this.props.done ? 'grey-bg' : '')}
-      >
-        <Col>
-          <Row className="d-flex mb-2">
-            <div className="stepHeading">Step 4</div>
-            {this.props.done && <img src={Tick} className="mr-2" />}
+import { useHistory } from 'react-router-dom'
+
+const Step4 = props => {
+  const history = useHistory()
+
+  return (
+    <Container
+      fluid
+      className={'stepContainer ' + (props.done ? 'grey-bg' : '')}
+    >
+      <Col>
+        <Row className="d-flex mb-0.8">
+          <div className="stepHeading">Step 4</div>
+          {props.done && <img src={Tick} />}
+        </Row>
+        <Row className="stepInfo">
+          Modify the layers of model to be trained & train the model and then
+          continue to analyse part for analysis of model
+        </Row>
+        {!props.done && (
+          <Row className="d-flex justify-content-flex-start mt-3">
+            <button
+              className="primary-cta primary-shadow"
+              onClick={() => {
+                history.push('/analysis')
+                window.location.reload(false)
+              }}
+              disabled={!props.trainingCompleted}
+            >
+              Model Analysis
+            </button>
           </Row>
-          <Row className="stepInfo">
-            Modify the layers of model to be trained
-          </Row>
-          {!this.props.done && (
-            <Row className="d-flex justify-content-flex-start mt-3">
-              <button className="primary-cta primary-shadow">
-                Augmentation done
-              </button>
-            </Row>
-          )}
-        </Col>
-      </Container>
-    )
-  }
+        )}
+      </Col>
+    </Container>
+  )
 }
 
 export default Step4

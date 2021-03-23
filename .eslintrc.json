@@ -26,7 +26,8 @@
     "react/prop-types": 0,
     "no-unused-vars": 0,
     "react/no-string-refs": 0,
-    "no-var": 0
+    "no-var": 0, 
+    "no-irregular-whitespace":0
   },
   "settings": {
     "react": {

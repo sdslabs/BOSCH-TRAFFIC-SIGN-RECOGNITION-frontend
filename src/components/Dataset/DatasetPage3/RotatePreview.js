@@ -10,6 +10,7 @@ import {
   getModifiedImages,
   undoAugmentationAPI,
 } from '../../../api/datasetAPI'
+import { tree } from 'd3'
 const rotationOptions = [
   { value: 'angle', label: 'Angle' },
   { value: 'flip', label: 'Flip' },
@@ -118,16 +119,29 @@ class RotatePreview extends React.Component {
       this.setState({ undoDisabled: true })
     }
   }
+  isButtonDisabled = () => {
+    if (this.state.selectedOption) {
+      if (this.state.selectedOption.value === 'angle') {
+        return false
+      } else {
+        if (this.state.flipStyle) {
+          return false
+        }
+      }
+    }
+    return true
+  }
   render() {
     const { selectedOption } = this.state
     return (
       <div>
         <div className="confirm-cancel">
           <button
-            className="primary-cta"
+            className="primary-cta-sec"
             onClick={() => {
               this.applyRotation()
             }}
+            disabled={this.isButtonDisabled()}
           >
             Execute
           </button>

@@ -26,6 +26,7 @@ const ErasePreview = props => {
     console.log(randomize)
   }, [randomize])
   const doSomething = async () => {
+    console.log(crop)
     const data = {
       name: 'erase',
       params: {
@@ -54,7 +55,7 @@ const ErasePreview = props => {
   return (
     <div>
       <div className="confirm-cancel">
-        <button className="primary-cta" onClick={doSomething}>
+        <button className="primary-cta-sec" onClick={doSomething} disabled={!crop.x}>
           Execute
         </button>
         <img

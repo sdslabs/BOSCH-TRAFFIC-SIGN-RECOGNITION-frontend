@@ -55,7 +55,7 @@ class NoisePreview extends React.Component {
     return (
       <div>
         <div className="confirm-cancel">
-          <button className="primary-cta" onClick={this.applyNoise}>
+          <button className="primary-cta-sec" onClick={this.applyNoise}>
             Execute
           </button>
           <img

@@ -3,6 +3,12 @@ import { Container, Row, Col } from 'react-bootstrap'
 import Tick from '../../assets/images/tick.svg'
 import { generateDataset } from '../../api/datasetAPI'
 class Step1 extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      disabled: false,
+    }
+  }
   submitInitialDataset = async () => {
     console.log('submit initial dataset!!!')
     const res = await generateDataset(JSON.stringify(this.props.initialData))
@@ -25,9 +31,9 @@ class Step1 extends React.Component {
         }}
       >
         <Col>
-          <Row className="d-flex mb-2">
+          <Row className="d-flex mb-0.8">
             <div className="stepHeading">Step 1</div>
-            {this.props.done && <img src={Tick} className="mr-2" />}
+            {this.props.done && <img src={Tick} />}
           </Row>
           <Row>
             <div className="stepInfo">
@@ -38,7 +44,11 @@ class Step1 extends React.Component {
             <Row className="d-flex justify-content-flex-start mt-3">
               <button
                 className="primary-cta primary-shadow"
-                onClick={this.submitInitialDataset}
+                onClick={() => {
+                  this.submitInitialDataset()
+                  this.setState({ disabled: true })
+                }}
+                disabled={this.state.disabled}
               >
                 Generate Dataset
               </button>
