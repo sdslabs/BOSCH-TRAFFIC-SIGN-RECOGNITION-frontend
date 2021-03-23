@@ -50,14 +50,14 @@ const DatasetPage4 = props => {
             setTrainingCompleted={props.setTrainingCompleted}
           />
         </Row>
-        <Row>
-          <Col xs={7} className="border-right">
+        <Row className="m-0 p-0">
+          <Col xs={7} className="border-right m-0 p-0">
             <InnerDisplay
               selectedValues={selectedValues}
               setSelectedValues={setSelectedValues}
             />
           </Col>
-          <Col xs={5} className="py-2">
+          <Col xs={5} className="m-0 p-0">
             <RightSidebar
               selectedValues={selectedValues}
               setSelectedValues={setSelectedValues}
