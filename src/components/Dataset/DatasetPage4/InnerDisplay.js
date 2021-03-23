@@ -20,14 +20,6 @@ export const InnerDisplay = props => {
     props.setSelectedValues(newValues)
   }
 
-  // const handleInput = e => {
-  //   const newNoOfLayers = e.target.value
-  //   const newValues = { ...props.selectedValues }
-  //   newValues.hiddenlayers = newNoOfLayers
-  //   setNoofLayers(newNoOfLayers)
-  //   props.setSelectedValues(newValues)
-  // }
-
   return (
     <Container className="innerdisplay">
       <h2> Hidden Layers </h2>
@@ -35,14 +27,6 @@ export const InnerDisplay = props => {
         <div className="image">
           <img className="img-inner" src={hiddenlayers} alt="Image here" />
         </div>
-
-        {/* <Col className="number-picker-outer">
-          {false && (
-            <p className="num-pick-text">
-              Number of Hidden layers: {selectedValues.layers.length}
-            </p>
-          )}
-        </Col> */}
       </Row>
       <Row className="lowerleft">
         <Col>
