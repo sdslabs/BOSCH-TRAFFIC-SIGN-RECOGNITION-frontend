@@ -3,7 +3,14 @@ import { Container, Row, Col } from 'react-bootstrap'
 import Tick from '../../assets/images/tick.svg'
 import { splitDataset } from '../../api/datasetAPI'
 class Step2 extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      disabled: false,
+    }
+  }
   splitData = async () => {
+    this.setState({ disabled: true })
     const res = await splitDataset({
       training_data: this.props.splitDataTraining,
     })
@@ -18,9 +25,9 @@ class Step2 extends React.Component {
         className={'stepContainer ' + (this.props.done ? 'grey-bg' : '')}
       >
         <Col>
-          <Row className="d-flex mb-2">
+          <Row className="d-flex mb-0.8">
             <div className="stepHeading">Step 2</div>
-            {this.props.done && <img src={Tick} className="mr-2" />}
+            {this.props.done && <img src={Tick} />}
           </Row>
           <Row>
             <div className="stepInfo">
@@ -32,6 +39,7 @@ class Step2 extends React.Component {
               <button
                 className="primary-cta primary-shadow"
                 onClick={this.splitData}
+                disabled={this.state.disabled}
               >
                 Split Data
               </button>

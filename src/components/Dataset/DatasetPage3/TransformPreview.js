@@ -102,10 +102,11 @@ class TransformPreview extends React.Component {
       <div>
         <div className="confirm-cancel">
           <button
-            className="primary-cta"
+            className="primary-cta-sec"
             onClick={() => {
               this.applyTransform()
             }}
+            disabled={!this.state.transformType}
           >
             Execute
           </button>

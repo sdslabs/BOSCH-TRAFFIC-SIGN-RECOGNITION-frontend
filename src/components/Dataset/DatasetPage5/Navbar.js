@@ -3,23 +3,23 @@ import { NavLink } from 'react-router-dom'
 const MenuItems = [
   {
     title: 'Model Evaluation',
-    url: '/dataset/analysis/model',
+    url: '/analysis/model',
   },
   {
     title: 'Confusion Matrix analysis',
-    url: '/dataset/analysis/confusion',
+    url: '/analysis/confusion',
   },
   {
     title: 'Uncertainity analysis',
-    url: '/dataset/analysis/uncertainity',
+    url: '/analysis/uncertainity',
   },
   {
     title: 'Augmentation analysis',
-    url: '/dataset/analysis/augmentation',
+    url: '/analysis/augmentation',
   },
   {
     title: 'Weight analysis',
-    url: '/dataset/analysis/weight',
+    url: '/analysis/weight',
   },
 ]
 class Navbar extends React.Component {

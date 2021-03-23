@@ -216,3 +216,16 @@ export const augAnalysis = async data => {
     data: data,
   })
 }
+
+export const getGraphStats = () => {
+  const timeString = Date.now().toString()
+  return axiosInstance
+    .get(`/GetDataStats/${timeString}`)
+    .then(response => {
+      const res = JSON.parse(response.request.response)
+      return res
+    })
+    .catch(error => {
+      return Promise.reject(error)
+    })
+}

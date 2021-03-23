@@ -14,6 +14,14 @@
   height: 100%;
 }
 
+.w-0 {
+  width: 70% !important;
+}
+
+.h-4 {
+  height: 4.5rem !important;
+}
+
 .mt-3 {
   margin-top: 3rem;
 }
@@ -32,7 +40,15 @@
   margin-left: 5rem;
 }
 
-.mbt-1{
+.mr-2 {
+  margin-right: 24px !important;
+}
+
+.mbt-1 {
   margin: 0.25rem;
-  margin-bottom:0.25rem
+  margin-bottom: 0.25rem;
+}
+
+.pt-5 {
+  padding-top: 3.75rem !important;
 }

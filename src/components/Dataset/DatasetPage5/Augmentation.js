@@ -122,7 +122,7 @@ const Augmentation = props => {
         <div className="select-image">
           <div className="heading-row">
             <div className="analysis-heading">1. Select Image</div>
-            <button className="primary-cta row-last-button">Reset</button>
+            <button className="primary-cta-sec row-last-button">Reset</button>
           </div>
           <Row className="mb-4" />
 
@@ -210,7 +210,7 @@ const Augmentation = props => {
           <div className="heading-row">
             <div className="analysis-heading">2. Augment</div>
             <button className="secondary-cta row-last-button">Reset</button>
-            <button className="primary-cta row-button" onClick={execute}>
+            <button className="primary-cta-sec row-button" onClick={execute} disabled={!selectedImg}>
               Execute
             </button>
           </div>

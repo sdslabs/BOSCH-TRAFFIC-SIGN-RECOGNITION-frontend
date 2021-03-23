@@ -2,20 +2,21 @@
   background-color: #f8f8f8;
   min-height: 100%;
   .heading {
+    width: 100%;
     @include primary-font-normal;
     @include font-size-2433;
     font-weight: 600;
     color: $theme-color-black;
-    min-height: 5rem;
+    height: 3.75rem;
     @include flex-row-center;
     justify-content: center;
-    padding-left: 2rem;
-    padding-right: 2rem;
+    margin: 0;
   }
 }
 
 .stepContainer {
-  padding: 2rem 1.5rem;
+  padding: 1rem 1.5rem;
+  padding-left: 2rem;
   .stepHeading {
     @include primary-font-normal;
     @include font-size-2027;
@@ -36,4 +37,15 @@
 .grey-bg {
   background-color: rgba(196, 196, 196, 0.2);
   border: 1px solid #00902b;
+}
+
+.steps-bar {
+  z-index: 500;
+  position: fixed;
+  width: 18rem;
+}
+
+.stepbar-void {
+  width: 18rem;
+  height: 100%;
 }

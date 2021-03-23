@@ -121,10 +121,28 @@ const CropPreview = props => {
       setUndoDisabled(true)
     }
   }
+  const isButtonDisabled = () => {
+    if (selectedOption) {
+      if (selectedOption.value === 'perspective') {
+        if (cropState) {
+          return false
+        }
+      } else {
+        if (crop.x) {
+          return false
+        }
+      }
+    }
+    return true
+  }
   return (
     <div>
       <div className="confirm-cancel">
-        <button className="primary-cta" onClick={doSomething}>
+        <button
+          className="primary-cta-sec"
+          onClick={doSomething}
+          disabled={isButtonDisabled()}
+        >
           Execute
         </button>
         <img

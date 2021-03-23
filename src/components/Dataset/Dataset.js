@@ -16,14 +16,14 @@ import Step5 from '../Common/SidebarStep5.js'
 import { getInitialData } from '../../api/datasetAPI'
 import DatasetPage3 from './DatasetPage3/DatasetPage3'
 
-const Dataset = () => {
-  const [datasetStep, setDatasetStep] = useState(1) // current step of dataset generation
+const Dataset = props => {
+  const [datasetStep, setDatasetStep] = useState(props.page) // current step of dataset generation
   const [splitDataTraining, setSplitDataTraining] = useState(70) // percentage of training data in split
   const [isUpload, setUpload] = useState(false)
   const [isNewFolder, setNewFolder] = useState(false)
   const [tensorFlowLink, setTensorFlowLink] = useState()
   const [trainingCompleted, setTrainingCompleted] = useState(false)
-
+  const [showSidebar, setShowSidebar] = useState(true)
   const [structure, setStructure] = useState({ empty: true }) // main structure (this is initialData)
 
   useEffect(() => {
@@ -74,41 +74,44 @@ const Dataset = () => {
   }
   return (
     <Row className="h-100">
-      <Col xs={2.4} className="h-100">
-        {' '}
-        <Container className="sidebar border-right border-dark p-0">
-          <Col className="p-0">
-            <Row className="border-bottom heading">Heading for model</Row>
-            {datasetStep >= 1 && (
-              <Step1
-                done={datasetStep > 1}
-                initialData={structure}
-                setDatasetStep={setDatasetStep}
-              />
-            )}
-            {datasetStep >= 2 && (
-              <Step2
-                done={datasetStep > 2}
-                splitDataTraining={splitDataTraining}
-                setDatasetStep={setDatasetStep}
-              />
-            )}
-            {datasetStep >= 3 && (
-              <Step3 done={datasetStep > 3} setDatasetStep={setDatasetStep} />
-            )}
-            {datasetStep >= 4 && (
-              <Step4
-                done={datasetStep > 4}
-                setDatasetStep={setDatasetStep}
-                trainingCompleted={trainingCompleted}
-              />
-            )}
-            {datasetStep >= 7 && (
-              <Step5 done={datasetStep > 7} setDatasetStep={setDatasetStep} />
-            )}
-          </Col>
-        </Container>
-      </Col>
+      {showSidebar && <div className="stepbar-void"></div>}
+      {showSidebar && (
+        <div className="h-100 steps-bar">
+          {' '}
+          <Container className="sidebar border-right border-dark p-0">
+            <Col className="p-0">
+              <Row className="border-bottom heading">Heading for model</Row>
+              {datasetStep >= 1 && (
+                <Step1
+                  done={datasetStep > 1}
+                  initialData={structure}
+                  setDatasetStep={setDatasetStep}
+                />
+              )}
+              {datasetStep >= 2 && (
+                <Step2
+                  done={datasetStep > 2}
+                  splitDataTraining={splitDataTraining}
+                  setDatasetStep={setDatasetStep}
+                />
+              )}
+              {datasetStep >= 3 && (
+                <Step3 done={datasetStep > 3} setDatasetStep={setDatasetStep} />
+              )}
+              {datasetStep >= 3.5 && (
+                <Step4
+                  done={datasetStep > 4}
+                  setDatasetStep={setDatasetStep}
+                  trainingCompleted={trainingCompleted}
+                />
+              )}
+              {datasetStep >= 7 && (
+                <Step5 done={datasetStep > 7} setDatasetStep={setDatasetStep} />
+              )}
+            </Col>
+          </Container>
+        </div>
+      )}
       <Col className="mx-0 px-0">
         {datasetStep === 1 && (
           <DatasetPage1
@@ -132,7 +135,7 @@ const Dataset = () => {
             setStructure={setStructure}
           />
         )}
-        {datasetStep === 3 && <DatasetPage3Data />}
+        {datasetStep === 3 && <DatasetPage3Data setShowSidebar={setShowSidebar}/>}
         {datasetStep === 4 && (
           <DatasetPage4
             structure={structure}
@@ -144,7 +147,7 @@ const Dataset = () => {
             setTrainingCompleted={setTrainingCompleted}
           />
         )}
-        {datasetStep === 6 && (
+        {datasetStep === 3.5 && (
           <DatasetPage6
             structure={structure}
             setStructure={setStructure}

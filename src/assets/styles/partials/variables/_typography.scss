@@ -12,6 +12,10 @@
   font-size: 1rem;
   line-height: 1.45rem;
 }
+@mixin font-size-1424 {
+  font-size: 14px;
+  line-height: 24px;
+}
 
 @mixin font-size-912 {
   font-size: 0.5625rem;
