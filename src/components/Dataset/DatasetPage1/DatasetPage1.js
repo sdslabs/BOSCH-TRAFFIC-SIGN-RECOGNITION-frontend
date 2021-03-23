@@ -157,7 +157,7 @@ const DatasetPage1 = props => {
                     name="checkAll"
                     checked={checkAllFolders}
                     onChange={handleCheckMultiple}
-                    className="d-flex align-items-center"
+                    className="d-flex align-items-center checkbox-default"
                   ></input>
                 </Col>
               )}
@@ -181,6 +181,7 @@ const DatasetPage1 = props => {
                           >
                             <input
                               type="checkbox"
+                              className="checkbox-default"
                               id={folder.id}
                               name={folder.name}
                               checked={folder.checked}
