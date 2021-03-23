@@ -15,7 +15,8 @@ import Step4 from '../Common/SidebarStep4.js'
 import Step5 from '../Common/SidebarStep5.js'
 import { getInitialData } from '../../api/datasetAPI'
 import DatasetPage3 from './DatasetPage3/DatasetPage3'
-
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
+import Loader from 'react-loader-spinner'
 const Dataset = props => {
   const [datasetStep, setDatasetStep] = useState(props.page) // current step of dataset generation
   const [splitDataTraining, setSplitDataTraining] = useState(70) // percentage of training data in split
@@ -25,7 +26,7 @@ const Dataset = props => {
   const [trainingCompleted, setTrainingCompleted] = useState(false)
   const [showSidebar, setShowSidebar] = useState(true)
   const [structure, setStructure] = useState({ empty: true }) // main structure (this is initialData)
-
+  const [showLoader, tl] = useState(false)
   useEffect(() => {
     handleGetInitialData()
   }, [])
@@ -42,7 +43,9 @@ const Dataset = props => {
   }, [trainingCompleted])
 
   const handleGetInitialData = async () => {
+    tl(true)
     const structure = await getInitialData()
+    tl(false)
     structure.empty = false
     structure.folders.forEach((folder, id) => {
       let selectedCount = 0
@@ -74,6 +77,18 @@ const Dataset = props => {
   }
   return (
     <Row className="h-100">
+      {showLoader && (
+        <div className="loader-wrapper">
+          <div className="loader">
+            <Loader
+              type="BallTriangle"
+              color="#335BC0"
+              height={150}
+              width={150}
+            />
+          </div>
+        </div>
+      )}
       {showSidebar && <div className="stepbar-void"></div>}
       {showSidebar && (
         <div className="h-100 steps-bar">
@@ -86,6 +101,7 @@ const Dataset = props => {
                   done={datasetStep > 1}
                   initialData={structure}
                   setDatasetStep={setDatasetStep}
+                  tl={tl}
                 />
               )}
               {datasetStep >= 2 && (
@@ -93,10 +109,11 @@ const Dataset = props => {
                   done={datasetStep > 2}
                   splitDataTraining={splitDataTraining}
                   setDatasetStep={setDatasetStep}
+                  tl={tl}
                 />
               )}
               {datasetStep >= 3 && (
-                <Step3 done={datasetStep > 3} setDatasetStep={setDatasetStep} />
+                <Step3 done={datasetStep > 3} setDatasetStep={setDatasetStep} tl={tl}/>
               )}
               {datasetStep >= 3.5 && (
                 <Step4
@@ -126,6 +143,7 @@ const Dataset = props => {
               setUpload(false)
             }}
             showUploadTools={true}
+            sp={true}
           />
         )}
         {datasetStep === 2 && (
@@ -136,7 +154,7 @@ const Dataset = props => {
           />
         )}
         {datasetStep === 3 && (
-          <DatasetPage3Data setShowSidebar={setShowSidebar} />
+          <DatasetPage3Data setShowSidebar={setShowSidebar} tl={tl}/>
         )}
         {datasetStep === 4 && (
           <DatasetPage4
@@ -147,6 +165,7 @@ const Dataset = props => {
             setTensorFlowLink={setTensorFlowLink}
             trainingCompleted={trainingCompleted}
             setTrainingCompleted={setTrainingCompleted}
+            tl={tl}
           />
         )}
         {datasetStep === 3.5 && (
@@ -158,17 +177,17 @@ const Dataset = props => {
             setTensorFlowLink={setTensorFlowLink}
           />
         )}
-        {datasetStep === 7 && <DatasetPage5 />}
+        {datasetStep === 7 && <DatasetPage5 tl={tl}/>}
       </Col>
       {isUpload || isNewFolder ? (
-          <RightSidebar
-            isUpload={isUpload}
-            toggleUpload={setUpload}
-            isNewFolder={isNewFolder}
-            toggleNewFolder={setNewFolder}
-            structure={structure}
-            setStructure={setStructure}
-          />
+        <RightSidebar
+          isUpload={isUpload}
+          toggleUpload={setUpload}
+          isNewFolder={isNewFolder}
+          toggleNewFolder={setNewFolder}
+          structure={structure}
+          setStructure={setStructure}
+        />
       ) : null}
     </Row>
   )

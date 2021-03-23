@@ -15,6 +15,7 @@ class AugmentationNavbar extends React.Component {
     this.props.showActionAreaHandler(true)
   }
   copyAndSave = async () => {
+    this.props.tl(true)
     this.setState({copyDisabled:true})
     const res = await copyAndSaveAPI()
     if (res.status === 200) {
@@ -29,6 +30,7 @@ class AugmentationNavbar extends React.Component {
     }
   }
   replaceAndSave = async () => {
+    this.props.tl(true)
     this.setState({replaceDisabled:true})
     const res = await replaceAndSaveAPI()
     if (res.status === 200) {

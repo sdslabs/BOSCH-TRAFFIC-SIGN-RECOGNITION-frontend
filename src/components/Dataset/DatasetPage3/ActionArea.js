@@ -63,6 +63,7 @@ class ActionArea extends React.Component {
                 showActionAreaHandler={this.props.showActionAreaHandler}
                 image={this.props.image}
                 editingHandler={this.props.editingHandler}
+                tl={this.props.tl}
               />
             )}
           </div>

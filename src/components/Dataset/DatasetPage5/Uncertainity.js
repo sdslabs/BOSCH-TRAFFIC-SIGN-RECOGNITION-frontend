@@ -10,7 +10,9 @@ const Uncertainity = props => {
   }, [])
 
   const graphDataHandler = async () => {
+    props.tl(true)
     const res = await getGraphData3()
+    props.tl(false)
     setGraphData(res)
     console.log(res)
   }

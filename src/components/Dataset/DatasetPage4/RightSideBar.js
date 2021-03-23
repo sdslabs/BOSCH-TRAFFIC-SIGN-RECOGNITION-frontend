@@ -10,6 +10,7 @@ export const RightSidebar = props => {
   }, [])
   const getGraphData = async () => {
     const res = await getGraphStats()
+    props.tl(false)
     setGraphData(res)
   }
   const handleSelectedChange = e => {

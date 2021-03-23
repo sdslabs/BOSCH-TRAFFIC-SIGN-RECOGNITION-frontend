@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { getGraphData5 } from '../../../api/datasetAPI'
-import {generalData} from "../../../constants/Analysis"
-const Weight = (props) => {
+import { generalData } from '../../../constants/Analysis'
+const Weight = props => {
   const [graphData, setGraphData] = useState(null)
   useEffect(() => {
     graphDataHandler()
@@ -9,8 +9,10 @@ const Weight = (props) => {
   }, [])
 
   const graphDataHandler = async () => {
+    props.tl(true)
     const res = await getGraphData5()
     setGraphData(res)
+    props.tl(false)
     console.log(res)
   }
   return (

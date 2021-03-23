@@ -10,9 +10,11 @@ class Step1 extends React.Component {
     }
   }
   submitInitialDataset = async () => {
+    this.props.tl(true)
     console.log('submit initial dataset!!!')
     const res = await generateDataset(JSON.stringify(this.props.initialData))
     console.log('response received: ', res)
+    this.props.tl(false)
     if (res.status === 200) {
       console.log('setDatasetstep = 2')
       this.props.setDatasetStep(2)

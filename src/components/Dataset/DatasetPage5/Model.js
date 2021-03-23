@@ -11,7 +11,9 @@ const Model = props => {
   }, [])
 
   const graphDataHandler = async () => {
+    props.tl(true)
     const res = await getGraphData1()
+    props.tl(false)
     setGraphData(res)
     console.log(res)
   }
