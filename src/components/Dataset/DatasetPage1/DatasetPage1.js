@@ -93,7 +93,7 @@ const DatasetPage1 = props => {
   return (
     <>
       {!props.structure.empty ? (
-        <Container fluid className="mx-0 px-0 dataset-page-1">
+        <Container fluid className="h-100 m-0 p-0 dataset-page-1">
           {props.showUploadTools ? (
             <div className="empty-header border-bottom header-step3">
               <button
@@ -137,7 +137,7 @@ const DatasetPage1 = props => {
             </Row>
           )}
           {!props.notShowHeader && (
-            <Row className="ml-0 select-dataset-header">
+            <Row className="m-0 select-dataset-header">
               {!props.preview && (
                 <Col
                   xs={1}
@@ -153,18 +153,36 @@ const DatasetPage1 = props => {
                 </Col>
               )}
               <Col xs={1}></Col>
-              <Col> Name</Col>
-              <Col> No of Images</Col>
-              <Col>Images Selected</Col>
+              <Col
+                xs={1}
+                className="d-flex justify-content-center align-items-center"
+              >
+                {' '}
+                Name
+              </Col>
+              <Col
+                xs={2}
+                className="d-flex justify-content-center align-items-center"
+              >
+                {' '}
+                No of Images
+              </Col>
+              <Col
+                xs={2}
+                className="d-flex justify-content-center align-items-center"
+              >
+                Images Selected
+              </Col>
+              <Col></Col>
             </Row>
           )}
-          <Row className="ml-0">
+          <Row className="m-0">
             <Form className="w-100">
-              <Container fluid className="mx-0 px-0">
-                <Col className="mx-0 px-0">
+              <Container fluid className="m-0 p-0">
+                <Col className="m-0 p-0">
                   {props.structure.folders.map(folder => (
                     <div key={folder.id}>
-                      <Row className="mx-0 px-0 border-bottom d-flex align-items-center select-dataset-folder">
+                      <Row className="m-0 p-0 border-bottom d-flex align-items-center select-dataset-folder">
                         {!props.preview && (
                           <Col
                             xs={1}
@@ -240,14 +258,27 @@ const DatasetPage1 = props => {
                             />
                           )}
                         </Col>
-                        <Col className="">
+                        <Col
+                          xs={1}
+                          className="d-flex justify-content-center align-items-center"
+                        >
                           {JSON.stringify(folder.name)
                             .replace('"', '')
                             .replace('"', '')}
                         </Col>
-                        <Col className="">{folder.imageCount.toString()}</Col>
+                        <Col
+                          xs={2}
+                          className="d-flex justify-content-center align-items-center"
+                        >
+                          {folder.imageCount.toString()}
+                        </Col>
                         {!props.isAnalysis && (
-                          <Col>{folder.selectedCount.toString()}</Col>
+                          <Col
+                            xs={2}
+                            className="d-flex justify-content-center align-items-center"
+                          >
+                            {folder.selectedCount.toString()}
+                          </Col>
                         )}
                       </Row>
 
