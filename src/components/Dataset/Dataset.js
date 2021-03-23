@@ -161,7 +161,7 @@ const Dataset = props => {
         {datasetStep === 7 && <DatasetPage5 />}
       </Col>
       {isUpload || isNewFolder ? (
-        <Col xs={2.4}>
+        <Col xs={2}>
           {' '}
           <RightSidebar
             isUpload={isUpload}
