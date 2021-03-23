@@ -1,7 +1,7 @@
 import React from 'react'
 import { MenuItems } from '../../constants/NavbarItems'
 import { NavLink, useHistory, useLocation } from 'react-router-dom'
-import Logo from "../../assets/images/main-logo.png"
+import Logo from '../../assets/images/main-logo.png'
 const Navbar = () => {
   const history = useHistory()
   const location = useLocation()

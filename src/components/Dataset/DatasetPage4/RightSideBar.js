@@ -91,7 +91,7 @@ export const RightSidebar = props => {
             />
           </Col>
           <Col className="p-0 m-0">
-            <Row className="p-0 m-0"> Epochs</Row>
+            <Row className="p-0 m-0 normal-heading"> Epochs</Row>
             <input
               type="number"
               id="epochs"

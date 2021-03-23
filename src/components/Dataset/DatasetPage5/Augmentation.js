@@ -186,7 +186,7 @@ const Augmentation = props => {
                 )}
               </Col>
               <Col>Train Data</Col>
-              <Col>{totalTrainImages}</Col>
+              <Col className="ml-5">{totalTrainImages}</Col>
             </Row>
             {isTrainSelected && (
               <DatasetPage1
@@ -199,6 +199,7 @@ const Augmentation = props => {
                 isAnalysis={true}
                 preview={true}
                 notShowHeader={true}
+                isAugmentation={true}
               />
             )}
             <Row className="ml-0 d-flex align-items-center border-bottom select-dataset-header">
@@ -222,7 +223,7 @@ const Augmentation = props => {
                 )}
               </Col>
               <Col className="">Validation Data</Col>
-              <Col className="">{totalTestImages}</Col>
+              <Col className="ml-5">{totalTestImages}</Col>
             </Row>
             {isTestSelected && (
               <DatasetPage1
@@ -235,6 +236,7 @@ const Augmentation = props => {
                 preview={true}
                 notShowHeader={true}
                 selectedImg={selectedImg}
+                isAugmentation={true}
               />
             )}
           </div>
@@ -368,10 +370,10 @@ const Augmentation = props => {
             </div>
             <div className="analysis-heading">Uncertainity Scores</div>
             <div className="action-name mbt-1">
-              Epistemic -> {analysisImages.uc_scores.epistemic}
+              Epistemic -{'>'} {analysisImages.uc_scores.epistemic}
             </div>
             <div className="action-name mbt-1">
-              Aleatoric -> {analysisImages.uc_scores.aleatoric}
+              Aleatoric -{'>'} {analysisImages.uc_scores.aleatoric}
             </div>
           </div>
         )}

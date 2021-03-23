@@ -275,7 +275,7 @@ const DatasetPage1 = props => {
                               )}
                             </Col>
                             <Col
-                              xs={1}
+                              xs={props.isAugmentation ? 3 : 1}
                               className="d-flex align-items-center justify-content-center"
                             >
                               {JSON.stringify(folder.name)
@@ -283,8 +283,12 @@ const DatasetPage1 = props => {
                                 .replace('"', '')}
                             </Col>
                             <Col
-                              xs={2}
-                              className="d-flex align-items-center justify-content-center"
+                              xs={props.isAugmentation ? 5 : 2}
+                              className={
+                                props.isAugmentation
+                                  ? 'pl-5 ml-5 d-flex align-items-center justify-content-center'
+                                  : 'd-flex align-items-center justify-content-center'
+                              }
                             >
                               {folder.imageCount.toString()}
                             </Col>
@@ -296,7 +300,7 @@ const DatasetPage1 = props => {
                                 {folder.selectedCount.toString()}
                               </Col>
                             )}
-                            <Col></Col>
+                            {props.isAugmentation ? null : <Col></Col>}
                           </Row>
 
                           {folder.currentlySelected ? (
