@@ -74,7 +74,7 @@ export const RightSidebar = props => {
             onChange={optimizerChoose}
             options={options}
             id="optimizer"
-            classNamePrefix="react-select2"
+            classNamePrefix="react-select"
             isSearchable={false}
             placeholder={'Select type of Optimizer'}
           ></Select>
