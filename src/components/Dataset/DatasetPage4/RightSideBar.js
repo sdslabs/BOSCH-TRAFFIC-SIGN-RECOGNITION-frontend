@@ -62,7 +62,7 @@ export const RightSidebar = props => {
     <Container className="m-0 p-0 ">
       <Col className="mx-4 p-0 ">
         <Row className="m-0 p-0">
-          <h2> Training Parameters</h2>
+          <h2 className="my-3"> Training Parameters</h2>
         </Row>
         <Row className="m-0 p-0">
           <Select
