@@ -10,6 +10,7 @@ class Step2 extends React.Component {
     }
   }
   splitData = async () => {
+    this.props.tl(true)
     this.setState({ disabled: true })
     const res = await splitDataset({
       training_data: this.props.splitDataTraining,

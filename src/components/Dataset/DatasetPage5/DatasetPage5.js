@@ -12,7 +12,7 @@ import Uncertainity from './Uncertainity'
 import Augmentation from './Augmentation'
 import Weight from './Weight'
 import Markdown from 'markdown-it'
-const DatasetPage5 = () => {
+const DatasetPage5 = (props) => {
   const history = useHistory()
   const md = new Markdown()
   const gotoDefault = () => {
@@ -37,19 +37,19 @@ const DatasetPage5 = () => {
       </div>
       <Switch>
         <Route exact path="/analysis/model">
-          <Model setGeneralData={setGeneralData} />
+          <Model setGeneralData={setGeneralData} tl={props.tl}/>
         </Route>
         <Route exact path="/analysis/confusion">
-          <Confusion setGeneralData={setGeneralData} />
+          <Confusion setGeneralData={setGeneralData} tl={props.tl}/>
         </Route>
         <Route exact path="/analysis/uncertainity">
-          <Uncertainity setGeneralData={setGeneralData} />
+          <Uncertainity setGeneralData={setGeneralData} tl={props.tl}/>
         </Route>
         <Route exact path="/analysis/augmentation">
-          <Augmentation setGeneralData={setGeneralData} />
+          <Augmentation setGeneralData={setGeneralData} tl={props.tl}/>
         </Route>
         <Route exact path="/analysis/weight">
-          <Weight setGeneralData={setGeneralData} />
+          <Weight setGeneralData={setGeneralData} tl={props.tl}/>
         </Route>
       </Switch>
     </div>

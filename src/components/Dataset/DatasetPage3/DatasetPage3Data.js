@@ -23,23 +23,27 @@ const DatasetPage3Data = props => {
   const [manualAug, setManualAug] = useState(false)
   useEffect(() => {
     handleGetAugmentationData()
-    getGraphData()
   }, [])
   useEffect(() => {
     if (!augmentationDataSelected) {
       getGraphData()
     }
-    if(manualAug) {
+    if (manualAug) {
       setManualAug(false)
     }
   }, [augmentationDataSelected])
   const getGraphData = async () => {
+    props.tl(true)
     const res = await getGraphStats()
-    console.log(res)
     setGraphData(res)
+    props.tl(false)
   }
   const handleGetAugmentationData = async () => {
+    props.tl(true)
     const structure = await getSplitData()
+    const res = await getGraphStats()
+    props.tl(false)
+    setGraphData(res)
     structure.train.empty = false
     structure.valid.empty = false
     console.log(structure)
@@ -110,6 +114,7 @@ const DatasetPage3Data = props => {
         setImageSelectable={setImageSelectable}
         setShowActionArea={setShowActionArea}
         setShowSidebar={props.setShowSidebar}
+        tl={props.tl}
       />
     )
   }
@@ -135,6 +140,7 @@ const DatasetPage3Data = props => {
                 onClick={() => {
                   sendManualAugmentationData()
                   setManualAug(true)
+                  props.tl(true)
                 }}
                 disabled={manualAug}
               >
@@ -152,6 +158,7 @@ const DatasetPage3Data = props => {
             </div>
           )}
         </div>
+        <div className="ml-5 heading mt-0">Dataset</div>
         <DatasetPage1
           initialDataHandler={setTestStructure}
           structure={testStructure}
@@ -189,6 +196,7 @@ const DatasetPage3Data = props => {
           showActionAreaHandler={removeActionArea}
           action={'Random'}
           editingHandler={setAugmentationDataSelected}
+          tl={props.tl}
         />
       )}
     </div>

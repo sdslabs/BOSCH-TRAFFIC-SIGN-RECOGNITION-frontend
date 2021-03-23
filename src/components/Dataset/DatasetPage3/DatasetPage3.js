@@ -16,6 +16,7 @@ const DatasetPage3 = props => {
     let res = await getOriginalImages()
     setOriginalImages(res.images)
     res = await getModifiedImages()
+    props.tl(false)
     setModifiedImages(res.images)
   }
   return (
@@ -29,6 +30,7 @@ const DatasetPage3 = props => {
         setImageSelectable={props.setImageSelectable}
         setShowActionArea={props.setShowActionArea}
         setShowSidebar={props.setShowSidebar}
+        tl={props.tl}
       />
       <Preview
         originalImages={originalImages}

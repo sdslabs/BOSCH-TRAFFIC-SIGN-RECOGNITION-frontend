@@ -56,7 +56,9 @@ const Augmentation = props => {
     handleGetAugmentationData()
   }, [])
   const handleGetAugmentationData = async () => {
+    props.tl(true)
     const structure = await getSplitData()
+    props.tl(false)
     structure.train.empty = false
     structure.valid.empty = false
     console.log(structure)
@@ -112,7 +114,9 @@ const Augmentation = props => {
         variance,
       },
     }
+    props.tl(true)
     const res = await augAnalysis(data)
+    props.tl(false)
     if (res.status === 200) {
       setStep(3)
       setAnalysisImages(res.data)

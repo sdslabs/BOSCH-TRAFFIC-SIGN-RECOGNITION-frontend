@@ -134,6 +134,9 @@ const DatasetPage1 = props => {
                 )}
               </Row>
             )}
+            {props.sp && (
+              <div className="ml-5 heading mt-0">Generate Dataset</div>
+            )}
             {props.showTestRow && (
               <Row className="ml-2 mb-2 select-dataset-header">
                 <Col>Validation Data</Col>

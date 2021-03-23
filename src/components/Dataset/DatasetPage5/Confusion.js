@@ -9,8 +9,10 @@ const Confusion = (props) => {
   }, [])
 
   const graphDataHandler = async () => {
+    props.tl(true)
     const res = await getGraphData2()
     setGraphData(res)
+    props.tl(false)
     console.log(res)
   }
   return (

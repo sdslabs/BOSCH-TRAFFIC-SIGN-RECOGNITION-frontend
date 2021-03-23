@@ -48,6 +48,7 @@ const DatasetPage4 = props => {
             setTensorFlowLink={props.setTensorFlowLink}
             trainingCompleted={props.trainingCompleted}
             setTrainingCompleted={props.setTrainingCompleted}
+            tl={props.tl}
           />
         </Row>
         <Row className="m-0 p-0">
@@ -61,6 +62,7 @@ const DatasetPage4 = props => {
             <RightSidebar
               selectedValues={selectedValues}
               setSelectedValues={setSelectedValues}
+              tl={props.tl}
             />
           </Col>
         </Row>

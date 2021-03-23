@@ -3,6 +3,7 @@ import { sendHP, getEmbedLink } from '../../../api/datasetAPI'
 
 export const Topbar = props => {
   const handleSend = async () => {
+    props.tl(true)
     props.setReadyToSend(false)
     console.log('Sending Selected Values: ', props.selectedValues)
     sendHP(props.selectedValues).then(response => {
@@ -24,6 +25,7 @@ export const Topbar = props => {
           console.log('Got tensorflow link: ', resp)
           if (!(resp.link_exists === 'false')) {
             props.setTensorFlowLink(resp.link)
+            props.tl(false)
             console.log(
               'Link is ready! Taking you to the embedding wala page: ',
               resp,

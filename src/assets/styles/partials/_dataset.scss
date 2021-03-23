@@ -1,0 +1,14 @@
+.loader-wrapper {
+  position: fixed;
+  top: 4.5rem;
+  width: 105%;
+  height: 100%;
+  z-index: 1500;
+  background-color: rgba(0, 0, 0, 0.6);
+  .loader {
+    height: 150px;
+    width: 150px;
+    padding-left: calc(105% / 2 - 150px);
+    padding-top: calc(50vh - 150px - 4.75rem);
+  }
+}

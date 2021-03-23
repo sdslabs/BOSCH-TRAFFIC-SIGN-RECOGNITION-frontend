@@ -78,6 +78,7 @@ class RandomPreview extends React.Component {
             className="primary-cta-sec p-05"
             onClick={() => {
               this.sendPercentageData()
+              this.props.tl(true)
             }}
             disabled={!this.state.selectedOption || this.state.disabled}
           >

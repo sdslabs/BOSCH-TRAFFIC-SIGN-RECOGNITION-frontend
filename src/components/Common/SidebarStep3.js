@@ -25,6 +25,7 @@ const Step3 = (props) => {
             <button
               className="primary-cta primary-shadow"
               onClick={() => {
+                props.tl(true)
                 history.push('/trainedmodels')
                 window.location.reload(false)
               }}
