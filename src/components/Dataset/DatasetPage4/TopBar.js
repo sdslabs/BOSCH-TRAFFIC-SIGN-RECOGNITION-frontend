@@ -42,13 +42,13 @@ export const Topbar = props => {
         <Col xs={7}></Col>
         {!props.readyToSend ? (
           <Col xs={5} className="py-2">
-            <button className="secondary-cta-disabled" disabled>
+            <button className="primary-cta" disabled>
               Train Model
             </button>
           </Col>
         ) : (
           <Col xs={5} className="py-2">
-            <button className="secondary-cta-enabled" onClick={handleSend}>
+            <button className="primary-cta" onClick={handleSend}>
               Train Model
             </button>
           </Col>
