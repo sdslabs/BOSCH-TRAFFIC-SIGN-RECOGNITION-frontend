@@ -75,8 +75,7 @@ const Dataset = props => {
   }
   return (
     <Row className="h-100">
-      <Col xs={2.4} className="h-100">
-        {' '}
+      <Col xs={3} className="h-100">
         <Container
           className="sidebar border-right border-dark p-0"
           style={{
@@ -158,8 +157,7 @@ const Dataset = props => {
         {datasetStep === 5 && <DatasetPage5 />}
       </Col>
       {isUpload || isNewFolder ? (
-        <Col xs={2.9}>
-          {' '}
+        <Col xs={2}>
           <RightSidebar
             isUpload={isUpload}
             toggleUpload={toggleUpload}
