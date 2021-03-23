@@ -13,6 +13,7 @@ const ErasePreview = props => {
   const [mean, setMean] = useState(0)
   const [variance, setVariance] = useState(0)
   const [randomize, setRandomize] = useState(false)
+  const [execDisabled, setExecDisabled] = useState(false)
   const undoAugmentation = async () => {
     let res = await undoAugmentationAPI()
     if (res.status === 200) {
@@ -26,6 +27,7 @@ const ErasePreview = props => {
     console.log(randomize)
   }, [randomize])
   const doSomething = async () => {
+    setExecDisabled(true)
     console.log(crop)
     const data = {
       name: 'erase',
@@ -44,6 +46,7 @@ const ErasePreview = props => {
       },
     }
     let res = await applyAugmentation(data)
+    setExecDisabled(false)
     if (res.status === 200) {
       console.log('image rotated in the backend')
       res = await getModifiedImages()
@@ -55,7 +58,11 @@ const ErasePreview = props => {
   return (
     <div>
       <div className="confirm-cancel">
-        <button className="primary-cta-sec" onClick={doSomething} disabled={!crop.x}>
+        <button
+          className="primary-cta-sec"
+          onClick={doSomething}
+          disabled={!crop.x || execDisabled}
+        >
           Execute
         </button>
         <img

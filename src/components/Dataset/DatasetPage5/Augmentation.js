@@ -260,7 +260,7 @@ const Augmentation = props => {
               </button>
             </div>
             <div className="aug-options">
-              <div className="action-name">Rotate</div>
+              <div className="action-name2">Rotate</div>
               <div className="aug-rotate">
                 <PrettoSlider
                   valueLabelDisplay="auto"
@@ -273,7 +273,7 @@ const Augmentation = props => {
                   onChange={(e, val) => setRotation(val)}
                 />
               </div>
-              <div className="action-name mt-1">Blur</div>
+              <div className="action-name2 mt-1">Blur</div>
               <div className="aug-rotate">
                 <PrettoSlider
                   valueLabelDisplay="auto"
@@ -286,7 +286,7 @@ const Augmentation = props => {
                   onChange={(e, val) => setBlur(val)}
                 />
               </div>
-              <div className="action-name mt-1">Sharpen</div>
+              <div className="action-name2 mt-1">Sharpen</div>
               <div className="aug-rotate">
                 <PrettoSlider
                   valueLabelDisplay="auto"
@@ -299,7 +299,7 @@ const Augmentation = props => {
                   onChange={(e, val) => setSharpen(val)}
                 />
               </div>
-              <div className="action-name mt-1">Noise</div>
+              <div className="action-name2 mt-1">Noise</div>
               <div className="noise-input">
                 <div className="augmentation-input">
                   <div className="action-option">Mean</div>

@@ -55,3 +55,19 @@
     }
   }
 }
+
+.folder-radios {
+  margin-top: 1rem;
+  width: 80%;
+  @include flex-row-center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  .folder-radio {
+    @include flex-row-center;
+    width: 40%;
+    margin-bottom: 0.5rem;
+    input {
+      margin-right: 4px;
+    }
+  }
+}

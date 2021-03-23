@@ -99,7 +99,7 @@ class RandomPreview extends React.Component {
             value={selectedOption}
             onChange={this.handleChange}
             options={options}
-            className="react-select-container"
+            className="react-select-container w-80"
             classNamePrefix="react-select"
             isSearchable={false}
           ></Select>

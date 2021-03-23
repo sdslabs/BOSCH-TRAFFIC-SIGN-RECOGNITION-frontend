@@ -80,6 +80,7 @@ class TransformPreview extends React.Component {
       transformType: null,
       showInfoTransformType: null,
       undoDisabled: true,
+      execDisabled: false,
     }
   }
 
@@ -93,6 +94,7 @@ class TransformPreview extends React.Component {
     this.setState({ showInfoTransformType })
   }
   applyTransform = async () => {
+    this.setState({ execDisabled: true })
     let data = {
       name: this.state.transformType,
       params: {},
@@ -106,6 +108,7 @@ class TransformPreview extends React.Component {
       }
     }
     let res = await applyAugmentation(data)
+    this.setState({ execDisabled: false })
     if (res.status === 200) {
       console.log('image transformed in the backend')
       res = await getModifiedImages()
@@ -130,7 +133,7 @@ class TransformPreview extends React.Component {
             onClick={() => {
               this.applyTransform()
             }}
-            disabled={!this.state.transformType}
+            disabled={!this.state.transformType || this.state.execDisabled}
           >
             Execute
           </button>

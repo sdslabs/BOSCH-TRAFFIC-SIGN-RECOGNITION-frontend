@@ -44,70 +44,79 @@ const Upload = props => {
     document.getElementById('file-input').value = ''
   }
   return (
-    <Container className="upload">
-      <div className="head">
-        <span className="button" onClick={uploadFiles}>
-          Upload
-        </span>
-        <span className="exit">
-          <img src={cross} onClick={props.toggleUpload} />
-        </span>
+    <div className="action-wrapper">
+      <div className="confirm-cancel">
+        <button
+          className="primary-cta-sec"
+          disabled={nooffiles === 0 || !folderName}
+          onClick={uploadFiles}
+        >
+          Create
+        </button>
+        <img
+          src={cross}
+          onClick={() => {
+            props.toggleUpload(false)
+          }}
+          className="cross"
+        />
       </div>
-      <Row className="heading"> Upload </Row>
-      <Row className="heading-2"> Choose Images to Upload </Row>
-      <Row>
-        <Col>
-          <form>
-            <label
-              style={{
-                color: '#335BC0',
-                borderColor: '#335BC0',
-                backgroundColor: 'white',
-                marginTop: '10%',
-                borderStyle: 'solid',
-                padding: '3px',
-                borderRadius: '0.25rem',
-                cursor: 'pointer',
-              }}
-            >
-              <input
-                id="file-input"
-                type="file"
-                accept="image/*"
-                multiple={true}
-                capture={true}
-                style={{ display: 'none' }}
-                onChange={onFileChange}
-              />
-              Browse
-            </label>
-          </form>
-        </Col>
-        {nooffiles != 0 ? (
-          <Col className="delete-images">
-            <Row className="inside">
-              <img className="img" src={cross} onClick={deselectFiles} />
-              <p className="text">{nooffiles} images</p>
-            </Row>
-          </Col>
-        ) : null}
-      </Row>
-      <Row className="heading-2"> Choose Folder for uploading </Row>
-      {!props.structure.empty
-        ? props.structure.folders.map((folder, id) => (
-            <Form key={id}>
-              <Form.Check
-                type="checkbox"
-                label={folder.name}
-                key={id}
-                name={folder.name}
-                id={folder.name}
-                onChange={setSelectedFolderName}
-              />
-            </Form>
-          ))
-        : null}
-    </Container>
+      <div className="rotate-preview">
+        <div className="rotate-heading">
+          <div className="action-name">Upload</div>{' '}
+        </div>
+        <div className="augmentation-input">
+          <div className="action-option">Choose images to upload</div>
+          <label
+            className="secondary-cta"
+            style={{
+              width: '5rem',
+              paddingLeft: 'auto',
+              paddingRight: 'auto',
+              marginTop: '1rem',
+            }}
+          >
+            <input
+              id="file-input"
+              type="file"
+              accept="image/*"
+              multiple={true}
+              capture={true}
+              style={{ display: 'none' }}
+              onChange={onFileChange}
+            />
+            Browse
+          </label>
+          {nooffiles != 0 && (
+            <div className="inside">
+              <img src={cross} onClick={deselectFiles} className="cross" />
+              <div>{nooffiles} images</div>
+            </div>
+          )}
+        </div>
+        <div className="augmentation-input">
+          <div className="action-option">Choose folder for uploading</div>
+          <div className="folder-radios">
+            {!props.structure.empty &&
+              !props.structure.empty &&
+              props.structure.folders.map(folder => {
+                return (
+                  <div key={folder.name} className="folder-radio">
+                    <input
+                      type="radio"
+                      checked={folder.name === folderName}
+                      onChange={() => {
+                        setFolderName(folder.name)
+                      }}
+                    />
+                    <div>Class {folder.name}</div>
+                  </div>
+                )
+              })}
+          </div>
+        </div>
+      </div>
+    </div>
   )
 }
 

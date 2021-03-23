@@ -3,7 +3,7 @@ import { Container, Col, Row, Form } from 'react-bootstrap'
 import cross from '../../assets/images/cross.svg'
 
 const NewFolder = props => {
-  const [folderName, setFolderName] = useState('')
+  const [folderName, setFolderName] = useState(43)
   const [nooffiles, setnooffiles] = useState(0)
   const [files, setFiles] = useState([])
   const onFileChange = event => {
@@ -46,67 +46,71 @@ const NewFolder = props => {
     console.log(folderName)
   })
   return (
-    <Container className="newfolder">
-      <div className="head">
-        {nooffiles != 0 ? (
-          <span className="button" onClick={uploadFiles}>
-            Create
-          </span>
-        ) : (
-          <span className="disabled-button"> Create </span>
-        )}
-        <span className="exit">
-          <img src={cross} onClick={props.toggleNewFolder} />
-        </span>
-      </div>
-      <Row className="heading"> New Folder </Row>
-      <Form.Group>
-        <Form.Label> Name </Form.Label>
-        <Form.Control
-          type="text"
-          placeholder="Name"
-          onChange={setSelectedFolderName}
+    <div className="action-wrapper">
+      <div className="confirm-cancel">
+        <button
+          className="primary-cta-sec"
+          disabled={nooffiles === 0 || !folderName}
+          onClick={uploadFiles}
+        >
+          Create
+        </button>
+        <img
+          src={cross}
+          onClick={() => {
+            props.toggleNewFolder(false)
+          }}
+          className="cross"
         />
-      </Form.Group>
-      <Row className="heading-2"> Choose Images to Upload </Row>
-      <Row>
-        <Col>
-          <form>
-            <label
-              style={{
-                color: '#335BC0',
-                borderColor: '#335BC0',
-                backgroundColor: 'white',
-                marginTop: '10%',
-                borderStyle: 'solid',
-                padding: '3px',
-                borderRadius: '0.25rem',
-                cursor: 'pointer',
-              }}
-            >
-              <input
-                id="file-input"
-                type="file"
-                accept="image/*"
-                multiple={true}
-                capture={true}
-                style={{ display: 'none' }}
-                onChange={onFileChange}
-              />
-              Browse
-            </label>
-          </form>
-        </Col>
-        {nooffiles != 0 ? (
-          <Col className="delete-images">
-            <Row className="inside">
-              <img className="img" src={cross} onClick={deselectFiles} />
-              <p className="text">{nooffiles} images</p>
-            </Row>
-          </Col>
-        ) : null}
-      </Row>
-    </Container>
+      </div>
+      <div className="rotate-preview">
+        <div className="rotate-heading">
+          <div className="action-name">New Folder</div>
+        </div>
+        <div className="augmentation-input">
+          <div className="action-option">Folder Name</div>
+          <input
+            type="number"
+            min={43}
+            className="input-box"
+            placeholder="Folder Name"
+            name="Folder Name"
+            value={folderName}
+            onChange={e => {
+              setFolderName(e.target.value)
+            }}
+          />
+        </div>
+        <div className="augmentation-input">
+          <div className="action-option">Choose images to upload</div>
+          <label
+            className="secondary-cta"
+            style={{
+              width: '5rem',
+              paddingLeft: 'auto',
+              paddingRight: 'auto',
+            }}
+          >
+            <input
+              id="file-input"
+              type="file"
+              accept="image/*"
+              multiple={true}
+              capture={true}
+              style={{ display: 'none' }}
+              onChange={onFileChange}
+            />
+            Browse
+          </label>
+          {nooffiles != 0 && (
+            <div className="inside">
+              <img src={cross} onClick={deselectFiles} className="cross" />
+              <div>{nooffiles} images</div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
   )
 }
 

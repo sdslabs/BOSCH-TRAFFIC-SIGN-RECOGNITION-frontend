@@ -68,3 +68,12 @@
   opacity: 0.4;
   pointer-events: none;
 }
+
+.center-heading {
+  @include flex-row-center;
+  justify-content: center;
+}
+
+.w-80 {
+  width: 80% !important;
+}

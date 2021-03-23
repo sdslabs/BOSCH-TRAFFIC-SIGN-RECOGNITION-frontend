@@ -100,8 +100,8 @@
     padding-left: 2rem;
   }
   .aug-rotate {
-    margin-top: -0.75rem;
-    height: 0.75rem;
+    margin-top: -0.5rem;
+    height: 1rem;
     width: 100%;
     padding-right: 40%;
   }
@@ -156,8 +156,9 @@
     }
     span {
       @include primary-font-normal;
-      @include font-size-2027;
+      @include font-size-1622;
       color: $theme-color-black39;
+      text-align: center;
     }
   }
 }

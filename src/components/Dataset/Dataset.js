@@ -161,17 +161,14 @@ const Dataset = props => {
         {datasetStep === 7 && <DatasetPage5 />}
       </Col>
       {isUpload || isNewFolder ? (
-        <Col xs={2.4}>
-          {' '}
           <RightSidebar
             isUpload={isUpload}
-            toggleUpload={toggleUpload}
+            toggleUpload={setUpload}
             isNewFolder={isNewFolder}
-            toggleNewFolder={toggleNewFolder}
+            toggleNewFolder={setNewFolder}
             structure={structure}
             setStructure={setStructure}
-          />{' '}
-        </Col>
+          />
       ) : null}
     </Row>
   )
