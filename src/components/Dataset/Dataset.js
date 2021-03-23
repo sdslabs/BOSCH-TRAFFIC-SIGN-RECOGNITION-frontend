@@ -1,17 +1,20 @@
-// libs
 import React, { useState, useEffect } from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
-// commponents
 import RightSidebar from '../Common/RightSidebar'
-import LeftSidebar from '../Common/LeftSidebar'
 import DatasetPage1 from './DatasetPage1/DatasetPage1'
 import DatasetPage2 from './DatasetPage2/DatasetPage2'
 import DatasetPage3Data from './DatasetPage3/DatasetPage3Data'
 import DatasetPage4 from './DatasetPage4/DatasetPage4.js'
 import DatasetPage6 from './DatasetPage6/DatasetPage6.js'
 import DatasetPage5 from './DatasetPage5/DatasetPage5.js'
-// apis
+// import structure from './structure.json'
+import { Container, Row, Col } from 'react-bootstrap'
+import Step1 from '../Common/SidebarStep1.js'
+import Step2 from '../Common/SidebarStep2.js'
+import Step3 from '../Common/SidebarStep3.js'
+import Step4 from '../Common/SidebarStep4.js'
+import Step5 from '../Common/SidebarStep5.js'
 import { getInitialData } from '../../api/datasetAPI'
+import DatasetPage3 from './DatasetPage3/DatasetPage3'
 
 const Dataset = props => {
   const [datasetStep, setDatasetStep] = useState(props.page) // current step of dataset generation
@@ -71,75 +74,103 @@ const Dataset = props => {
     setUpload(false)
   }
   return (
-    <Container fluid className="p-0">
-      <Row className="h-100">
-        <Col xs={3} className="h-100 p-0">
-          <LeftSidebar
+    <Row className="h-100">
+      <Col xs={2.4} className="h-100">
+        {' '}
+        <Container
+          className="sidebar border-right border-dark p-0"
+          style={{
+            backgroundColor:
+              isUpload || isNewFolder ? 'rgba(196, 196, 196, 0.2)' : 'white',
+          }}
+        >
+          <Col className="p-0">
+            <Row className="border-bottom heading">Heading for model</Row>
+            {datasetStep >= 1 && (
+              <Step1
+                done={datasetStep > 1}
+                initialData={structure}
+                setDatasetStep={setDatasetStep}
+                isUpload={isUpload}
+                isNewFolder={isNewFolder}
+              />
+            )}
+            {datasetStep >= 2 && (
+              <Step2
+                done={datasetStep > 2}
+                splitDataTraining={splitDataTraining}
+                setDatasetStep={setDatasetStep}
+              />
+            )}
+            {datasetStep >= 3 && (
+              <Step3 done={datasetStep > 3} setDatasetStep={setDatasetStep} />
+            )}
+            {datasetStep >= 4 && (
+              <Step4 done={datasetStep > 4} setDatasetStep={setDatasetStep} />
+            )}
+            {datasetStep >= 5 && (
+              <Step5 done={datasetStep > 5} setDatasetStep={setDatasetStep} />
+            )}
+          </Col>
+        </Container>
+      </Col>
+      <Col className="mx-0 px-0">
+        {datasetStep === 1 && (
+          <DatasetPage1
+            xs={7}
+            structure={structure}
+            setStructure={setStructure}
+            toggleUpload={() => {
+              setUpload(true)
+              setNewFolder(false)
+            }}
+            toggleNewFolder={() => {
+              setNewFolder(true)
+              setUpload(false)
+            }}
             isUpload={isUpload}
             isNewFolder={isNewFolder}
-            structure={structure}
-            datasetStep={datasetStep}
-            setDatasetStep={setDatasetStep}
-            splitDataTraining={splitDataTraining}
+            showUploadTools={true}
           />
+        )}
+        {datasetStep === 2 && (
+          <DatasetPage2
+            setSplitDataTraining={setSplitDataTraining}
+            structure={structure}
+            setStructure={setStructure}
+          />
+        )}
+        {datasetStep === 3 && <DatasetPage3Data />}
+        {datasetStep === 4 && (
+          <DatasetPage4
+            structure={structure}
+            setStructure={setStructure}
+            setDatasetStep={setDatasetStep}
+          />
+        )}
+        {datasetStep === 6 && (
+          <DatasetPage6
+            structure={structure}
+            setStructure={setStructure}
+            setDatasetStep={setDatasetStep}
+          />
+        )}
+        {datasetStep === 5 && <DatasetPage5 />}
+      </Col>
+      {isUpload || isNewFolder ? (
+        <Col xs={2.9}>
+          {' '}
+          <RightSidebar
+            isUpload={isUpload}
+            toggleUpload={toggleUpload}
+            isNewFolder={isNewFolder}
+            toggleNewFolder={toggleNewFolder}
+            structure={structure}
+            setStructure={setStructure}
+          />{' '}
         </Col>
-        <Col xs={7} className="h-100 p-0">
-          {datasetStep === 1 && (
-            <DatasetPage1
-              xs={7}
-              structure={structure}
-              setStructure={setStructure}
-              toggleUpload={() => {
-                setUpload(true)
-                setNewFolder(false)
-              }}
-              toggleNewFolder={() => {
-                setNewFolder(true)
-                setUpload(false)
-              }}
-              isUpload={isUpload}
-              isNewFolder={isNewFolder}
-              showUploadTools={true}
-            />
-          )}
-          {datasetStep === 2 && (
-            <DatasetPage2
-              setSplitDataTraining={setSplitDataTraining}
-              structure={structure}
-              setStructure={setStructure}
-            />
-          )}
-          {datasetStep === 3 && <DatasetPage3Data />}
-          {datasetStep === 4 && (
-            <DatasetPage4
-              structure={structure}
-              setStructure={setStructure}
-              setDatasetStep={setDatasetStep}
-            />
-          )}
-          {datasetStep === 6 && (
-            <DatasetPage6
-              structure={structure}
-              setStructure={setStructure}
-              setDatasetStep={setDatasetStep}
-            />
-          )}
-          {datasetStep === 5 && <DatasetPage5 />}
-        </Col>
-        {isUpload || isNewFolder ? (
-          <Col xs={2} className="h-100 p-0">
-            <RightSidebar
-              isUpload={isUpload}
-              toggleUpload={toggleUpload}
-              isNewFolder={isNewFolder}
-              toggleNewFolder={toggleNewFolder}
-              structure={structure}
-              setStructure={setStructure}
-            />{' '}
-          </Col>
-        ) : null}
-      </Row>
-    </Container>
+      ) : null}
+    </Row>
   )
 }
 
