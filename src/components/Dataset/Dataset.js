@@ -135,7 +135,9 @@ const Dataset = props => {
             setStructure={setStructure}
           />
         )}
-        {datasetStep === 3 && <DatasetPage3Data setShowSidebar={setShowSidebar}/>}
+        {datasetStep === 3 && (
+          <DatasetPage3Data setShowSidebar={setShowSidebar} />
+        )}
         {datasetStep === 4 && (
           <DatasetPage4
             structure={structure}
