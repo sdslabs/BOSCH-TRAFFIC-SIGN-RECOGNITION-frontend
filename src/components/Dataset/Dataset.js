@@ -83,7 +83,7 @@ const Dataset = props => {
             splitDataTraining={splitDataTraining}
           />
         </Col>
-        <Col xs={7} className="h-100 p-0">
+        <Col xs={isUpload || isNewFolder ? 7 : 9} className="h-100 p-0">
           {datasetStep === 1 && (
             <DatasetPage1
               xs={7}
