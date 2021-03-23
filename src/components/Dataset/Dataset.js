@@ -69,52 +69,55 @@ const Dataset = props => {
   }
 
   const toggleNewFolder = () => {
+    console.log('toggle new folder')
     setNewFolder(!isNewFolder)
     setUpload(false)
   }
   return (
     <Row className="h-100">
-      {showSidebar && <div className="stepbar-void"></div>}
-      {showSidebar && (
-        <div className="h-100 steps-bar">
-          {' '}
-          <Container className="sidebar border-right border-dark p-0">
-            <Col className="p-0">
-              <Row className="border-bottom heading">STN + EDUQ</Row>
-              {datasetStep >= 1 && (
-                <Step1
-                  done={datasetStep > 1}
-                  initialData={structure}
-                  setDatasetStep={setDatasetStep}
-                />
-              )}
-              {datasetStep >= 2 && (
-                <Step2
-                  done={datasetStep > 2}
-                  splitDataTraining={splitDataTraining}
-                  setDatasetStep={setDatasetStep}
-                />
-              )}
-              {datasetStep >= 3 && (
-                <Step3 done={datasetStep > 3} setDatasetStep={setDatasetStep} />
-              )}
-              {datasetStep >= 3.5 && (
-                <Step4
-                  done={datasetStep > 4}
-                  setDatasetStep={setDatasetStep}
-                  trainingCompleted={trainingCompleted}
-                />
-              )}
-              {datasetStep >= 7 && (
-                <Step5 done={datasetStep > 7} setDatasetStep={setDatasetStep} />
-              )}
-            </Col>
-          </Container>
-        </div>
-      )}
+      <Col xs={2.4} className="h-100">
+        {' '}
+        <Container
+          className="sidebar border-right border-dark p-0"
+          style={{
+            backgroundColor:
+              isUpload || isNewFolder ? 'rgba(196, 196, 196, 0.2)' : 'white',
+          }}
+        >
+          <Col className="p-0">
+            <Row className="border-bottom heading">Heading for model</Row>
+            {datasetStep >= 1 && (
+              <Step1
+                done={datasetStep > 1}
+                initialData={structure}
+                setDatasetStep={setDatasetStep}
+                isUpload={isUpload}
+                isNewFolder={isNewFolder}
+              />
+            )}
+            {datasetStep >= 2 && (
+              <Step2
+                done={datasetStep > 2}
+                splitDataTraining={splitDataTraining}
+                setDatasetStep={setDatasetStep}
+              />
+            )}
+            {datasetStep >= 3 && (
+              <Step3 done={datasetStep > 3} setDatasetStep={setDatasetStep} />
+            )}
+            {datasetStep >= 4 && (
+              <Step4 done={datasetStep > 4} setDatasetStep={setDatasetStep} />
+            )}
+            {datasetStep >= 5 && (
+              <Step5 done={datasetStep > 5} setDatasetStep={setDatasetStep} />
+            )}
+          </Col>
+        </Container>
+      </Col>
       <Col className="mx-0 px-0">
         {datasetStep === 1 && (
           <DatasetPage1
+            xs={7}
             structure={structure}
             setStructure={setStructure}
             toggleUpload={() => {
@@ -125,6 +128,8 @@ const Dataset = props => {
               setNewFolder(true)
               setUpload(false)
             }}
+            isUpload={isUpload}
+            isNewFolder={isNewFolder}
             showUploadTools={true}
           />
         )}
@@ -135,31 +140,25 @@ const Dataset = props => {
             setStructure={setStructure}
           />
         )}
-        {datasetStep === 3 && <DatasetPage3Data setShowSidebar={setShowSidebar}/>}
+        {datasetStep === 3 && <DatasetPage3Data />}
         {datasetStep === 4 && (
           <DatasetPage4
             structure={structure}
             setStructure={setStructure}
             setDatasetStep={setDatasetStep}
-            tensorFlowLink={tensorFlowLink}
-            setTensorFlowLink={setTensorFlowLink}
-            trainingCompleted={trainingCompleted}
-            setTrainingCompleted={setTrainingCompleted}
           />
         )}
-        {datasetStep === 3.5 && (
+        {datasetStep === 6 && (
           <DatasetPage6
             structure={structure}
             setStructure={setStructure}
             setDatasetStep={setDatasetStep}
-            tensorFlowLink={tensorFlowLink}
-            setTensorFlowLink={setTensorFlowLink}
           />
         )}
-        {datasetStep === 7 && <DatasetPage5 />}
+        {datasetStep === 5 && <DatasetPage5 />}
       </Col>
       {isUpload || isNewFolder ? (
-        <Col xs={2.4}>
+        <Col xs={2.9}>
           {' '}
           <RightSidebar
             isUpload={isUpload}

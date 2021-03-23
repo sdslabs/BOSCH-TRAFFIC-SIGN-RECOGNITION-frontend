@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Container, Col, Row, Form } from 'react-bootstrap'
 import cross from '../../assets/images/cross.svg'
+import { createFolder, sendFile } from '../../api/datasetAPI'
 
 const NewFolder = props => {
   const [folderName, setFolderName] = useState('')
@@ -16,17 +17,25 @@ const NewFolder = props => {
     setFolderName(e.target.value)
   }
   const uploadFiles = () => {
+    // change this path according to your directory
+    const path =
+      '/home/mahak/BOSCH-TRAFFIC-SIGN-RECOGNITION/data/original/' + folderName
+    createFolder(path)
     const images = []
     if (files.length != 0) {
       for (let i = 0; i < files.length; i++) {
+        const pathImage = path + '/' + files[i].name
         images.push({
           name: files[i].name,
           can_be_modified: true,
           selected: true,
+          path: pathImage,
         })
+        sendFile(files[i], pathImage)
       }
       props.structure.folders.push({
         name: folderName,
+        path: path,
         images: images,
         checked: false,
         currentlySelected: false,
@@ -36,6 +45,7 @@ const NewFolder = props => {
       })
       props.setStructure({ ...props.structure })
     }
+    props.toggleNewFolder()
   }
   const deselectFiles = () => {
     setnooffiles(0)
