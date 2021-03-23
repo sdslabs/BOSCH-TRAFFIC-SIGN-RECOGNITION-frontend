@@ -1,15 +1,16 @@
 import React, { useState } from 'react'
 import { Container, Col, Row, Form } from 'react-bootstrap'
 import cross from '../../assets/images/cross.svg'
-import { sendFile } from '../../api/datasetAPI'
 
 const Upload = props => {
   const [folderName, setFolderName] = useState('')
   const [nooffiles, setnooffiles] = useState(0)
   const [files, setFiles] = useState([])
   const onFileChange = event => {
+    console.log(event.target.files, event.target)
     setnooffiles(event.target.files.length)
     setFiles(event.target.files)
+    console.log(files)
   }
   const setSelectedFolderName = e => {
     if (folderName != '') {
@@ -21,24 +22,18 @@ const Upload = props => {
     if (files.length != 0) {
       props.structure.folders.forEach(element => {
         if (element.name === folderName) {
-          for (let i = 0; i < files.length; i++) {
-            const path = element.path + '/' + files[i].name
-            element.images.push({
-              name: files[i].name,
-              can_be_modified: 'true',
-              selected: 'true',
-              path: path,
-            })
-            element.imageCount += 1
-            element.selectedCount += 1
-            sendFile(files[i], path)
-          }
+          element.images.push({
+            name: files[0].name,
+            can_be_modified: 'true',
+            selected: 'true',
+          })
+          element.imageCount += 1
+          element.selectedCount += 1
+          setFiles([])
+          setFolderName('')
+          setnooffiles(0)
+          document.getElementById(folderName).checked = false
         }
-        setFiles([])
-        setFolderName('')
-        document.getElementById(folderName).checked = false
-        setnooffiles(0)
-        props.toggleUpload()
       })
       props.setStructure({ ...props.structure })
     }

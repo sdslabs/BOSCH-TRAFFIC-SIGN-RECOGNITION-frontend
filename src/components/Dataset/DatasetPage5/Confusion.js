@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { getGraphData2 } from '../../../api/datasetAPI'
-import { generalData } from '../../../constants/Analysis'
-const Confusion = props => {
+import {generalData} from "../../../constants/Analysis"
+const Confusion = (props) => {
   const [graphData, setGraphData] = useState(null)
   useEffect(() => {
     graphDataHandler()

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { getGraphData1 } from '../../../api/datasetAPI'
 import BarGraph from '../../Common/BarGraph'
 import LineGraph from '../../Common/LineGraph'
-import { generalData } from '../../../constants/Analysis'
+import {generalData} from "../../../constants/Analysis"
 const Model = props => {
   const [graphData, setGraphData] = useState(null)
   useEffect(() => {

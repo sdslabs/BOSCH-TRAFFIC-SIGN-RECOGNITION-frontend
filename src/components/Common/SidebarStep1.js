@@ -23,12 +23,6 @@ class Step1 extends React.Component {
       <Container
         fluid
         className={'stepContainer ' + (this.props.done ? 'grey-bg' : '')}
-        style={{
-          backgroundColor:
-            this.props.isUpload || this.props.isNewFolder
-              ? 'rgba(196, 196, 196, 0.2)'
-              : 'white',
-        }}
       >
         <Col>
           <Row className="d-flex mb-0.8">
