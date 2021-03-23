@@ -1,5 +1,5 @@
 .rotate-preview {
-  padding: 2rem;
+  padding: 1.5rem;
   padding-top: 0;
 }
 
@@ -11,6 +11,11 @@
 
 .action-name {
   @include font-size-2433;
+  @include primary-font-normal;
+  font-weight: 600;
+}
+.action-name2 {
+  @include font-size-1622;
   @include primary-font-normal;
   font-weight: 600;
 }

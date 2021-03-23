@@ -173,7 +173,7 @@ const DatasetPage3Data = props => {
       <div className="action-area-ter">
         <div className="action-area-ter-void" />
         <div className="empty-header" />
-        <div className="heading ml-3">Data statistics</div>
+        <div className="heading center-heading">Data statistics</div>
         <div className="graph-stat-container">
           {graphData && (
             <BarGraph
