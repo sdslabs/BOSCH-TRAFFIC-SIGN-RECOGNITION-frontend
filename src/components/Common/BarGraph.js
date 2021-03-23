@@ -42,8 +42,8 @@ const BarGraph = props => {
         {
           backgroundColor: '#335bc0',
           data: props.data,
-          borderWidth: 5,
-          borderColor: '#575757',
+          borderWidth: 1,
+          borderColor: '#c4c4c4',
         },
       ],
     }

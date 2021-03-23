@@ -8,12 +8,12 @@
   .navbar-logo-container {
     @include flex-row-center;
     justify-content: center;
-    width: 20%;
-    max-width: 22rem;
+    width: 17rem;
     height: 100%;
   }
 
   .navbar-links-container {
+    margin-left: 1rem;
     @include flex-row-center;
     width: 80%;
     height: 100%;
@@ -57,8 +57,8 @@
 }
 
 .main-logo {
-  width: 80%;
-  height: 2rem;
+  width: 55%;
+  height: 2.5rem;
 }
 
 .navbar-container-sec {
