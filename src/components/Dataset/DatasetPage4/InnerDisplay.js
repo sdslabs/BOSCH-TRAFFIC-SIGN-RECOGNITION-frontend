@@ -4,7 +4,7 @@ import arrowdown from '../../../assets/images/arrowdown.svg'
 import arrowup from '../../../assets/images/arrowup.svg'
 import { useEffect, useState } from 'react'
 import plus from '../../../assets/images/plus.svg'
-import hiddenlayers from '../../../assets/images/hiddenlayers.svg'
+import hiddenlayersImage from '../../../assets/images/hiddenlayers.svg'
 import trash from '../../../assets/images/trash.png'
 
 export const InnerDisplay = props => {
@@ -22,13 +22,12 @@ export const InnerDisplay = props => {
 
   return (
     <Container className="innerdisplay">
-      <h2> Hidden Layers </h2>
       <Row className="upperlayer">
         <div className="image">
-          <img className="img-inner" src={hiddenlayers} alt="Image here" />
+          <img className="img-inner" src={hiddenlayersImage} alt="Image here" />
         </div>
       </Row>
-      <Row className="lowerleft">
+      <Row className="lowerleft d-flex justify-content-center">
         <Col>
           <Row className="middlelayer">
             <img src={arrowdown4} />
