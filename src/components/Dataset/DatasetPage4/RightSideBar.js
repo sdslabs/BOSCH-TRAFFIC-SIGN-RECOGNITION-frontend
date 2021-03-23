@@ -83,6 +83,7 @@ export const RightSidebar = props => {
             <input
               type="number"
               id="learningRate"
+              className="input-default"
               step={0.01}
               value={props.selectedValues.learningRate}
               onChange={handleSelectedChange}
