@@ -57,6 +57,7 @@ const DatasetImageDiv = props => {
         >
           <input
             type="checkbox"
+            className="checkbox-default"
             id={props.image.name}
             checked={props.image.selected === 'true'}
             disabled={props.image.can_be_modified === 'false'}
