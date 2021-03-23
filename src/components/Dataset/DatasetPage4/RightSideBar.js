@@ -58,10 +58,12 @@ export const RightSidebar = props => {
   }
 
   return (
-    <Container>
-      <Col>
-        <Row className="training-heading">Training Parameters</Row>
-        <Row>
+    <Container className="m-0 p-0 ">
+      <Col className="mx-4 p-0 ">
+        <Row className="m-0 p-0">
+          <h2> Training Parameters</h2>
+        </Row>
+        <Row className="m-0 p-0">
           <Select
             styles={customStyles}
             value={{
@@ -76,7 +78,7 @@ export const RightSidebar = props => {
             placeholder={'Select type of Optimizer'}
           ></Select>
         </Row>
-        <Row className="py-3">
+        <Row className="py-3 m-0">
           <Col className="p-0 m-0">
             <Row className="p-0 m-0">Learning Rate</Row>
             <input
@@ -98,7 +100,7 @@ export const RightSidebar = props => {
             />
           </Col>
         </Row>
-        <Row className="py-3">
+        <Row className="py-3 m-0">
           <Col className="p-0 m-0">
             <Row className="p-0 m-0"> Batch Size</Row>
             <input
@@ -118,7 +120,7 @@ export const RightSidebar = props => {
             />
           </Col>
         </Row>
-        <Row className="py-3">
+        <Row className="py-3 m-0">
           <Col className="p-0 m-0">
             <Row className="p-0 m-0">Weight Decay</Row>
             <input
@@ -138,7 +140,7 @@ export const RightSidebar = props => {
             />
           </Col>
         </Row>
-        <Row>DATA STATS</Row>
+        <Row className="p-0 m-0">DATA STATS</Row>
         {/* yaahaaa css fix karni ho to apni class bananaa isko mat change karna kahi aur bhi used hai */}
         <div className="graph-stat-container">
           {graphData && (
