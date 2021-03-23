@@ -11,55 +11,61 @@ class ActionArea extends React.Component {
     if (this.props.action) {
       return (
         <div className="action-area">
-          {this.props.action === 'Rotate' && (
-            <RotatePreview
-              showActionAreaHandler={this.props.showActionAreaHandler}
-              image={this.props.image}
-              setModifiedImages={this.props.setModifiedImages}
-            />
-          )}
-          {this.props.action === 'Crop' && (
-            <CropPreview
-              showActionAreaHandler={this.props.showActionAreaHandler}
-              image={this.props.image}
-              setModifiedImages={this.props.setModifiedImages}
-            />
-          )}
-          {this.props.action === 'Adjust' && (
-            <AdjustPreview
-              showActionAreaHandler={this.props.showActionAreaHandler}
-              image={this.props.image}
-              setModifiedImages={this.props.setModifiedImages}
-            />
-          )}
-          {this.props.action === 'Noise' && (
-            <NoisePreview
-              showActionAreaHandler={this.props.showActionAreaHandler}
-              image={this.props.image}
-              setModifiedImages={this.props.setModifiedImages}
-            />
-          )}
-          {this.props.action === 'Erase' && (
-            <ErasePreview
-              showActionAreaHandler={this.props.showActionAreaHandler}
-              image={this.props.image}
-              setModifiedImages={this.props.setModifiedImages}
-            />
-          )}
-          {this.props.action === 'Transform' && (
-            <TransformPreview
-              showActionAreaHandler={this.props.showActionAreaHandler}
-              image={this.props.image}
-              setModifiedImages={this.props.setModifiedImages}
-            />
-          )}
-          {this.props.action === 'Random' && (
-            <RandomPreview
-              showActionAreaHandler={this.props.showActionAreaHandler}
-              image={this.props.image}
-              editingHandler={this.props.editingHandler}
-            />
-          )}
+          <div
+            className="action-area-close"
+            onClick={() => this.props.showActionAreaHandler(false)}
+          />
+          <div className="action-wrapper">
+            {this.props.action === 'Rotate' && (
+              <RotatePreview
+                showActionAreaHandler={this.props.showActionAreaHandler}
+                image={this.props.image}
+                setModifiedImages={this.props.setModifiedImages}
+              />
+            )}
+            {this.props.action === 'Crop' && (
+              <CropPreview
+                showActionAreaHandler={this.props.showActionAreaHandler}
+                image={this.props.image}
+                setModifiedImages={this.props.setModifiedImages}
+              />
+            )}
+            {this.props.action === 'Adjust' && (
+              <AdjustPreview
+                showActionAreaHandler={this.props.showActionAreaHandler}
+                image={this.props.image}
+                setModifiedImages={this.props.setModifiedImages}
+              />
+            )}
+            {this.props.action === 'Noise' && (
+              <NoisePreview
+                showActionAreaHandler={this.props.showActionAreaHandler}
+                image={this.props.image}
+                setModifiedImages={this.props.setModifiedImages}
+              />
+            )}
+            {this.props.action === 'Erase' && (
+              <ErasePreview
+                showActionAreaHandler={this.props.showActionAreaHandler}
+                image={this.props.image}
+                setModifiedImages={this.props.setModifiedImages}
+              />
+            )}
+            {this.props.action === 'Transform' && (
+              <TransformPreview
+                showActionAreaHandler={this.props.showActionAreaHandler}
+                image={this.props.image}
+                setModifiedImages={this.props.setModifiedImages}
+              />
+            )}
+            {this.props.action === 'Random' && (
+              <RandomPreview
+                showActionAreaHandler={this.props.showActionAreaHandler}
+                image={this.props.image}
+                editingHandler={this.props.editingHandler}
+              />
+            )}
+          </div>
         </div>
       )
     } else return <div></div>

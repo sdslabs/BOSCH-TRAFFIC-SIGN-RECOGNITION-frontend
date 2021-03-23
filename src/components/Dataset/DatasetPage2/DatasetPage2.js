@@ -51,11 +51,11 @@ const DatasetPage2 = props => {
   }
   return (
     <div className="dataset-page2 h-100">
-      <div className="data h-100">
+      <div className="empty-header header-step3"/>
+      <div className="data h-100 pt-5">
         <DatasetPage1
           preview={true}
           structure={getModifiedStructure(props.structure)}
-          showEmptyHeader={true}
           setStructure={props.setStructure}
           toggleNewFolder={props.toggleNewFolder}
         />
@@ -63,6 +63,7 @@ const DatasetPage2 = props => {
       <div className="action-area-sec">
         <div className="empty-header" />
         <div className="rotate-preview split-data">
+
           <div className="action-name split-heading">Split Data</div>
           <div className="action-option">Training Data</div>
           <PrettoSlider

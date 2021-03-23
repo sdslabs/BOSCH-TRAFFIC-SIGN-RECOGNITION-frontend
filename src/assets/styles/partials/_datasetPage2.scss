@@ -1,5 +1,5 @@
 .dataset-page2 {
-  width: 80%;
+  width: calc(((100% + 18rem) * 8 / 10) - 18rem);
   height: 100%;
   .heading {
     @include primary-font-normal;

@@ -40,6 +40,12 @@
 }
 
 .steps-bar {
-  width: 20%;
-  max-width: 22rem;
+  z-index: 500;
+  position: fixed;
+  width: 18rem;
+}
+
+.stepbar-void {
+  width: 18rem;
+  height: 100%;
 }

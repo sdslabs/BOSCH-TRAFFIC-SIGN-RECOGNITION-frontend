@@ -1,7 +1,9 @@
 import React from 'react'
 import { MenuItems } from '../../constants/NavbarItems'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useHistory, useLocation } from 'react-router-dom'
 const Navbar = () => {
+  const history = useHistory()
+  const location = useLocation()
   return (
     <nav className="navbar-container">
       <div className="navbar-logo-container">
@@ -23,14 +25,17 @@ const Navbar = () => {
             )
           })}
         </ul>
-        <button
-          className="primary-cta invert-btn-color row-last-button mr-2"
-          onClick={() => {
-            window.location.reload(false)
-          }}
-        >
-          Restart Process
-        </button>
+        {location.pathname !== '/' && (
+          <button
+            className="primary-cta invert-btn-color row-last-button mr-2"
+            onClick={() => {
+              history.push('/dataset')
+              window.location.reload(false)
+            }}
+          >
+            Restart Process
+          </button>
+        )}
       </div>
     </nav>
   )

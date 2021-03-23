@@ -5,9 +5,12 @@
     padding-top: 8rem;
 
     .home-illustration {
-        background-color: #c4c4c4;
         height: 30rem;
         width: 40rem;
         margin-bottom: 2rem;
+        img{
+            height: 100%;
+            width: 100%;
+        }
     }
 }

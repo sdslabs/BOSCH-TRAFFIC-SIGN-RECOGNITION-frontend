@@ -54,7 +54,7 @@ const ErasePreview = props => {
   return (
     <div>
       <div className="confirm-cancel">
-        <button className="primary-cta" onClick={doSomething}>
+        <button className="primary-cta-sec" onClick={doSomething} disabled={!crop.x}>
           Execute
         </button>
         <img

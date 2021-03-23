@@ -1,18 +1,38 @@
 .action-area {
-  position: absolute;
+  position: fixed;
+  top: 4.5rem !important;
+  width: 100%;
+  height: 100%;
+  right: 0;
+  top: 0;
+  @include flex-row-center;
+  filter: drop-shadow(-3px 0px 8px rgba(25, 25, 25, 0.25));
+  z-index: 1000;
+}
+.action-area-close{
+  background-color: rgba(0, 0, 0, 0.6);
+  width: 80%;
+  height: 100%;
+}
+.action-wrapper {
+  background-color: $theme-color-white;
+  height: 100%;
+  width: 20%;
+}
+.action-area-sec {
+  z-index: 100;
+  position: fixed;
+  top: 4.5rem !important;
   background-color: $theme-color-white;
   width: 20%;
   height: 100%;
   right: 0;
   top: 0;
-  filter: drop-shadow(-3px 0px 8px rgba(25, 25, 25, 0.25));
-  z-index: 1;
-}
-
-.action-area-sec {
-  @extend .action-area;
-  filter: none;
   border-left: 1px solid rgba(25, 25, 25, 0.3);
+}
+.action-area-ter {
+  @extend .action-area-sec;
+  width: 25%;
 }
 
 .action-option {
@@ -29,7 +49,7 @@
 }
 
 .confirm-cancel {
-  height: 5rem;
+  height: 3.75rem;
   padding: 1rem 1.5rem;
   @include flex-row-center;
   justify-content: space-between;

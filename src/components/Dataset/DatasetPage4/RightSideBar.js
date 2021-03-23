@@ -1,8 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { Container, Col, Row } from 'react-bootstrap'
-
 import Select from 'react-select'
+import { getGraphStats } from '../../../api/datasetAPI'
+import BarGraph from '../../Common/BarGraph'
 export const RightSidebar = props => {
+  const [graphData, setGraphData] = useState(null)
+  useEffect(() => {
+    getGraphData()
+  }, [])
+  const getGraphData = async () => {
+    const res = await getGraphStats()
+    setGraphData(res)
+  }
   const handleSelectedChange = e => {
     const newValues = { ...props.selectedValues }
     switch (e.target.id) {
@@ -130,6 +139,16 @@ export const RightSidebar = props => {
           </Col>
         </Row>
         <Row>DATA STATS</Row>
+        {/* yaahaaa css fix karni ho to apni class bananaa isko mat change karna kahi aur bhi used hai */}
+        <div className="graph-stat-container">
+          {graphData && (
+            <BarGraph
+              data={graphData}
+              showMultiple={true}
+              title={'Images selected in each class'}
+            />
+          )}
+        </div>
       </Col>
     </Container>
   )

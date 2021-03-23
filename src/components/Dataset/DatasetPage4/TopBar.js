@@ -28,7 +28,7 @@ export const Topbar = props => {
               'Link is ready! Taking you to the embedding wala page: ',
               resp,
             )
-            props.setDatasetStep(6)
+            props.setDatasetStep(3.5)
             clearInterval(embedLinkPinger)
           }
         })
