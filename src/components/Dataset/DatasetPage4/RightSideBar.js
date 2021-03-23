@@ -60,7 +60,9 @@ export const RightSidebar = props => {
   return (
     <Container>
       <Col>
-        <Row className="training-heading">Training Parameters</Row>
+        <Row className="training-heading py-3">
+          <h2>Training Parameters</h2>
+        </Row>
         <Row>
           <Select
             styles={customStyles}
