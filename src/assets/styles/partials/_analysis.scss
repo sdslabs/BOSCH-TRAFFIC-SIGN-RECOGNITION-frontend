@@ -144,15 +144,15 @@
   width: 100%;
   height: 12rem;
   margin: 1.5rem 0;
-
   .analysis-img {
+   
     height: 10rem;
     @include flex-column-center;
     justify-content: space-between;
-    margin-right: 2rem;
+    margin-right: 1rem;
     img {
-      height: 8rem;
-      width: 8rem;
+      height: 7rem;
+      width: 7rem;
     }
     span {
       @include primary-font-normal;

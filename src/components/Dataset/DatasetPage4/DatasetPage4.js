@@ -8,11 +8,11 @@ const DatasetPage4 = props => {
   const [selectedValues, setSelectedValues] = useState({
     layers: [{ name: 'Conv' }, { name: 'Conv' }, { name: 'Conv' }],
     optimizer: 'Adam',
-    learningRate: 0.01,
+    learningRate: 0.0005,
     epochs: 1,
     centroidSize: 100,
     lm: 0.1,
-    weightDecay: 0.01,
+    weightDecay: 0.0001,
     batchSize: 64,
   })
   const [readyToSend, setReadyToSend] = useState(false)

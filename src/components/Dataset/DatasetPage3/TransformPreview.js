@@ -12,39 +12,63 @@ const transforms = [
     label: 'Wavelet Transform',
     value: 'Wavelet',
     types: [
-      { name: 'haar', info: '' },
-      { name: 'coif10', info: '' },
-      { name: 'db10', info: '' },
-      { name: 'sym10', inof: '' },
+      {
+        name: 'haar',
+        info:
+          'Haar wavelet is a sequence of rescaled "square-shaped" functions which together form a wavelet family or basis.',
+      },
+      {
+        name: 'coif10',
+        info:
+          'Coiflets are Wavelets with scaling functions with vanishing moments for discrete transformation.',
+      },
+      {
+        name: 'db10',
+        info:
+          'Daubechies Wavelet is characterized by a maximal number of vanishing moments for some given support.',
+      },
+      {
+        name: 'sym10',
+        info:
+          'Symlets Wavelet is a modified version of Daubechies wavelets with increased symmetry.',
+      },
     ],
   },
   {
     label: 'Colour Transform',
     value: 'Colour',
     types: [
-      { name: 'RGB', info: '' },
-      { name: 'HSV', info: '' },
-      { name: 'LAB', info: '' },
-      { name: 'Grey', info: '' },
+      { name: 'RGB', info: 'Converts image to RGB scale' },
+      { name: 'HSV', info: 'Converts image to HSV scale' },
+      { name: 'LAB', info: 'Converts image to LAB scale' },
+      { name: 'Grey', info: 'Converts image to grey scale' },
     ],
   },
   {
     label: 'Surround Transform',
     value: 'Surround',
     types: [
-      { name: 'add_brightness', info: '' },
-      { name: 'add_shadow', info: '' },
-      { name: 'add_snow', info: '' },
-      { name: 'add_rain', info: '' },
-      { name: 'add_fog', info: '' },
+      { name: 'add_brightness', info: 'Add Brightness to Image' },
+      { name: 'add_shadow', info: 'Add Shadow to Image' },
+      { name: 'add_snow', info: 'Add Snow Effect to Image' },
+      { name: 'add_rain', info: 'Add Rain Effect to Image' },
+      { name: 'add_fog', info: 'Add Fog Effect to Image' },
     ],
   },
   {
     label: 'Histogram Transform',
     value: 'histogram',
     types: [
-      { name: 'Hist_Eq', info: '' },
-      { name: 'CLAHE', info: '' },
+      {
+        name: 'Hist_Eq',
+        info:
+          "A method in image processing of contrast adjustment using the image's histogram",
+      },
+      {
+        name: 'CLAHE',
+        info:
+          'A variant of Adaptive histogram equalization (AHE) which takes care of over-amplification of the contrast',
+      },
     ],
   },
 ]
