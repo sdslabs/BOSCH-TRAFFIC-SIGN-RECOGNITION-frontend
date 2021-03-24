@@ -1,24 +1,12 @@
 import React, { useState } from 'react'
-import { Container, Col, Row, Form } from 'react-bootstrap'
-import cross from '../../assets/images/cross.svg'
+import crossIcon from '../../assets/images/cross.svg'
 
 const Upload = props => {
   const [folderName, setFolderName] = useState('')
   const [nooffiles, setnooffiles] = useState(0)
-  const [files, setFiles] = useState([])
-  const onFileChange = event => {
-    console.log(event.target.files, event.target)
-    setnooffiles(event.target.files.length)
-    setFiles(event.target.files)
-    console.log(files)
-  }
-  const setSelectedFolderName = e => {
-    if (folderName != '') {
-      document.getElementById(folderName).checked = false
-    }
-    e.target.checked ? setFolderName(e.target.name) : setFolderName('')
-  }
-  const uploadFiles = () => {
+  const [files, setFiles] = useState([]) // currently selected files
+
+  const handleCreateFile = () => {
     if (files.length != 0) {
       const newStructure = { ...props.structure }
       newStructure.folders.forEach((folder, i) => {
@@ -31,39 +19,47 @@ const Upload = props => {
               can_be_modified: 'true',
               selected: 'true',
             })
+            folder.imageCount += 1
+            folder.selectedCount += 1
           }
-          folder.imageCount += 1
-          folder.selectedCount += 1
           setFiles([])
           setFolderName('')
           setnooffiles(0)
-          // document.getElementById(folderName).checked = false
         }
       })
       props.setStructure({ ...newStructure })
     }
+    props.toggleUpload(false)
   }
-  const deselectFiles = () => {
-    setnooffiles(0)
+
+  const handleFileSelected = e => {
+    console.log('Files selected: ', e.target.files)
+    setnooffiles(e.target.files.length)
+    setFiles(e.target.files)
+  }
+
+  const handleFileDeselected = () => {
     setFiles([])
+    setnooffiles(0)
     document.getElementById('file-input').value = ''
   }
+
   return (
     <div className="action-wrapper">
       <div className="confirm-cancel">
         <button
           className="primary-cta-sec"
           disabled={nooffiles === 0 || !folderName}
-          onClick={uploadFiles}
+          onClick={handleCreateFile}
         >
           Create
         </button>
         <img
-          src={cross}
+          src={crossIcon}
           onClick={() => {
             props.toggleUpload(false)
           }}
-          className="cross"
+          className="crossIcon"
         />
       </div>
       <div className="rotate-preview">
@@ -88,13 +84,17 @@ const Upload = props => {
               multiple={true}
               capture={true}
               style={{ display: 'none' }}
-              onChange={onFileChange}
+              onChange={handleFileSelected}
             />
             Browse
           </label>
           {nooffiles != 0 && (
             <div className="inside">
-              <img src={cross} onClick={deselectFiles} className="cross" />
+              <img
+                src={crossIcon}
+                onClick={handleFileDeselected}
+                className="crossIcon"
+              />
               <div>{nooffiles} images</div>
             </div>
           )}
