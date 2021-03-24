@@ -3,7 +3,7 @@ import crossIcon from '../../assets/images/cross.svg'
 
 const Upload = props => {
   const [folderName, setFolderName] = useState('')
-  const [nooffiles, setnooffiles] = useState(0)
+  const [noOfFiles, setnooffiles] = useState(0)
   const [files, setFiles] = useState([]) // currently selected files
 
   const handleCreateFile = () => {
@@ -49,7 +49,7 @@ const Upload = props => {
       <div className="confirm-cancel">
         <button
           className="primary-cta-sec"
-          disabled={nooffiles === 0 || !folderName}
+          disabled={noOfFiles === 0 || !folderName}
           onClick={handleCreateFile}
         >
           Create
@@ -88,14 +88,14 @@ const Upload = props => {
             />
             Browse
           </label>
-          {nooffiles != 0 && (
+          {noOfFiles != 0 && (
             <div className="inside">
               <img
                 src={crossIcon}
                 onClick={handleFileDeselected}
                 className="crossIcon"
               />
-              <div>{nooffiles} images</div>
+              <div>{noOfFiles} images</div>
             </div>
           )}
         </div>
