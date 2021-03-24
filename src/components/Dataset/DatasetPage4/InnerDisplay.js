@@ -33,50 +33,69 @@ export const InnerDisplay = props => {
             <img src={arrowdown4} />
             <div className="input-text">Input</div>
           </Row>
-          <div className="layers">
-            {props.selectedValues.layers.map((layer, index) => (
-              <div
-                className="layer d-flex align-items-center justify-content-center"
-                key={index}
-              >
-                <div className="layer-text">{layer.name}</div>
-                {index > 2 ? (
-                  <img
-                    className="trash"
-                    src={trash}
-                    onClick={() => {
-                      deleteLayer(index)
-                    }}
-                  />
-                ) : (
-                  <img className="trash" src={''} alt={''} />
-                )}
-                <div />
-              </div>
-            ))}
-          </div>
-
-          <Row className="button">
-            <img className="plus" src={plus} />
-            <Dropdown>
-              <Dropdown.Toggle id="dropdown-basic" as="span">
-                Add layer
-              </Dropdown.Toggle>
-              <Dropdown.Menu>
-                <Dropdown.Item onClick={() => addLayer('Conv')}>
-                  Conv
-                </Dropdown.Item>
-                <Dropdown.Item onClick={() => addLayer('Relu')}>
-                  Relu
-                </Dropdown.Item>
-                <Dropdown.Item onClick={() => addLayer('Batch_Norm')}>
-                  Batch_Norm
-                </Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
+          <Row className="mt-3">
+            <Col className="borde px-3 pt-0 pb-3">
+              {props.selectedValues.layers.map((layer, index) => (
+                <Row className="border  border-dark mt-1 mx-2" key={index}>
+                  <Col
+                    xs={10}
+                    className="pl-5 py-0 d-flex align-items-center justify-content-center"
+                  >
+                    {layer.name}
+                  </Col>
+                  {index > 2 ? (
+                    <Col
+                      xs={2}
+                      className="p-0 d-flex align-items-center justify-content-center"
+                    >
+                      <img
+                        className="trash"
+                        src={trash}
+                        onClick={() => {
+                          deleteLayer(index)
+                        }}
+                      />
+                    </Col>
+                  ) : (
+                    <Col
+                      xs={2}
+                      className="p-0 d-flex align-items-center justify-content-center"
+                    >
+                      <img className="trash" src={''} alt={''} />
+                    </Col>
+                  )}
+                </Row>
+              ))}
+            </Col>
           </Row>
-          <div className="const-btn">FC</div>
-          <div className="const-btn">FC</div>
+
+          <Row>
+            <Col className="secondary-cta mx-5 dropdown-btn">
+              <img className="plus" src={plus} />
+              <Dropdown>
+                <Dropdown.Toggle id="dropdown-basic" as="span">
+                  Add layer
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                  <Dropdown.Item onClick={() => addLayer('Conv')}>
+                    Conv
+                  </Dropdown.Item>
+                  <Dropdown.Item onClick={() => addLayer('Relu')}>
+                    Relu
+                  </Dropdown.Item>
+                  <Dropdown.Item onClick={() => addLayer('Batch_Norm')}>
+                    Batch_Norm
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            </Col>
+          </Row>
+          <Row className="border  border-dark py-2 mx-2 mt-1 d-flex align-items-center justify-content-center">
+            FC
+          </Row>
+          <Row className="border  border-dark py-2 mx-2 mt-1 d-flex align-items-center justify-content-center">
+            FC
+          </Row>
         </Col>
       </Row>
     </Container>

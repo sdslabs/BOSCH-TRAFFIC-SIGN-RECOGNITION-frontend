@@ -1,6 +1,7 @@
 {
-	"name": "app",
+	"name": "analysis.ai",
 	"version": "0.1.0",
+	"author": "Burnerlee & CapriciousRebel from SDSLabs",
 	"private": true,
 	"dependencies": {
 		"@material-ui/core": "^4.11.3",
@@ -34,7 +35,10 @@
 		"eject": "react-scripts eject",
 		"electron": "electron .",
 		"lint": "eslint ./",
-		"lint:fix": "eslint ./ --fix"
+		"lint:fix": "eslint ./ --fix",
+		"postinstall": "install-app-deps",
+		"pack": "electron-builder --dir",
+		"dist": "electron-builder"
 	},
 	"browserslist": {
 		"production": [
@@ -51,6 +55,7 @@
 	"devDependencies": {
 		"babel-eslint": "^10.1.0",
 		"electron": "^12.0.0",
+		"electron-builder": "^22.10.5",
 		"eslint": "^7.21.0",
 		"eslint-config-google": "^0.14.0",
 		"eslint-config-prettier": "^8.1.0",
@@ -60,5 +65,31 @@
 		"sass": "^1.32.8"
 	},
 	"main": "src/electron.js",
-	"homepage": "./"
+	"homepage": "./",
+	"build": {
+		"appId": "F2#$s@*1n",
+		"win": {
+			"target": "NSIS"
+		},
+		"linux": {
+			"target": [
+				"AppImage",
+				"deb"
+			]
+		},
+		"dmg": {
+			"contents": [
+				{
+					"x": 110,
+					"y": 150
+				},
+				{
+					"x": 240,
+					"y": 150,
+					"type": "link",
+					"path": "/Applications"
+				}
+			]
+		}
+	}
 }

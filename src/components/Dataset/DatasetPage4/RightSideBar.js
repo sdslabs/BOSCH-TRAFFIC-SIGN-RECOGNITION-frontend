@@ -141,7 +141,9 @@ export const RightSidebar = props => {
             />
           </Col>
         </Row>
-        <Row className="p-0 m-0">DATA STATS</Row>
+        <Row className="p-0 m-0">
+          <h2 className="my-3">DATA STATS</h2>
+        </Row>
         {/* yaahaaa css fix karni ho to apni class bananaa isko mat change karna kahi aur bhi used hai */}
         <div className="graph-stat-container">
           {graphData && (
