@@ -70,7 +70,7 @@ export const InnerDisplay = props => {
           </Row>
 
           <Row>
-            <Col className="secondary-cta mx-5 dropdown-btn">
+            <button className="secondary-cta ml-3 dropdown-btn">
               <img className="plus" src={plus} />
               <Dropdown>
                 <Dropdown.Toggle id="dropdown-basic" as="span">
@@ -88,7 +88,7 @@ export const InnerDisplay = props => {
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
-            </Col>
+            </button>
           </Row>
           <Row className="border  border-dark py-2 mx-2 mt-1 d-flex align-items-center justify-content-center">
             FC
