@@ -3,7 +3,7 @@ import crossIcon from '../../assets/images/cross.svg'
 
 const NewFolder = props => {
   const [noOfFiles, setNoOfFiles] = useState(0) // number of files to be uploaded
-  const [targetFolderName, setTargetFolderName] = useState(43) // the name of the target folder
+  const [targetFolderName, setTargetFolderName] = useState(48) // the name of the target folder
   const [files, setFiles] = useState([]) // currently selected files
 
   const handleCreateFile = () => {
@@ -15,6 +15,30 @@ const NewFolder = props => {
       folder => targetFolderName === folder.name,
     )
     if (isFolderInStructure) {
+      const newStructure = { ...props.structure }
+      if (files.length != 0) {
+        const newImages = []
+        for (let i = 0; i < files.length; i++) {
+          newImages.push({
+            name: files[i].name,
+            path: files[i].path,
+            can_be_modified: 'true',
+            selected: 'true',
+          })
+        }
+
+        newStructure.folders.push({
+          name: newStructure.folders.length,
+          path: files[0].path.slice(0, files[0].path.lastIndexOf('/')),
+          images: newImages,
+          checked: true,
+          currentlySelected: false,
+          imageCount: files.length,
+          selectedCount: files.length,
+          id: newStructure.folders.length,
+        })
+        props.setStructure(newStructure)
+      }
     } else {
       const newStructure = { ...props.structure }
       if (files.length != 0) {
@@ -86,7 +110,7 @@ const NewFolder = props => {
           <div className="action-option">Folder Name</div>
           <input
             type="number"
-            min={43}
+            min={48}
             className="input-box"
             placeholder="Folder Name"
             name="Folder Name"
