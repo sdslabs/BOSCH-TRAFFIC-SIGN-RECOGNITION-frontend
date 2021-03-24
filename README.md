@@ -1,4 +1,4 @@
-# analysis.ai
+# Analysis.ai Frontend
 
 This project was made for Inter-IIT Tech Meet 2021.
 
@@ -13,7 +13,7 @@ This project was made for Inter-IIT Tech Meet 2021.
 - React.js
 - Electron.js
 
-## Team
+# Team
 
 - Aviral Jain [@burnerlee](https://github.com/burnerlee)
 - Smith Pereira [@vrongmeal](https://github.com/CapriciousRebel)
