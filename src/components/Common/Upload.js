@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import crossIcon from '../../assets/images/cross.svg'
 
 const Upload = props => {
-  const [folderName, setFolderName] = useState('')
-  const [noOfFiles, setnooffiles] = useState(0)
+  const [noOfFiles, setnooffiles] = useState(0) // number of files to be uploaded
+  const [targetFolderName, setTargetFolderName] = useState('') // folder in which files will be uploaded
   const [files, setFiles] = useState([]) // currently selected files
 
   const handleCreateFile = () => {
@@ -11,7 +11,7 @@ const Upload = props => {
       const newStructure = { ...props.structure }
       newStructure.folders.forEach((folder, i) => {
         // find the concerned folder in structure
-        if (folder.name === folderName) {
+        if (folder.name === targetFolderName) {
           for (var i = 0; i < files.length; i++) {
             folder.images.push({
               name: files[i].name,
@@ -23,11 +23,11 @@ const Upload = props => {
             folder.selectedCount += 1
           }
           setFiles([])
-          setFolderName('')
+          setTargetFolderName('')
           setnooffiles(0)
         }
       })
-      props.setStructure({ ...newStructure })
+      props.setStructure(newStructure)
     }
     props.toggleUpload(false)
   }
@@ -49,7 +49,7 @@ const Upload = props => {
       <div className="confirm-cancel">
         <button
           className="primary-cta-sec"
-          disabled={noOfFiles === 0 || !folderName}
+          disabled={noOfFiles === 0 || !targetFolderName}
           onClick={handleCreateFile}
         >
           Create
@@ -109,9 +109,9 @@ const Upload = props => {
                   <div key={folder.name} className="folder-radio">
                     <input
                       type="radio"
-                      checked={folder.name === folderName}
+                      checked={folder.name === targetFolderName}
                       onChange={() => {
-                        setFolderName(folder.name)
+                        setTargetFolderName(folder.name)
                       }}
                     />
                     <div>Class {folder.name}</div>

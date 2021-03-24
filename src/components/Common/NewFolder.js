@@ -1,66 +1,81 @@
 import React, { useState, useEffect } from 'react'
-import { Container, Col, Row, Form } from 'react-bootstrap'
-import cross from '../../assets/images/cross.svg'
+import crossIcon from '../../assets/images/cross.svg'
 
 const NewFolder = props => {
-  const [folderName, setFolderName] = useState(43)
-  const [nooffiles, setnooffiles] = useState(0)
-  const [files, setFiles] = useState([])
-  const onFileChange = event => {
-    console.log(event.target.files, event.target)
-    setnooffiles(event.target.files.length)
-    setFiles(event.target.files)
-    console.log(files)
-  }
-  const setSelectedFolderName = e => {
-    setFolderName(e.target.value)
-  }
-  const uploadFiles = () => {
-    const images = []
-    if (files.length != 0) {
-      for (let i = 0; i < files.length; i++) {
-        images.push({
-          name: files[i].name,
-          can_be_modified: true,
-          selected: true,
+  const [noOfFiles, setNoOfFiles] = useState(0) // number of files to be uploaded
+  const [targetFolderName, setTargetFolderName] = useState(43) // the name of the target folder
+  const [files, setFiles] = useState([]) // currently selected files
+
+  const handleCreateFile = () => {
+    console.log('files: ', files)
+    console.log('targetFolderName: ', targetFolderName)
+    console.log('noOfFiles: ', noOfFiles)
+
+    const isFolderInStructure = props.structure.folders.find(
+      folder => targetFolderName === folder.name,
+    )
+    if (isFolderInStructure) {
+    } else {
+      const newStructure = { ...props.structure }
+      if (files.length != 0) {
+        const newImages = []
+        for (let i = 0; i < files.length; i++) {
+          newImages.push({
+            name: files[i].name,
+            path: files[i].path,
+            can_be_modified: 'true',
+            selected: 'true',
+          })
+        }
+
+        newStructure.folders.push({
+          name: targetFolderName.toString(),
+          path: files[0].path.slice(0, files[0].path.lastIndexOf('/')),
+          images: newImages,
+          checked: true,
+          currentlySelected: false,
+          imageCount: files.length,
+          selectedCount: files.length,
+          id: newStructure.folders.length,
         })
+        props.setStructure(newStructure)
       }
-      props.structure.folders.push({
-        name: folderName,
-        images: images,
-        checked: false,
-        currentlySelected: false,
-        imageCount: files.length,
-        selectedCount: files.length,
-        id: props.structure.folders[props.structure.folders.length - 1].id + 1,
-      })
-      props.setStructure({ ...props.structure })
     }
+    props.toggleNewFolder(false)
   }
-  const deselectFiles = () => {
-    setnooffiles(0)
+
+  const handleFileSelected = e => {
+    console.log('Files selected: ', e.target.files)
+    setNoOfFiles(e.target.files.length)
+    setFiles(e.target.files)
+  }
+
+  const handleFileDeselected = () => {
+    setNoOfFiles(0)
     setFiles([])
     document.getElementById('file-input').value = ''
   }
-  useEffect(() => {
-    console.log(folderName)
-  })
+
+  const handleFolderChange = e => {
+    setTargetFolderName(e.target.value)
+  }
+
   return (
     <div className="action-wrapper">
       <div className="confirm-cancel">
         <button
           className="primary-cta-sec"
-          disabled={nooffiles === 0 || !folderName}
-          onClick={uploadFiles}
+          disabled={noOfFiles === 0 || !targetFolderName}
+          onClick={handleCreateFile}
         >
           Create
         </button>
         <img
-          src={cross}
+          src={crossIcon}
           onClick={() => {
             props.toggleNewFolder(false)
           }}
-          className="cross"
+          className="crossIcon"
         />
       </div>
       <div className="rotate-preview">
@@ -75,10 +90,8 @@ const NewFolder = props => {
             className="input-box"
             placeholder="Folder Name"
             name="Folder Name"
-            value={folderName}
-            onChange={e => {
-              setFolderName(e.target.value)
-            }}
+            value={targetFolderName}
+            onChange={handleFolderChange}
           />
         </div>
         <div className="augmentation-input">
@@ -98,14 +111,18 @@ const NewFolder = props => {
               multiple={true}
               capture={true}
               style={{ display: 'none' }}
-              onChange={onFileChange}
+              onChange={handleFileSelected}
             />
             Browse
           </label>
-          {nooffiles != 0 && (
+          {noOfFiles != 0 && (
             <div className="inside">
-              <img src={cross} onClick={deselectFiles} className="cross" />
-              <div>{nooffiles} images</div>
+              <img
+                src={crossIcon}
+                onClick={handleFileDeselected}
+                className="crossIcon"
+              />
+              <div>{noOfFiles} images</div>
             </div>
           )}
         </div>

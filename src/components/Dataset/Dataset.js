@@ -82,7 +82,7 @@ const Dataset = props => {
           <div className="loader">
             <Loader
               type="BallTriangle"
-              color="#335BC0"
+              color="#ffffff"
               height={150}
               width={150}
             />
