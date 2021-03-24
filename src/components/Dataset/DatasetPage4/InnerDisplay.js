@@ -4,7 +4,7 @@ import arrowdown from '../../../assets/images/arrowdown.svg'
 import arrowup from '../../../assets/images/arrowup.svg'
 import { useEffect, useState } from 'react'
 import plus from '../../../assets/images/plus.svg'
-import hiddenlayersImage from '../../../assets/images/hiddenlayers.svg'
+import hiddenlayersImage from '../../../assets/images/hiddenlayers.png'
 import trash from '../../../assets/images/trash.png'
 
 export const InnerDisplay = props => {
@@ -23,17 +23,13 @@ export const InnerDisplay = props => {
   return (
     <Container className="innerdisplay">
       <Row className="upperlayer">
-        <div className="image">
+        <div className="image mb-5">
           <img className="img-inner" src={hiddenlayersImage} alt="Image here" />
         </div>
       </Row>
-      <Row className="lowerleft d-flex justify-content-center">
+      <Row className="mt-5 lowerleft d-flex justify-content-center">
         <Col className="d-flex flex-column align-items-center">
-          <Row className="d-flex flex-column align-items-center middlelayer">
-            <img src={arrowdown4} />
-            <div className="input-text">Input</div>
-          </Row>
-          <Row className="mt-3  middle-layer-div">
+          <Row className="  middle-layer-div">
             <Col className="borde px-3 pt-0 pb-3">
               {props.selectedValues.layers.map((layer, index) => (
                 <Row className="border  border-dark mt-1 mx-2" key={index}>
