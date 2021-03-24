@@ -3,7 +3,7 @@
 This project was made for Inter-IIT Tech Meet 2021.
 
 # Setup
-
+- Make sure you have `node version >=14.0` and `nvm` installed.
 - Setup the backend repository from [here](https://github.com/dsgiitr/BOSCH-TRAFFIC-SIGN-RECOGNITION)
 - Make sure you have `npm` installed, otherwise get it from [here](https://www.npmjs.com/get-npm)
 - Run the following command to start the desktop app: `npm install && npm run`
