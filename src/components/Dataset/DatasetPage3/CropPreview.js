@@ -41,12 +41,12 @@ const CropPreview = props => {
       const data = {
         name: 'crop',
         params: {
-          pt1: [(crop.x / 150) * 32, (crop.y / 150) * 32],
-          pt2: [((crop.x + crop.width) / 150) * 32, (crop.y / 150) * 32],
-          pt3: [(crop.x / 150) * 32, ((crop.y + crop.height) / 150) * 32],
+          pt1: [(crop.x / 150) * 40, (crop.y / 150) * 40],
+          pt2: [((crop.x + crop.width) / 150) * 40, (crop.y / 150) * 40],
+          pt3: [(crop.x / 150) * 40, ((crop.y + crop.height) / 150) * 40],
           pt4: [
-            ((crop.x + crop.width) / 150) * 32,
-            ((crop.y + crop.height) / 150) * 32,
+            ((crop.x + crop.width) / 150) * 40,
+            ((crop.y + crop.height) / 150) * 40,
           ],
         },
       }
@@ -63,20 +63,20 @@ const CropPreview = props => {
         name: 'perspective_transform',
         params: {
           pt1: [
-            (cropState['left-top'].x / 150) * 32,
-            (cropState['left-top'].y / 150) * 32,
+            (cropState['left-top'].x / 150) * 40,
+            (cropState['left-top'].y / 150) * 40,
           ],
           pt2: [
-            (cropState['right-top'].x / 150) * 32,
-            (cropState['right-top'].y / 150) * 32,
+            (cropState['right-top'].x / 150) * 40,
+            (cropState['right-top'].y / 150) * 40,
           ],
           pt3: [
-            (cropState['left-bottom'].x / 150) * 32,
-            (cropState['left-bottom'].y / 150) * 32,
+            (cropState['left-bottom'].x / 150) * 40,
+            (cropState['left-bottom'].y / 150) * 40,
           ],
           pt4: [
-            (cropState['right-bottom'].x / 150) * 32,
-            (cropState['right-bottom'].y / 150) * 32,
+            (cropState['right-bottom'].x / 150) * 40,
+            (cropState['right-bottom'].y / 150) * 40,
           ],
         },
       }

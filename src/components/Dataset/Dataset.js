@@ -133,7 +133,7 @@ const Dataset = props => {
           </Container>
         </div>
       )}
-      <Col className="mx-0 px-0">
+      <Col className={'mx-0 px-0'}>
         {datasetStep === 1 && (
           <DatasetPage1
             structure={structure}

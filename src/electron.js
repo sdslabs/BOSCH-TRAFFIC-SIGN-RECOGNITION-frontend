@@ -4,15 +4,15 @@ const BrowserWindow = electron.BrowserWindow
 let mainWindow
 function createWindow() {
   mainWindow = new BrowserWindow({
-    width: 1024,
-    height: 768,
+    width: 1920,
+    height: 1080,
     webPreferences: {
       nodeIntegration: true,
     },
   })
   mainWindow.loadURL('http://localhost:3000')
+
   mainWindow.setMenu(null)
-  mainWindow.webContents.openDevTools()
   mainWindow.on('closed', function () {
     mainWindow = null
   })

@@ -32,12 +32,12 @@ const ErasePreview = props => {
     const data = {
       name: 'erase',
       params: {
-        pt1: [(crop.x / 150) * 32, (crop.y / 150) * 32],
-        pt2: [((crop.x + crop.width) / 150) * 32, (crop.y / 150) * 32],
-        pt3: [(crop.x / 150) * 32, ((crop.y + crop.height) / 150) * 32],
+        pt1: [(crop.x / 150) * 40, (crop.y / 150) * 40],
+        pt2: [((crop.x + crop.width) / 150) * 40, (crop.y / 150) * 40],
+        pt3: [(crop.x / 150) * 40, ((crop.y + crop.height) / 150) * 40],
         pt4: [
-          ((crop.x + crop.width) / 150) * 32,
-          ((crop.y + crop.height) / 150) * 32,
+          ((crop.x + crop.width) / 150) * 40,
+          ((crop.y + crop.height) / 150) * 40,
         ],
         randomize,
         grayIndex: parseInt(grayScale),

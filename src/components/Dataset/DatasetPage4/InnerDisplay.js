@@ -28,12 +28,12 @@ export const InnerDisplay = props => {
         </div>
       </Row>
       <Row className="lowerleft d-flex justify-content-center">
-        <Col>
-          <Row className="middlelayer">
+        <Col className="d-flex flex-column align-items-center">
+          <Row className="d-flex flex-column align-items-center middlelayer">
             <img src={arrowdown4} />
             <div className="input-text">Input</div>
           </Row>
-          <Row className="mt-3">
+          <Row className="mt-3  middle-layer-div">
             <Col className="borde px-3 pt-0 pb-3">
               {props.selectedValues.layers.map((layer, index) => (
                 <Row className="border  border-dark mt-1 mx-2" key={index}>
@@ -69,7 +69,7 @@ export const InnerDisplay = props => {
             </Col>
           </Row>
 
-          <Row>
+          <Row className="force-left">
             <button className="secondary-cta ml-3 dropdown-btn">
               <img className="plus" src={plus} />
               <Dropdown>
@@ -90,10 +90,10 @@ export const InnerDisplay = props => {
               </Dropdown>
             </button>
           </Row>
-          <Row className="border  border-dark py-2 mx-2 mt-1 d-flex align-items-center justify-content-center">
+          <Row className="border middle-layer-div-sec border-dark py-2 mx-2 mt-1 d-flex align-items-center justify-content-center">
             FC
           </Row>
-          <Row className="border  border-dark py-2 mx-2 mt-1 d-flex align-items-center justify-content-center">
+          <Row className="border  middle-layer-div-sec border-dark py-2 mx-2 mt-1 d-flex align-items-center justify-content-center">
             FC
           </Row>
         </Col>

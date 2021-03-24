@@ -1,5 +1,4 @@
 .innerdisplay {
-  overflow-y: scroll;
   font-family: Nunito Sans;
   font-style: normal;
   margin-top: 3rem;
@@ -68,17 +67,16 @@
     flex-direction: column;
     align-items: center;
     .input-text {
-      border: solid;
+      margin-top: 1rem;
+      border: 2px solid black;
       background-color: #f8f8f8;
       width: 80%;
       text-align: center;
-      height: 5%;
-      border-width: 1%;
-      border-color: black;
       font-weight: 600;
       padding: 2%;
       font-size: 1.5rem;
-      margin-top: 1%;
+      @include flex-row-center;
+      justify-content: center;
     }
   }
   .trash {

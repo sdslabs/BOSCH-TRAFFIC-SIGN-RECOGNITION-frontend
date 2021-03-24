@@ -59,7 +59,7 @@ export const RightSidebar = props => {
   }
 
   return (
-    <Container className="m-0 p-0 ">
+    <div className="scroller-right">
       <Col className="mx-4 p-0 ">
         <Row className="m-0 p-0">
           <h2 className="my-3"> Training Parameters</h2>
@@ -145,7 +145,7 @@ export const RightSidebar = props => {
           <h2 className="my-3">DATA STATS</h2>
         </Row>
         {/* yaahaaa css fix karni ho to apni class bananaa isko mat change karna kahi aur bhi used hai */}
-        <div className="graph-stat-container">
+        <div className="graph-stat-container2">
           {graphData && (
             <BarGraph
               data={graphData}
@@ -155,6 +155,6 @@ export const RightSidebar = props => {
           )}
         </div>
       </Col>
-    </Container>
+    </div>
   )
 }
