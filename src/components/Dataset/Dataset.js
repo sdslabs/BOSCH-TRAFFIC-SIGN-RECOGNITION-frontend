@@ -113,7 +113,11 @@ const Dataset = props => {
                 />
               )}
               {datasetStep >= 3 && (
-                <Step3 done={datasetStep > 3} setDatasetStep={setDatasetStep} tl={tl}/>
+                <Step3
+                  done={datasetStep > 3}
+                  setDatasetStep={setDatasetStep}
+                  tl={tl}
+                />
               )}
               {datasetStep >= 3.5 && (
                 <Step4
@@ -154,7 +158,7 @@ const Dataset = props => {
           />
         )}
         {datasetStep === 3 && (
-          <DatasetPage3Data setShowSidebar={setShowSidebar} tl={tl}/>
+          <DatasetPage3Data setShowSidebar={setShowSidebar} tl={tl} />
         )}
         {datasetStep === 4 && (
           <DatasetPage4
@@ -177,7 +181,7 @@ const Dataset = props => {
             setTensorFlowLink={setTensorFlowLink}
           />
         )}
-        {datasetStep === 7 && <DatasetPage5 tl={tl}/>}
+        {datasetStep === 7 && <DatasetPage5 tl={tl} />}
       </Col>
       {isUpload || isNewFolder ? (
         <RightSidebar

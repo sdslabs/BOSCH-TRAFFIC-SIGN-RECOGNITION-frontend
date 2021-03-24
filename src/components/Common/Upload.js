@@ -20,22 +20,27 @@ const Upload = props => {
   }
   const uploadFiles = () => {
     if (files.length != 0) {
-      props.structure.folders.forEach(element => {
-        if (element.name === folderName) {
-          element.images.push({
-            name: files[0].name,
-            can_be_modified: 'true',
-            selected: 'true',
-          })
-          element.imageCount += 1
-          element.selectedCount += 1
+      const newStructure = { ...props.structure }
+      newStructure.folders.forEach((folder, i) => {
+        // find the concerned folder in structure
+        if (folder.name === folderName) {
+          for (var i = 0; i < files.length; i++) {
+            folder.images.push({
+              name: files[i].name,
+              path: files[i].path,
+              can_be_modified: 'true',
+              selected: 'true',
+            })
+          }
+          folder.imageCount += 1
+          folder.selectedCount += 1
           setFiles([])
           setFolderName('')
           setnooffiles(0)
-          document.getElementById(folderName).checked = false
+          // document.getElementById(folderName).checked = false
         }
       })
-      props.setStructure({ ...props.structure })
+      props.setStructure({ ...newStructure })
     }
   }
   const deselectFiles = () => {
