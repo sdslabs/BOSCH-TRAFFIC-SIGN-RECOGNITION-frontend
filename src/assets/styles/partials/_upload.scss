@@ -62,6 +62,7 @@
   @include flex-row-center;
   justify-content: space-between;
   flex-wrap: wrap;
+  padding-bottom: 5rem;
   .folder-radio {
     @include flex-row-center;
     width: 45%;
