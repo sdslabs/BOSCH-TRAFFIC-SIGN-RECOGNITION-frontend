@@ -242,7 +242,7 @@ const Augmentation = props => {
           </div>
         </div>
         {step >= 2 && (
-          <div className={'augment-select' + (step > 2 ? ' opacity' : '')}>
+          <div className={'augment-select'}>
             <div className="heading-row">
               <div className="analysis-heading">2. Augment</div>
               <button
