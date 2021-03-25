@@ -12,7 +12,7 @@ function createWindow() {
   })
   mainWindow.loadURL('http://localhost:3000')
 
-  mainWindow.setMenu(null)
+  // mainWindow.setMenu(null)
   mainWindow.on('closed', function () {
     mainWindow = null
   })
