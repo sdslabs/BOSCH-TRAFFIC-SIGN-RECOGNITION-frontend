@@ -45,7 +45,7 @@ const Upload = props => {
   }
 
   return (
-    <div className="action-wrapper">
+    <div className="action-wrapper scroller">
       <div className="confirm-cancel">
         <button
           className="primary-cta-sec"

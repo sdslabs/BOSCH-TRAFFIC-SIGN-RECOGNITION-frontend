@@ -124,10 +124,14 @@
   height: 80vh;
   margin-right: 5% !important;
 }
+.scroller{
+  overflow-y: overlay;
+  overflow-x: hidden;
+}
 .selector,
 .analysis-graph-multiple,
 .middle-layer-div,
-.scroller-right {
+.scroller-right,.scroller {
   &::-webkit-scrollbar {
     width: 0.5rem;
     height: 2rem;
