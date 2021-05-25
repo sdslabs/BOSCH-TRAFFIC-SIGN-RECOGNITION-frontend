@@ -1,14 +1,10 @@
-# Analysis.ai Frontend
+# BOSCH's TRAFFIC SIGN RECOGNITION Frontend
 
-This project was made for Inter-IIT Tech Meet 2021.
+### Analyis.ai is designed to help an analyst build, augment and analyse datasets for traffic sign recognition.
 
 # Setup
 - Setup the backend repository from [here](https://github.com/dsgiitr/BOSCH-TRAFFIC-SIGN-RECOGNITION)
-- Move into the project folder using the terminal
 - Make sure you have `npm` installed, otherwise get it from [here](https://www.npmjs.com/get-npm)
 - Run the following command to start the desktop app: `npm install && npm run`
 
-# Tech Stack
-
-- React.js
-- Electron.js
+An electron app will open up where one can build the data sets and proceed with model building and analysis.
